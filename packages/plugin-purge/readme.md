@@ -10,10 +10,10 @@ Once you have Vite in your project, you can install the Vite Plugin PurgeCSS usi
 
 ```bash
 # With npm
-npm i -D vite-plugin-purgecss
+npm i -D vite-plugin-purge
 
 # With yarn
-yarn add vite-plugin-purgecss --dev
+yarn add vite-plugin-purge --dev
 ```
 
 ## Usage
@@ -22,13 +22,12 @@ To use the Vite Plugin PurgeCSS in your Vite project, you need to add it to the 
 
 ```javascript
 // vite.config.js
-import pluginPurgeCSS from 'vite-plugin-purgecss'
+import pluginPurgeCSS from 'vite-plugin-purge'
 
 export default {
   plugins: [
     pluginPurgeCSS({
-      // Add your PurgeCSS options here
-      // See https://www.purgecss.com/configuration for available options
+      content: ['**/*.html', '**/*.js']
     })
   ]
 }
@@ -38,16 +37,17 @@ export default {
 
 The `pluginPurgeCSS` function accepts an options object to configure the behavior of PurgeCSS during the build process. The options are the same as those defined in [`@fullhuman/postcss-purgecss`][1]. For a full list of available options, please refer to the [PurgeCSS documentation][3].
 
-Here's an example of how to use the `whitelist` option to prevent certain classes from being purged:
+Here's an example of how to use the `safelist` option to prevent certain classes from being purged:
 
 ```javascript
 // vite.config.js
-import pluginPurgeCSS from 'vite-plugin-purgecss'
+import pluginPurgeCSS from 'vite-plugin-purge'
 
 export default {
   plugins: [
     pluginPurgeCSS({
-      whitelist: ['text-red-500', 'bg-blue-200']
+      content: ['**/*.html', '**/*.js'],
+      safelist: ['bg-red-500', 'text-blue-600']
     })
   ]
 }
@@ -60,7 +60,7 @@ export default {
 
 ## Credits
 
-This plugin is built upon the excellent work of [`@fullhuman/postcss-purgecss`][1], which is the core library responsible for the CSS purging process. Special thanks to the contributors of both `vite-plugin-purgecss` and [`@fullhuman/postcss-purgecss`][1].
+This plugin is built upon the excellent work of [`@fullhuman/postcss-purgecss`][1], which is the core library responsible for the CSS purging process. Special thanks to the contributors of both `vite-plugin-purge` and [`@fullhuman/postcss-purgecss`][1].
 
 ## License
 

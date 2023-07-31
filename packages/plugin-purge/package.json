@@ -1,5 +1,5 @@
 {
-  "name": "vite-plugin-purgecss",
+  "name": "vite-plugin-purge",
   "description": "Vite plugin to enable PurgeCSS for the build",
   "version": "0.0.0-development",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "author": "Beni Arisandi (https://stilearning.com)",
   "repository": "https://github.com/bent10/vite-plugins",
-  "homepage": "https://github.com/bent10/vite-plugins/tree/packages/plugin-purgecss",
+  "homepage": "https://github.com/bent10/vite-plugins/tree/packages/plugin-purge",
   "license": "MIT",
   "keywords": [
     "vite",
