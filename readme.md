@@ -34,11 +34,3 @@ Now you can use `git cz` or just `cz` instead of `git commit` when committing. Y
 ```bash
 git add . && git cz
 ```
-
-<br/>
-
----
-
-<p align="center">
-  <strong>A project by <a href="https://stilearning.com">Stilearning</a> &copy; 2022-2023.</strong>
-</p>
