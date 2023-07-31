@@ -16,8 +16,9 @@ Follows the steps below to get up and running:
 
 ## Packages
 
-| Package | Version (click for changelog) |
-| :------ | :---------------------------- |
+| Package                                    | Version (click for changelog)                                                                |
+| :----------------------------------------- | :------------------------------------------------------------------------------------------- |
+| [vite-plugin-purge](packages/plugin-purge) | [![npm](https://img.shields.io/npm/v/vite-plugin-purge)](packages/plugin-purge/changelog.md) |
 
 ## Contributing
 
