@@ -21,7 +21,9 @@ export type { PluginPurgeCSSOptions }
  * @param options - The PurgeCSS plugin options.
  * @returns Vite Plugin Object.
  */
-export default function pluginPurgeCSS(options: PluginPurgeCSSOptions): Plugin {
+export default function pluginPurgeCSS(
+  options?: PluginPurgeCSSOptions
+): Plugin {
   return {
     name: 'plugin-purgecss',
     apply: 'build',

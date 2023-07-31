@@ -7,7 +7,7 @@
   },
   "author": "Beni Arisandi (https://stilearning.com)",
   "repository": "https://github.com/bent10/vite-plugins",
-  "homepage": "https://github.com/bent10/vite-plugins/tree/packages/plugin-purge",
+  "homepage": "https://github.com/bent10/vite-plugins/tree/main/packages/plugin-purge",
   "license": "MIT",
   "keywords": [
     "vite",
