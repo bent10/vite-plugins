@@ -16,9 +16,10 @@ Follows the steps below to get up and running:
 
 ## Packages
 
-| Package                                    | Version (click for changelog)                                                                |
-| :----------------------------------------- | :------------------------------------------------------------------------------------------- |
-| [vite-plugin-purge](packages/plugin-purge) | [![npm](https://img.shields.io/npm/v/vite-plugin-purge)](packages/plugin-purge/changelog.md) |
+| Package                                    | Description                                                             | Version (click for changelog)                                                                |
+| :----------------------------------------- | :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
+| [vite-plugin-dom](packages/plugin-dom)     | Enables DOM manipulation and comment injection during the build process | [![npm](https://img.shields.io/npm/v/vite-plugin-dom)](packages/plugin-dom/changelog.md)     |
+| [vite-plugin-purge](packages/plugin-purge) | Enables PurgeCSS for the build                                          | [![npm](https://img.shields.io/npm/v/vite-plugin-purge)](packages/plugin-purge/changelog.md) |
 
 ## Contributing
 

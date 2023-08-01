@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pluginDom > transformIndexHtml > injects comments based on provided selectors 1`] = `
+"
+        
+
+<!--BEGIN h1--><h1></h1><!--/END h1-->
+
+
+        
+
+<!--BEGIN div.foo--><div class=\\"foo\\"></div><!--/END div.foo-->
+
+
+        
+
+<!--BEGIN .bar--><p class=\\"bar\\"></p><!--/END .bar-->
+
+
+        
+
+<!--BEGIN div#baz--><div id=\\"baz\\"></div><!--/END div#baz-->
+
+
+        
+
+<!--BEGIN div.qux--><div class=\\"qux\\"></div><!--/END div.qux-->
+
+
+      "
+`;
