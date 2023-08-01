@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`pluginFormat > formats assets except .html files 1`] = `
+"body {
+    color: red;
+}
+"
+`;
+
+exports[`pluginFormat > formats chunks when minify is disabled 1`] = `
+"function foo() {
+  console.log('Hello');
+}
+"
+`;
+
+exports[`pluginFormat > formats index HTML using transformIndexHtml hook 1`] = `
+"<div>
+  <span>Hello, Vite!</span>
+</div>
+"
+`;
