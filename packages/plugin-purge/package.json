@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-purge",
-  "description": "Vite plugin to enable PurgeCSS for the build",
+  "description": "Enables PurgeCSS for the build",
   "version": "0.0.0-development",
   "publishConfig": {
     "access": "public"
@@ -20,8 +20,8 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "readme.md",
-    "license"
+    "changelog.md",
+    "readme.md"
   ],
   "scripts": {
     "start": "npm run dev",
