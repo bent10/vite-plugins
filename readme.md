@@ -16,10 +16,11 @@ Follows the steps below to get up and running:
 
 ## Packages
 
-| Package                                    | Description                                                             | Version (click for changelog)                                                                |
-| :----------------------------------------- | :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------- |
-| [vite-plugin-dom](packages/plugin-dom)     | Enables DOM manipulation and comment injection during the build process | [![npm](https://img.shields.io/npm/v/vite-plugin-dom)](packages/plugin-dom/changelog.md)     |
-| [vite-plugin-purge](packages/plugin-purge) | Enables PurgeCSS for the build                                          | [![npm](https://img.shields.io/npm/v/vite-plugin-purge)](packages/plugin-purge/changelog.md) |
+| Package                                      | Description                                                             | Version (click for changelog)                                                                  |
+| :------------------------------------------- | :---------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- |
+| [vite-plugin-dom](packages/plugin-dom)       | Enables DOM manipulation and comment injection during the build process | [![npm](https://img.shields.io/npm/v/vite-plugin-dom)](packages/plugin-dom/changelog.md)       |
+| [vite-plugin-format](packages/plugin-format) | Format code and assets using Prettier                                   | [![npm](https://img.shields.io/npm/v/vite-plugin-format)](packages/plugin-format/changelog.md) |
+| [vite-plugin-purge](packages/plugin-purge)   | Enables PurgeCSS for the build                                          | [![npm](https://img.shields.io/npm/v/vite-plugin-purge)](packages/plugin-purge/changelog.md)   |
 
 ## Contributing
 
