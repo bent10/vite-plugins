@@ -24,7 +24,7 @@ export default function pluginDom({
   let parser: HtmlParser
 
   return {
-    name: 'vite:plugin-bootstrap',
+    name: 'plugin-dom',
     apply(_, { mode }) {
       return typeof applyOnMode === 'boolean'
         ? applyOnMode
