@@ -1,0 +1,38 @@
+{
+  "name": "vite-plugin-vendor",
+  "description": "Generates vendor bundles based on the specified options",
+  "version": "0.0.0-development",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Beni Arisandi (https://stilearning.com)",
+  "repository": "https://github.com/bent10/vite-plugins",
+  "homepage": "https://github.com/bent10/vite-plugins/tree/main/packages/plugin-vendor",
+  "license": "MIT",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "vendor"
+  ],
+  "type": "module",
+  "exports": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "changelog.md",
+    "readme.md"
+  ],
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "vite build --watch",
+    "build": "vite build && npm run types",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
+    "types": "tsc src/*.ts -d --emitDeclarationOnly --outDir ./dist",
+    "lint": "tsc --noEmit && eslint . --cache --cache-location .cache/eslint",
+    "format": "prettier . --write --cache-location .cache/prettier --ignore-path ../../.prettierignore"
+  },
+  "peerDependencies": {
+    "vite": ">=4.0.0"
+  }
+}
