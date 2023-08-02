@@ -37,9 +37,8 @@ describe('pluginCacheDir', () => {
   })
 
   it('resolves the default test cache directory in Vite config', () => {
-    const dir = resolve('node_modules/.vitest') // should be default vitest cache dir
-    const config = {
-      test: { cache: { dir } },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const config: any = {
       root: resolve()
     }
     // Set process.env.INIT_CWD to mimic being in a monorepo

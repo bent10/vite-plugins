@@ -30,10 +30,7 @@ export default function pluginCacheDir(): Plugin {
       if (
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        config.test?.cache &&
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        config.test.cache.dir === resolve(cacheDirTest) &&
+        !config.test?.cache &&
         !!process.env.INIT_CWD
       ) {
         try {
