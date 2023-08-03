@@ -22,7 +22,7 @@ export default function pluginCacheDir(): Plugin[] {
       config({
         cacheDir = DEFAULT_VITE_CACHE_DIR,
         root = process.cwd()
-      }: UserConfig & { test?: InlineConfig } = {}) {
+      }: UserConfig = {}) {
         if (cacheDir === DEFAULT_VITE_CACHE_DIR && !!process.env.INIT_CWD) {
           return {
             cacheDir: resolve(
