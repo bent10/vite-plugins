@@ -1,3 +1,10 @@
+# vite-plugin-cachedir [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.0.1...vite-plugin-cachedir@1.1.0) (2023-08-03)
+
+
+### Features
+
+* runs by `mode` ([96cdcb2](https://github.com/bent10/vite-plugins/commit/96cdcb277f65ceb2a5111da2b9cd06fb25a21ff0))
+
 ## vite-plugin-cachedir [1.0.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.0.0...vite-plugin-cachedir@1.0.1) (2023-08-02)
 
 
