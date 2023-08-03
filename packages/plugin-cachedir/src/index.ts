@@ -1,53 +1,63 @@
-import { accessSync, constants } from 'node:fs'
 import { relative, resolve } from 'node:path'
-import type { Plugin } from 'vite'
+import type { Plugin, UserConfig } from 'vite'
+import { InlineConfig } from 'vitest'
+
+const DEFAULT_VITE_CACHE_DIR = 'node_modules/.vite'
+const DEFAULT_VITEST_CACHE_DIR = 'node_modules/.vitest'
+const DEFAULT_VITEST_CACHE = {
+  cache: {
+    dir: DEFAULT_VITEST_CACHE_DIR
+  }
+}
 
 /**
  * Vite plugin to resolve the default cache directory in a monorepo.
  *
  * @returns A Vite plugin object.
  */
-export default function pluginCacheDir(): Plugin {
-  const cacheDir = 'node_modules/.vite'
-  const cacheDirTest = 'node_modules/.vitest'
-
-  return {
-    name: 'plugin-cachedir',
-    configResolved(config) {
-      if (config.cacheDir === resolve(cacheDir) && !!process.env.INIT_CWD) {
-        try {
-          accessSync('node_modules', constants.F_OK)
-        } catch {
-          Object.assign(config, {
+export default function pluginCacheDir(): Plugin[] {
+  return [
+    {
+      name: 'vite:plugin-cachedir',
+      config({
+        cacheDir = DEFAULT_VITE_CACHE_DIR,
+        root = process.cwd()
+      }: UserConfig & { test?: InlineConfig } = {}) {
+        if (cacheDir === DEFAULT_VITE_CACHE_DIR && !!process.env.INIT_CWD) {
+          return {
             cacheDir: resolve(
-              relative(config.root, process.env.INIT_CWD),
-              cacheDir
+              relative(root, process.env.INIT_CWD),
+              DEFAULT_VITE_CACHE_DIR
             )
-          })
+          }
         }
       }
-
-      if (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        !config.test?.cache &&
-        !!process.env.INIT_CWD
-      ) {
-        try {
-          accessSync('node_modules', constants.F_OK)
-        } catch {
-          Object.assign(config, {
+    },
+    {
+      name: 'vitest:plugin-cachedir',
+      apply({ mode }) {
+        return mode === 'test'
+      },
+      config({
+        root = process.cwd(),
+        test = DEFAULT_VITEST_CACHE
+      }: UserConfig & { test?: InlineConfig } = {}) {
+        if (
+          (!test?.cache || test.cache.dir === DEFAULT_VITEST_CACHE_DIR) &&
+          !!process.env.INIT_CWD
+        ) {
+          return {
             test: {
               cache: {
                 dir: resolve(
-                  relative(config.root, process.env.INIT_CWD),
-                  cacheDirTest
+                  relative(root, process.env.INIT_CWD),
+                  DEFAULT_VITEST_CACHE_DIR
                 )
               }
             }
-          })
+          }
         }
       }
     }
-  }
+  ]
 }
