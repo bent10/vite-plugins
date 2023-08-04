@@ -1,3 +1,10 @@
+## vite-plugin-cachedir [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.1.0...vite-plugin-cachedir@1.1.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* uses local prefix as root cwd ([aa14547](https://github.com/bent10/vite-plugins/commit/aa14547f367c4c385a875bc39534c6973d2d7352))
+
 # vite-plugin-cachedir [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.0.1...vite-plugin-cachedir@1.1.0) (2023-08-03)
 
 
