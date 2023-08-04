@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs'
 import { basename, dirname, join, relative, resolve } from 'node:path'
-import * as fg from 'fast-glob'
+import { sync } from 'fast-glob'
 import type { QueueConfig, VendorEntries } from './types.js'
 
 /**
@@ -47,7 +47,7 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
         ? join(baseDir, entry.files)
         : entry.files.map(f => join(baseDir, f))
 
-    const files = fg.sync(source, { onlyFiles: true })
+    const files = sync(source, { onlyFiles: true })
 
     for (const file of files) {
       const filepath = file.replace(nodeModulesDir, '')
