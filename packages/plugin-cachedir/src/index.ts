@@ -16,6 +16,9 @@ const DEFAULT_VITEST_CACHE = {
  * @returns A Vite plugin object.
  */
 export default function pluginCacheDir(): Plugin[] {
+  // @see https://docs.npmjs.com/cli/v7/using-npm/changelog#v7220-2021-09-02
+  const localPrefix = process.env['npm_config_local_prefix']
+
   return [
     {
       name: 'vite:plugin-cachedir',
@@ -23,10 +26,10 @@ export default function pluginCacheDir(): Plugin[] {
         cacheDir = DEFAULT_VITE_CACHE_DIR,
         root = process.cwd()
       }: UserConfig = {}) {
-        if (cacheDir === DEFAULT_VITE_CACHE_DIR && !!process.env.INIT_CWD) {
+        if (cacheDir === DEFAULT_VITE_CACHE_DIR && !!localPrefix) {
           return {
             cacheDir: resolve(
-              relative(root, process.env.INIT_CWD),
+              relative(root, localPrefix),
               DEFAULT_VITE_CACHE_DIR
             )
           }
@@ -44,13 +47,13 @@ export default function pluginCacheDir(): Plugin[] {
       }: UserConfig & { test?: InlineConfig } = {}) {
         if (
           (!test?.cache || test.cache.dir === DEFAULT_VITEST_CACHE_DIR) &&
-          !!process.env.INIT_CWD
+          !!localPrefix
         ) {
           return {
             test: {
               cache: {
                 dir: resolve(
-                  relative(root, process.env.INIT_CWD),
+                  relative(root, localPrefix),
                   DEFAULT_VITEST_CACHE_DIR
                 )
               }

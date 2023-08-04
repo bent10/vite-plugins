@@ -8,8 +8,8 @@ describe('pluginCacheDir', () => {
   const cwd = '/path/to/project'
 
   beforeEach(() => {
-    // Set process.env.INIT_CWD to mimic being in a monorepo
-    process.env.INIT_CWD = cwd
+    // Set `npm_config_local_prefix` to mimic being in a monorepo
+    process.env['npm_config_local_prefix'] = cwd
   })
 
   it('resolves the default cache directory in Vite config', () => {
