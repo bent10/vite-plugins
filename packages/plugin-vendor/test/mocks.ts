@@ -35,6 +35,8 @@ export async function mockFastGlob() {
 
   return {
     ...actual,
-    sync: vi.fn(source => [source.replace('dist/**/*', '') + 'index.js'])
+    default: {
+      sync: vi.fn(source => [source.replace('dist/**/*', '') + 'index.js'])
+    }
   }
 }

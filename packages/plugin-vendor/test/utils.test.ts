@@ -23,8 +23,10 @@ describe('createQueue', () => {
   })
 
   const mockFastGlob = async (files: string[]) => {
-    const { sync } = (await import('fast-glob')) as unknown as { sync: Mock }
-    sync.mockReturnValueOnce(files)
+    const { default: fg } = (await import('fast-glob')) as unknown as {
+      default: { sync: Mock }
+    }
+    fg.sync.mockReturnValueOnce(files)
   }
 
   it('correctly creates a queue with single file entry', async () => {
