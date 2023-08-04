@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.0...vite-plugin-vendor@1.1.1) (2023-08-04)
+
+
+### Bug Fixes
+
+* **build:** module interop ([7432a2c](https://github.com/bent10/vite-plugins/commit/7432a2c7fa25016ad4621a63d508bfe5977d658b))
+
 # vite-plugin-vendor [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.0.0...vite-plugin-vendor@1.1.0) (2023-08-04)
 
 
