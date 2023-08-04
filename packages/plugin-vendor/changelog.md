@@ -1,3 +1,15 @@
+# vite-plugin-vendor [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.0.0...vite-plugin-vendor@1.1.0) (2023-08-04)
+
+
+### Bug Fixes
+
+* uses named import for `fg.sync` ([3f9b5b7](https://github.com/bent10/vite-plugins/commit/3f9b5b76f3d392fb88c13bab1829b8581ea91f41))
+
+
+### Features
+
+* supports monorepo ([4d98cb1](https://github.com/bent10/vite-plugins/commit/4d98cb19e256099a55afe79c36df20bdcfecaade))
+
 # vite-plugin-vendor 1.0.0 (2023-08-02)
 
 
