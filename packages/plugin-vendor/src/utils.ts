@@ -30,8 +30,10 @@ export function getEntries() {
  */
 export function createQueue(entries: VendorEntries, config: QueueConfig) {
   const { root, vendorDir, manualEntry } = config
+  // @see https://docs.npmjs.com/cli/v7/using-npm/changelog#v7220-2021-09-02
+  const localPrefix = process.env['npm_config_local_prefix']
   const nodeModulesDir = resolve(
-    relative(root, process.env.INIT_CWD || process.cwd()),
+    relative(root, localPrefix || process.cwd()),
     'node_modules'
   )
   const queue: Array<{ from: string; to: string }> = []
