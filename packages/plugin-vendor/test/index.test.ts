@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { join } from 'node:path'
 import pluginVendor from '../src/index.js'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Plugin = Record<string, any>
 type Mock = ReturnType<typeof vi.fn>
 
@@ -16,49 +17,48 @@ vi.mock(
 
 describe('pluginVendor', async () => {
   let plugin: Plugin
-  let plugin2: Plugin
-  const root = '/path/to/root'
-  const publicDir = '/path/to/root/public'
-  const vendorDir = `${publicDir}/vendors`
+  const mockConfig = {
+    root: '/path/to/root',
+    publicDir: '/path/to/root/public'
+  }
   const { promises: fsp } = (await import('node:fs')) as unknown as {
     promises: Record<string, Mock>
   }
 
   beforeEach(() => {
     vi.clearAllMocks()
-    plugin = pluginVendor({ applyOnMode: ['static', 'development'] })[0]
-    plugin2 = pluginVendor()[1]
+    plugin = pluginVendor({ applyOnMode: ['static', 'development'] })
   })
 
   it('applies the plugin on specified modes', () => {
-    expect(plugin.apply({}, { mode: 'static' })).toBe(true)
-    expect(plugin.apply({}, { mode: 'development' })).toBe(true)
-    expect(plugin.apply({}, { mode: 'production' })).toBe(false)
+    expect(plugin.apply({ mode: 'static' })).toBe(true)
+    expect(plugin.apply({ mode: 'development' })).toBe(true)
+    expect(plugin.apply({ mode: 'production' })).toBe(false)
   })
 
-  it('configResolved function correctly sets resolvedRoot and resolvedPublicDir', () => {
-    plugin = pluginVendor({ applyOnMode: true })[0]
+  it('configResolved function correctly sets resolvedRoot and resolvedPublicDir', async () => {
+    plugin = pluginVendor({ applyOnMode: true })
 
-    expect(plugin.apply({}, { mode: true })).toBe(true)
-    expect(plugin.configResolved({ publicDir, root })).toBeUndefined()
+    expect(plugin.apply({ mode: true })).toBe(true)
+    expect(await plugin.configResolved(mockConfig)).toBeUndefined()
   })
 
   it('buildStart function copies vendor files to the destination directory', async () => {
-    plugin.configResolved({ publicDir, root })
+    await plugin.configResolved(mockConfig)
     await plugin.buildStart()
 
     expect(fsp.cp).toHaveBeenCalledTimes(2)
     expect(fsp.cp).toHaveBeenCalledWith(
-      `${root}/node_modules/foo/index.js`,
-      `${publicDir}/vendors/foo/index.js`,
+      join(mockConfig.root, 'node_modules/foo/index.js'),
+      join(mockConfig.publicDir, 'vendors/foo/index.js'),
       {
         preserveTimestamps: true,
         recursive: true
       }
     )
     expect(fsp.cp).toHaveBeenCalledWith(
-      `${root}/node_modules/foo/index.js`,
-      `${publicDir}/vendors/foo/index.js`,
+      join(mockConfig.root, 'node_modules/foo/index.js'),
+      join(mockConfig.publicDir, 'vendors/foo/index.js'),
       {
         preserveTimestamps: true,
         recursive: true
@@ -67,10 +67,10 @@ describe('pluginVendor', async () => {
   })
 
   it('configResolved function removes the destination directory', async () => {
-    await plugin2.configResolved({ publicDir })
+    await plugin.configResolved(mockConfig)
 
     expect(fsp.rm).toHaveBeenCalledTimes(1)
-    expect(fsp.rm).toHaveBeenCalledWith(vendorDir, {
+    expect(fsp.rm).toHaveBeenCalledWith(join(mockConfig.publicDir, 'vendors'), {
       recursive: true,
       force: true
     })
@@ -81,10 +81,10 @@ describe('pluginVendor', async () => {
     fsp.cp.mockRejectedValueOnce(new Error('Error during copy'))
 
     try {
-      plugin.configResolved({ publicDir, root })
+      await plugin.configResolved(mockConfig)
       await plugin.buildStart()
-    } catch (error: any) {
-      expect(error.message).toBe('Error during copy')
+    } catch (error: unknown) {
+      expect((error as Error).message).toBe('Error during copy')
     }
   })
 })

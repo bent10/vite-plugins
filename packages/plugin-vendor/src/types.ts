@@ -19,8 +19,6 @@ export interface PluginVendorOptions {
   /**
    * The destination directory for generated vendor files.
    *
-   * Defaults to the root directory of the build output.
-   *
    * @default 'vendors'
    */
   dest?: string

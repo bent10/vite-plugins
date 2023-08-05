@@ -15,63 +15,54 @@ export type { PluginVendorOptions, VendorEntries }
  */
 export default function pluginVendor(
   options: PluginVendorOptions = {}
-): Plugin[] {
+): Plugin {
   const {
     applyOnMode = ['static'],
     dest = 'vendors',
     manualEntry = {}
   } = options
-  let resolvedRoot: string, resolvedPublicDir: string
+  let resolvedRoot: string, vendorDir: string
 
-  return [
-    {
-      name: 'plugin-vendor',
-      enforce: 'pre',
-      apply({ preview }, { mode }) {
-        const isAllowedMode =
-          typeof applyOnMode === 'boolean'
-            ? applyOnMode
-            : applyOnMode?.indexOf(mode) !== -1
+  return {
+    name: 'vite:plugin-vendor',
+    enforce: 'pre',
+    apply({ preview, mode = '' }) {
+      const isAllowedMode =
+        typeof applyOnMode === 'boolean'
+          ? applyOnMode
+          : applyOnMode?.indexOf(mode) !== -1
 
-        return !preview && isAllowedMode
-      },
-      configResolved({ publicDir, root }) {
-        resolvedRoot = root
-        resolvedPublicDir = publicDir
-      },
-      async buildStart() {
-        try {
-          const vendorDir = join(resolvedPublicDir, dest)
-          const entries = getEntries()
-          const queue = createQueue(entries, {
-            root: resolvedRoot,
-            vendorDir,
-            manualEntry
-          })
-
-          // copying...
-          await Promise.all(
-            queue.map(
-              async ({ from, to }) =>
-                await fsp.cp(from, to, {
-                  preserveTimestamps: true,
-                  recursive: true
-                })
-            )
-          )
-        } catch (e) {
-          throw e
-        }
-      }
+      return !preview && isAllowedMode
     },
-    {
-      name: 'plugin-vendor:reset',
-      enforce: 'pre',
-      async configResolved({ publicDir }) {
-        const vendorDir = join(publicDir, dest)
-        // make sure you always get fresh copy for next run
-        await fsp.rm(vendorDir, { recursive: true, force: true })
+    async configResolved({ publicDir, root }) {
+      resolvedRoot = root
+      vendorDir = join(publicDir, dest)
+
+      // make sure to always get fresh copy for the next run
+      await fsp.rm(vendorDir, { recursive: true, force: true })
+    },
+    async buildStart() {
+      try {
+        const entries = getEntries()
+        const queue = createQueue(entries, {
+          root: resolvedRoot,
+          vendorDir,
+          manualEntry
+        })
+
+        // copying...
+        await Promise.all(
+          queue.map(
+            async ({ from, to }) =>
+              await fsp.cp(from, to, {
+                preserveTimestamps: true,
+                recursive: true
+              })
+          )
+        )
+      } catch (e) {
+        throw e
       }
     }
-  ]
+  }
 }
