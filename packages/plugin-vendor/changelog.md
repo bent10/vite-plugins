@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.1.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.1...vite-plugin-vendor@1.1.2) (2023-08-05)
+
+
+### Bug Fixes
+
+* updates plugin name and refactoring ([0f1891e](https://github.com/bent10/vite-plugins/commit/0f1891eb4e91ed442d8881064ae86de75e062b71))
+
 ## vite-plugin-vendor [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.0...vite-plugin-vendor@1.1.1) (2023-08-04)
 
 
