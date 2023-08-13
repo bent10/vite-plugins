@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.2.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.2.0...vite-plugin-vendor@1.2.1) (2023-08-13)
+
+
+### Bug Fixes
+
+* normalize glob patterns on win32 ([7dcdef6](https://github.com/bent10/vite-plugins/commit/7dcdef6dc8ca3ef13492384237d989b128f6fea2))
+
 # vite-plugin-vendor [1.2.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.2...vite-plugin-vendor@1.2.0) (2023-08-13)
 
 
