@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import { join } from 'node:path/posix'
 import pluginCacheDir from '../src/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
