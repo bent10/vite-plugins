@@ -1,4 +1,4 @@
-import { join } from 'node:path'
+import { join } from 'node:path/posix'
 import pluginVendor from '../src/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -49,16 +49,47 @@ describe('pluginVendor', async () => {
 
     expect(fsp.cp).toHaveBeenCalledTimes(2)
     expect(fsp.cp).toHaveBeenCalledWith(
-      join(mockConfig.root, 'node_modules/foo/index.js'),
-      join(mockConfig.publicDir, 'vendors/foo/index.js'),
+      join(mockConfig.root, 'node_modules/foo/dist/index.js'),
+      join(mockConfig.publicDir, 'vendors/foo/dist/index.js'),
       {
         preserveTimestamps: true,
         recursive: true
       }
     )
     expect(fsp.cp).toHaveBeenCalledWith(
-      join(mockConfig.root, 'node_modules/foo/index.js'),
-      join(mockConfig.publicDir, 'vendors/foo/index.js'),
+      join(mockConfig.root, 'node_modules/bar/dist/index.js'),
+      join(mockConfig.publicDir, 'vendors/bar/dist/index.js'),
+      {
+        preserveTimestamps: true,
+        recursive: true
+      }
+    )
+  })
+
+  it('copies files excluding those specified in ignore array', async () => {
+    const plugin: Plugin = pluginVendor({
+      ignore: ['foo'],
+      manualEntry: {
+        baz: { files: 'dist/**/*' }
+      }
+    })
+
+    plugin.configResolved(mockConfig)
+    await plugin.buildStart()
+
+    // One from entries and one from manual entry, excluding pkg2 and pkg3
+    expect(fsp.cp).toHaveBeenCalledTimes(2)
+    expect(fsp.cp).toHaveBeenCalledWith(
+      join(mockConfig.root, 'node_modules/bar/dist/index.js'),
+      join(mockConfig.publicDir, 'vendors/bar/dist/index.js'),
+      {
+        preserveTimestamps: true,
+        recursive: true
+      }
+    )
+    expect(fsp.cp).toHaveBeenCalledWith(
+      join(mockConfig.root, 'node_modules/baz/dist/index.js'),
+      join(mockConfig.publicDir, 'vendors/baz/dist/index.js'),
       {
         preserveTimestamps: true,
         recursive: true

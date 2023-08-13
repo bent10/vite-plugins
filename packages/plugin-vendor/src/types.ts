@@ -24,9 +24,14 @@ export interface PluginVendorOptions {
   dest?: string
 
   /**
+   * A list of vendor names or patterns for which corresponding files should
+   * be ignored. Files associated with these vendor will not be included in the
+   * vendor bundle.
+   */
+  ignore?: Array<string | RegExp>
+
+  /**
    * A manual list of vendor entries to include.
-   *
-   * @default undefined
    */
   manualEntry?: VendorEntries
 }

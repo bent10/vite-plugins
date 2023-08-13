@@ -1,3 +1,4 @@
+import { normalize } from 'node:path'
 import { createQueue } from '../src/utils.js'
 
 type Mock = ReturnType<typeof vi.fn>
@@ -41,7 +42,9 @@ describe('createQueue', () => {
     expect(queue[0].from).toBe(
       '/path/to/root/node_modules/dependency1/dist/file1.js'
     )
-    expect(queue[0].to).toBe('/path/to/root/vendorDir/dependency1/file1.js')
+    expect(normalize(queue[0].to)).toBe(
+      normalize('/path/to/root/vendorDir/dependency1/file1.js')
+    )
   })
 
   it('correctly creates a queue with multiple file entries', async () => {
@@ -59,11 +62,15 @@ describe('createQueue', () => {
     expect(queue[0].from).toBe(
       '/path/to/root/node_modules/dependency1/dist/file1.js'
     )
-    expect(queue[0].to).toBe('/path/to/root/vendorDir/dependency1/file1.js')
+    expect(normalize(queue[0].to)).toBe(
+      normalize('/path/to/root/vendorDir/dependency1/file1.js')
+    )
     expect(queue[1].from).toBe(
       '/path/to/root/node_modules/dependency1/dist/file2.js'
     )
-    expect(queue[1].to).toBe('/path/to/root/vendorDir/dependency1/file2.js')
+    expect(normalize(queue[1].to)).toBe(
+      normalize('/path/to/root/vendorDir/dependency1/file2.js')
+    )
   })
 
   it('correctly creates a queue with manual entry and string rename', async () => {
@@ -90,11 +97,15 @@ describe('createQueue', () => {
     expect(queue[0].from).toBe(
       '/path/to/root/node_modules/dependency1/dist/file1.js'
     )
-    expect(queue[0].to).toBe('/path/to/root/vendorDir/dependency1/file1.js')
+    expect(normalize(queue[0].to)).toBe(
+      normalize('/path/to/root/vendorDir/dependency1/file1.js')
+    )
     expect(queue[1].from).toBe(
       '/path/to/root/node_modules/manual-vendor/manual/file.js'
     )
-    expect(queue[1].to).toBe('/path/to/root/vendorDir/renamed.js')
+    expect(normalize(queue[1].to)).toBe(
+      normalize('/path/to/root/vendorDir/renamed.js')
+    )
   })
 
   it('correctly creates a queue with manual entry and function rename', async () => {
@@ -120,12 +131,14 @@ describe('createQueue', () => {
     expect(queue[0].from).toBe(
       '/path/to/root/node_modules/dependency1/dist/file1.js'
     )
-    expect(queue[0].to).toBe('/path/to/root/vendorDir/dependency1/file1.js')
+    expect(normalize(queue[0].to)).toBe(
+      normalize('/path/to/root/vendorDir/dependency1/file1.js')
+    )
     expect(queue[1].from).toBe(
       '/path/to/root/node_modules/manual-vendor/manual/file.js'
     )
-    expect(queue[1].to).toBe(
-      '/path/to/root/vendorDir/manual-vendor/renamed-file.js'
+    expect(normalize(queue[1].to)).toBe(
+      normalize('/path/to/root/vendorDir/manual-vendor/renamed-file.js')
     )
   })
 })

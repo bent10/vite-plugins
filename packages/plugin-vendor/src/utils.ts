@@ -8,15 +8,17 @@ import type { QueueConfig, VendorEntries } from './types.js'
  *
  * @returns The vendor entries.
  */
-export function getEntries() {
+export function getEntries(ignore: Array<string | RegExp>) {
   const vendors: VendorEntries = {}
   const { dependencies = {} } = JSON.parse(
     readFileSync('./package.json', 'utf8')
   )
 
-  for (const id of Object.keys(dependencies)) {
-    vendors[id] = { files: 'dist/**/*' }
-  }
+  Object.keys(dependencies)
+    .filter(name => !ignore.some(pattern => name.match(pattern)))
+    .forEach(name => {
+      vendors[name] = { files: 'dist/**/*' }
+    })
 
   return vendors
 }

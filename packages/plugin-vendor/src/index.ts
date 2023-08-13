@@ -19,6 +19,7 @@ export default function pluginVendor(
   const {
     applyOnMode = ['static'],
     dest = 'vendors',
+    ignore = [],
     manualEntry = {}
   } = options
   let resolvedRoot: string, vendorDir: string
@@ -43,7 +44,7 @@ export default function pluginVendor(
     },
     async buildStart() {
       try {
-        const entries = getEntries()
+        const entries = getEntries(ignore)
         const queue = createQueue(entries, {
           root: resolvedRoot,
           vendorDir,
