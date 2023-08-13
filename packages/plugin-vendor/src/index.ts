@@ -2,7 +2,7 @@ import { promises as fsp } from 'node:fs'
 import { join } from 'node:path'
 import type { Plugin } from 'vite'
 import type { PluginVendorOptions, VendorEntries } from './types.js'
-import { createQueue, getEntries } from './utils.js'
+import { normalizePath, createQueue, getEntries } from './utils.js'
 
 export type { PluginVendorOptions, VendorEntries }
 
@@ -37,7 +37,7 @@ export default function pluginVendor(
     },
     async configResolved({ publicDir, root }) {
       resolvedRoot = root
-      vendorDir = join(publicDir, dest)
+      vendorDir = normalizePath(join(publicDir, dest))
 
       // make sure to always get fresh copy for the next run
       await fsp.rm(vendorDir, { recursive: true, force: true })

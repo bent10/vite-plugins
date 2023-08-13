@@ -1,4 +1,3 @@
-import { sep } from 'node:path'
 export async function mockFs() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const actual = (await vi.importActual('node:fs')) as any
@@ -37,7 +36,9 @@ export async function mockFastGlob() {
   return {
     ...actual,
     default: {
-      sync: vi.fn(source => [source.replace(`**${sep}*`, 'index.js')])
+      sync: vi.fn(source =>
+        source.map((f: string) => f.replace('**/*', 'index.js'))
+      )
     }
   }
 }

@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['node:fs', 'node:path', 'fast-glob']
+      external: ['node:fs', 'node:path', 'fast-glob', 'vite']
     }
   },
   test: {

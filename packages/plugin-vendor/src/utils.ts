@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import fg from 'fast-glob'
+import { normalizePath as np } from 'vite'
 import type { QueueConfig, VendorEntries } from './types.js'
 
 /**
@@ -34,10 +35,10 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
   const { root, vendorDir, manualEntry } = config
   // @see https://docs.npmjs.com/cli/v7/using-npm/changelog#v7220-2021-09-02
   const localPrefix = process.env['npm_config_local_prefix']
-  const nodeModulesDir = resolve(
-    relative(root, localPrefix || process.cwd()),
-    'node_modules'
+  const nodeModulesDir = normalizePath(
+    resolve(relative(root, localPrefix || process.cwd()), 'node_modules')
   )
+
   const queue: Array<{ from: string; to: string }> = []
 
   Object.assign(entries, manualEntry)
@@ -46,13 +47,15 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
     const baseDir = join(nodeModulesDir, name)
     const source =
       typeof entry.files === 'string'
-        ? join(baseDir, entry.files)
+        ? [join(baseDir, entry.files)]
         : entry.files.map(f => join(baseDir, f))
+    const normalizedSource = source.map(f => normalizePath(f))
 
-    const files = fg.sync(source, { onlyFiles: true })
+    const files = fg.sync(normalizedSource, { onlyFiles: true })
 
     for (const file of files) {
       const filepath = file.replace(nodeModulesDir, '')
+
       const newName =
         typeof entry.rename === 'string'
           ? entry.rename
@@ -62,10 +65,14 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
 
       queue.push({
         from: file,
-        to: join(vendorDir, newName)
+        to: normalizePath(join(vendorDir, newName))
       })
     }
   }
 
   return queue
+}
+
+export function normalizePath(path: string) {
+  return np(path).replace(/\\+/g, '/')
 }

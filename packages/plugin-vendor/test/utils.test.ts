@@ -21,6 +21,8 @@ describe('createQueue', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
+    // Set `npm_config_local_prefix` to mimic being in a monorepo
+    process.env['npm_config_local_prefix'] = './'
   })
 
   const mockFastGlob = async (files: string[]) => {
