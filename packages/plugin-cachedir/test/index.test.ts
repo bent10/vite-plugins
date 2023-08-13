@@ -1,3 +1,4 @@
+import { resolve } from 'node:path'
 import pluginCacheDir from '../src/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,7 +16,7 @@ describe('pluginCacheDir', () => {
     const [plugin]: Plugin[] = pluginCacheDir()
     const config = plugin.config()
 
-    expect(config.cacheDir).toBe('/path/to/project/node_modules/.vite')
+    expect(config.cacheDir).toBe(resolve('/path/to/project/node_modules/.vite'))
   })
 
   it("does not resolve cache directory if it's already provided in Vite config", () => {
@@ -30,7 +31,7 @@ describe('pluginCacheDir', () => {
     const config = plugin.config()
 
     expect(config.test?.cache?.dir).toBe(
-      '/path/to/project/node_modules/.vitest'
+      resolve('/path/to/project/node_modules/.vitest')
     )
   })
 
