@@ -1,3 +1,10 @@
+# vite-plugin-vendor [1.2.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.2...vite-plugin-vendor@1.2.0) (2023-08-13)
+
+
+### Features
+
+* add `ignore` option ([4ece4da](https://github.com/bent10/vite-plugins/commit/4ece4da8c7dc9bd4d9bad17e5f056004d55f117a))
+
 ## vite-plugin-vendor [1.1.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.1.1...vite-plugin-vendor@1.1.2) (2023-08-05)
 
 
