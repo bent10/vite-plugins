@@ -38,7 +38,7 @@
     "format": "prettier . --write --cache-location .cache/prettier --ignore-path ../../.prettierignore"
   },
   "dependencies": {
-    "htmlparser2": "^8.0.2"
+    "htmlparser2": "^9.0.0"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"
