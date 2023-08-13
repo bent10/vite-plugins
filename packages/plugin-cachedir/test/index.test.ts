@@ -1,4 +1,3 @@
-import { join } from 'node:path/posix'
 import pluginCacheDir from '../src/index.js'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,7 +15,7 @@ describe('pluginCacheDir', () => {
     const [plugin]: Plugin[] = pluginCacheDir()
     const config = plugin.config()
 
-    expect(config.cacheDir).toBe(join(cwd, 'node_modules/.vite'))
+    expect(config.cacheDir).toBe('/path/to/project/node_modules/.vite')
   })
 
   it("does not resolve cache directory if it's already provided in Vite config", () => {
@@ -30,7 +29,9 @@ describe('pluginCacheDir', () => {
     const [, plugin]: Plugin[] = pluginCacheDir()
     const config = plugin.config()
 
-    expect(config.test?.cache?.dir).toBe(join(cwd, 'node_modules/.vitest'))
+    expect(config.test?.cache?.dir).toBe(
+      '/path/to/project/node_modules/.vitest'
+    )
   })
 
   it("does not resolve test cache directory if it's already provided in Vite config", () => {
