@@ -1,3 +1,10 @@
+## vite-plugin-dom [1.0.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-dom@1.0.1...vite-plugin-dom@1.0.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency htmlparser2 to v9 ([aa6a4ce](https://github.com/bent10/vite-plugins/commit/aa6a4cef57519807123ce4e26b3e9b5127f09d44))
+
 ## vite-plugin-dom [1.0.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-dom@1.0.0...vite-plugin-dom@1.0.1) (2023-08-01)
 
 
