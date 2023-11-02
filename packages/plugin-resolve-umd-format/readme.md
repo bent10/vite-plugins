@@ -33,6 +33,6 @@ export default {
 
 ## License
 
-![GitHub](https://img.shields.io/github/license/bent10/monorepo-starter)
+![GitHub](https://img.shields.io/github/license/bent10/vite-plugins)
 
 A project by [Stilearning](https://stilearning.com) &copy; 2023.
