@@ -42,10 +42,12 @@ export function createProcessor(
   extensions.push({
     renderer: {
       heading(text, level) {
-        const id = slugger.slug(text)
-        headingList.push({ text, level, id })
+        const normalizedText = text.trim().replace(/<[!\/a-zA-Z].*?>/g, '')
+        const id = slugger.slug(normalizedText)
 
-        return `<h${level} id="${id}" tabindex='-1'>${text}</h${level}>`
+        headingList.push({ text: normalizedText, level, id })
+
+        return `<h${level} id="${id}" tabindex='-1'>${text}</h${level}>\n`
       }
     }
   })

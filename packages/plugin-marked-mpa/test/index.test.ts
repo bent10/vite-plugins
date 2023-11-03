@@ -97,12 +97,16 @@ it('should handle file resolution, load and transform content', async () => {
       <title></title>
     </head>
     <body>
-      <h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1><p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
-    <h2 id=\\"foo\\" tabindex='-1'>foo</h2><p>foo</p>
-    <h3 id=\\"bar\\" tabindex='-1'>bar</h3><blockquote>
+      <h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
+    <p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
+    <h2 id=\\"foo\\" tabindex='-1'>foo</h2>
+    <p>foo</p>
+    <h3 id=\\"bar\\" tabindex='-1'>bar</h3>
+    <blockquote>
     <p>bar</p>
     </blockquote>
-    <h3 id=\\"baz\\" tabindex='-1'>baz</h3><ul>
+    <h3 id=\\"baz\\" tabindex='-1'>baz</h3>
+    <ul>
     <li>baz</li>
     </ul>
 
