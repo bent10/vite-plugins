@@ -35,6 +35,15 @@ export default function pluginVendor(
 
       return !preview && isAllowedMode
     },
+    config() {
+      return {
+        server: {
+          watch: {
+            ignored: `**/${dest}/**`
+          }
+        }
+      }
+    },
     async configResolved({ publicDir, root }) {
       resolvedRoot = root
       vendorDir = normalizePath(join(publicDir, dest))
