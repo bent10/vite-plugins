@@ -1,3 +1,10 @@
+# vite-plugin-marked-mpa [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.0.2...vite-plugin-marked-mpa@1.1.0) (2023-11-04)
+
+
+### Features
+
+* exposes server data context ([e53457c](https://github.com/bent10/vite-plugins/commit/e53457c8061c9da3bff42020c587b0572111d3cf))
+
 ## vite-plugin-marked-mpa [1.0.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.0.1...vite-plugin-marked-mpa@1.0.2) (2023-11-04)
 
 
