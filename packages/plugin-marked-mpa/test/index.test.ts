@@ -33,7 +33,7 @@ it('should handle custom options', () => {
   expect(plugin.config).toBeInstanceOf(Function)
 
   const config = plugin.config.call(null, {})
-  expect(config).toHaveProperty('appType', 'mpa')
+  expect(config).toHaveProperty('appType', 'custom')
   expect(config).toHaveProperty('build')
   expect(config).toHaveProperty('optimizeDeps')
 

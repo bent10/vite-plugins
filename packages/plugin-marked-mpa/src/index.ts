@@ -46,7 +46,7 @@ export default function pluginMarkedMpa(
     name: 'vite:plugin-marked-mpa',
     config() {
       return {
-        appType: 'mpa',
+        appType: 'custom',
         build: { rollupOptions: { input: inputPages } },
         optimizeDeps: { include: [] }
       }
