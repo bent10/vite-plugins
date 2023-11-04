@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.1.0...vite-plugin-marked-mpa@1.1.1) (2023-11-04)
+
+
+### Bug Fixes
+
+* sets name of the data object to `data` ([7c3453c](https://github.com/bent10/vite-plugins/commit/7c3453cf2e49c27740f73b77d7ebe6d76be45f99))
+
 # vite-plugin-marked-mpa [1.1.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.0.2...vite-plugin-marked-mpa@1.1.0) (2023-11-04)
 
 
