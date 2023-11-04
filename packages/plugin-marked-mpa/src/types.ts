@@ -75,23 +75,84 @@ export interface Routes {
  * Represents a route within the Multi-Page Application (MPA).
  */
 export type Route = {
-  source: string
   stem: string
+
+  /**
+   * The source of the route.
+   */
+  source: string
+
+  /**
+   * The unique identifier of the route.
+   */
   id: string
+
+  /**
+   * The URL of the route.
+   */
   url: string
+
+  /**
+   * Indicates whether the route is an alias.
+   */
   isAlias: boolean
 }
 
 /**
  * Data structure that may include unknown properties.
  */
-export type MatterData = UnknownData & AdditionalProps & AdditionalMatterProps
+export type Context = UnknownData & ServerContext & MarkedContext
 
 /**
  * Represents an object with properties of unknown data.
  */
 export interface UnknownData {
   [key: string]: unknown
+}
+
+/**
+ * Additional data added during the vite process.
+ */
+export interface ServerContext {
+  NODE_ENV: string
+  isDev: boolean
+  routes: Routes
+  route: Route
+
+  /**
+   * An object provides information about a file, required `enableDataStats: true`.
+   */
+  stats?: Stats
+}
+
+/**
+ * Additional data added during the Marked process.
+ */
+export interface MarkedContext {
+  /**
+   * The layout specified by the user.
+   */
+  layouts: LayoutsOptions
+
+  /**
+   * An array of headings included in the content.
+   */
+  headings: Heading[]
+
+  /**
+   * The title specified by the user.
+   */
+  title?: string
+
+  /**
+   * An array of CSS assets specified by the user.
+   */
+  css?: Array<string | Attrs>
+
+  /**
+   * An array of JavaScript assets specified by the user.
+   */
+  js?: Array<string | Attrs>
 }
 
 /**
@@ -117,66 +178,6 @@ export interface Heading {
    * Optional children headings if available.
    */
   children?: Heading[]
-}
-
-/**
- * Additional properties added during the vite and marked process, such as
- * headings and source information.
- */
-export interface AdditionalProps {
-  /**
-   * An array of headings included in the content.
-   */
-  headings: Heading[]
-
-  /**
-   * The source of the content.
-   */
-  source: string
-
-  /**
-   * The unique identifier of the content.
-   */
-  id: string
-
-  /**
-   * The URL of the content.
-   */
-  url: string
-
-  /**
-   * Indicates whether the content is an alias.
-   */
-  isAlias: boolean
-
-  /**
-   * An object provides information about a file, required `enableDataStats: true`.
-   */
-  stats?: Stats
-}
-/**
- * Additional properties added by the user through frontmatter.
- */
-export interface AdditionalMatterProps {
-  /**
-   * The layout specified by the user.
-   */
-  layout?: string
-
-  /**
-   * The title specified by the user.
-   */
-  title?: string
-
-  /**
-   * An array of CSS assets specified by the user.
-   */
-  css?: Array<string | Attrs>
-
-  /**
-   * An array of JavaScript assets specified by the user.
-   */
-  js?: Array<string | Attrs>
 }
 
 /**

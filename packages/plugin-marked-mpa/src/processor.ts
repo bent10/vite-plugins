@@ -1,4 +1,4 @@
-import { join, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { Eta } from 'eta'
 import { Marked } from 'marked'
 import markedHookData from 'marked-hook-data'
@@ -6,27 +6,24 @@ import markedHookFrontmatter from 'marked-hook-frontmatter'
 import markedHookLayout from 'marked-hook-layout'
 import markedSequentialHooks from 'marked-sequential-hooks'
 import GithubSlugger from 'github-slugger'
-import type { Heading, ProcessorOptions, UnknownData } from './types.js'
+import type { Context, Heading, ProcessorOptions } from './types.js'
 import { groupHeadingsByLevel, normalizeDataSource } from './utils.js'
 
 /**
  * Creates a Marked processor with the specified options.
  */
-export function createProcessor(
-  this: { data: UnknownData },
-  options: ProcessorOptions
-) {
+export function createProcessor(ctx: Context, options: ProcessorOptions) {
   const {
     root,
     data: datasource = 'data',
     frontmatter: fmOptions,
     eta: etaOptions = {},
-    layouts,
+    layouts: layoutsOptions,
     extensions = []
   } = options
+
   const resolvedRoot = resolve(root)
   const normalizedDatasource = normalizeDataSource(datasource, resolvedRoot)
-  const layoutsDir = join(resolvedRoot, layouts?.dir || 'layouts')
 
   // template engine
   const eta = new Eta({
@@ -56,6 +53,10 @@ export function createProcessor(
     .use(
       markedSequentialHooks({
         markdownHooks: [
+          (md, data) => {
+            Object.assign(data, ctx)
+            return md
+          },
           markedHookData(normalizedDatasource),
           markedHookFrontmatter(fmOptions),
           // render templates
@@ -72,11 +73,9 @@ export function createProcessor(
           (html, data) => {
             data.headings = groupHeadingsByLevel(headingList)
             headingList = []
-            // shares data
-            Object.assign(this.data, data)
             return html
           },
-          markedHookLayout({ ...layouts, dir: layoutsDir }),
+          markedHookLayout(layoutsOptions),
           // render templates
           async (html, data) => await eta.renderStringAsync(html, data)
         ]
