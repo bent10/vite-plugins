@@ -29,6 +29,7 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
   const eta = new Eta({
     views: resolvedRoot,
     useWith: true,
+    varName: 'data',
     tags: ['{{', '}}'],
     ...etaOptions
   })
