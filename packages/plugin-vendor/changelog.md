@@ -1,3 +1,15 @@
+# vite-plugin-vendor [1.3.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.2.1...vite-plugin-vendor@1.3.0) (2023-11-04)
+
+
+### Bug Fixes
+
+* sets default `applyOnMode` option to `true` ([7f5359e](https://github.com/bent10/vite-plugins/commit/7f5359e42ed53fb468194b91b93992ad92a8fe83))
+
+
+### Features
+
+* excludes the `dest` dir from watcher ([55c5124](https://github.com/bent10/vite-plugins/commit/55c5124fe3bcc6ea0c8c6f4996ed18ababbf11ea))
+
 ## vite-plugin-vendor [1.2.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.2.0...vite-plugin-vendor@1.2.1) (2023-08-13)
 
 
