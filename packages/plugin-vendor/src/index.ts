@@ -17,7 +17,7 @@ export default function pluginVendor(
   options: PluginVendorOptions = {}
 ): Plugin {
   const {
-    applyOnMode = ['static'],
+    applyOnMode = true,
     dest = 'vendors',
     ignore = [],
     manualEntry = {}

@@ -12,7 +12,7 @@ export interface PluginVendorOptions {
    * If an array of strings is provided, the plugin will only apply to the specified
    * build modes.
    *
-   * @default ['static']
+   * @default true
    */
   applyOnMode?: boolean | string[]
 

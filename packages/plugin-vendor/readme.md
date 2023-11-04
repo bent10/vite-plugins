@@ -24,7 +24,7 @@ yarn add vite-plugin-vendor --dev
 
 To use the plugin, simply import it and add it to the plugins array in your Vite config file:
 
-```javascript
+```js
 // vite.config.js
 import pluginVendor from 'vite-plugin-vendor'
 
@@ -56,7 +56,7 @@ Determines which build modes this plugin should apply to.
 - If `false`, the plugin will apply to no build modes.
 - If an array of strings is provided, the plugin will only apply to the specified build modes.
 
-Default value: `['static']`
+Default value: `true`
 
 ### `dest` (optional)
 
@@ -70,7 +70,7 @@ You can manually specify vendor entries and their details using the `manualEntry
 
 Example:
 
-```javascript
+```js
 // vite.config.js
 import pluginVendor from 'vite-plugin-vendor'
 
