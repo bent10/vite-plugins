@@ -1,3 +1,10 @@
+# vite-plugin-marked-mpa [1.2.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.1.1...vite-plugin-marked-mpa@1.2.0) (2023-11-05)
+
+
+### Features
+
+* enhances hot update ([a1b76d3](https://github.com/bent10/vite-plugins/commit/a1b76d3af146155469177e00ab66807f3f8fcf7e))
+
 ## vite-plugin-marked-mpa [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.1.0...vite-plugin-marked-mpa@1.1.1) (2023-11-04)
 
 
