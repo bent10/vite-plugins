@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.2.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.0...vite-plugin-marked-mpa@1.2.1) (2023-11-05)
+
+
+### Bug Fixes
+
+* removes unused code ([43e2a22](https://github.com/bent10/vite-plugins/commit/43e2a22e963fdebd099c959b779580a775f2779f))
+
 # vite-plugin-marked-mpa [1.2.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.1.1...vite-plugin-marked-mpa@1.2.0) (2023-11-05)
 
 
