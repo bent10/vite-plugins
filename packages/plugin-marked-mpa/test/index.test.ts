@@ -49,7 +49,7 @@ it('should handle file resolution, load and transform content', async () => {
   const plugin: Plugin = pluginMarkedMpa({
     root: 'test/fixtures',
     layouts: {
-      dir: 'layouts'
+      dir: '_layouts'
     },
     data: {
       foo: Promise.resolve('bar')
@@ -142,15 +142,24 @@ it('should handle hot updates', async () => {
   })
   const { handleHotUpdate }: Plugin = plugin
 
-  const file = resolve('test/fixtures/pages/foo/bar.md')
-  const server = { config: { root: 'test' }, ws: { send: vi.fn() } }
-  const hotUpdateResult = await handleHotUpdate({ file, server })
+  const files = [
+    'pages/foo.md',
+    '_layouts/foo.html',
+    '_partials/foo.html',
+    '_data/foo.json'
+  ]
 
-  expect(hotUpdateResult).toBeUndefined()
-  // verify that the WebSocket send method was called
-  expect(server.ws.send).toHaveBeenCalledWith({
-    type: 'full-reload',
-    path: '*'
+  const server = { config: { root: 'test' }, ws: { send: vi.fn() } }
+  files.forEach(async f => {
+    const file = resolve('test/fixtures', f)
+    const hotUpdateResult = await handleHotUpdate({ file, server })
+
+    expect(hotUpdateResult).toBeUndefined()
+    // verify that the WebSocket send method was called
+    expect(server.ws.send).toHaveBeenCalledWith({
+      type: 'full-reload',
+      path: '*'
+    })
   })
 })
 

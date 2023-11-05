@@ -123,10 +123,10 @@ export default function pluginMarkedMpa(
                 route.source ? route.source : '404.md'
               )
 
-              const md = ctx.route ? await readFile(source, 'utf8') : '404'
+              const md = await readFile(source, 'utf8')
               const html = await server.transformIndexHtml(url, md)
 
-              res.statusCode = ctx.route ? 200 : 404
+              res.statusCode = 200
               res.end(html)
             }
           } catch (err) {
