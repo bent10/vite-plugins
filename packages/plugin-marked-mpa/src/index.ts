@@ -1,10 +1,10 @@
 import { readFile, stat } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { join, resolve } from 'node:path'
 import fg from 'fast-glob'
-import { createLogger, type Plugin } from 'vite'
+import { createLogger, normalizePath, type Plugin } from 'vite'
 import { createProcessor } from './processor.js'
 import { createRoutes } from './routes.js'
-import type { Context, PluginMarkedMpaOptions } from './types.js'
+import type { Context, PluginMarkedMpaOptions, RouteMap } from './types.js'
 
 const log = createLogger()
 
@@ -16,41 +16,47 @@ export default function pluginMarkedMpa(
   options: PluginMarkedMpaOptions = {}
 ): Plugin {
   const {
-    root = 'views',
+    root = 'src',
     pages = 'pages',
+    partials = '_partials',
     layouts = {},
     enableDataStats,
     ...processorOptions
   } = options
-  const { dir: layoutdir = 'layouts', ...restLayouts } = layouts
+  const { dir: layoutsDir = '_layouts', ...restLayouts } = layouts
+
+  const resolvedPagesDir = resolve(root, pages)
+  const resolvedPartialsDir = resolve(root, partials)
+  const resolvedLayoutsDir = resolve(root, layoutsDir)
+
   const layoutsOptions: typeof layouts = {
-    dir: resolve(root, layoutdir),
+    dir: normalizePath(join(root, layoutsDir)),
     name: 'default',
     placeholder: /<Outlet[ \t]*?\/>/,
     ...restLayouts
   }
+  // set datasources from ctx, later
+  const datasources: string[] = []
 
-  const cwd = resolve(root, pages)
-  const sources = fg.sync(`**/*.md`, { cwd })
+  const sources = fg.sync(`**/*.md`, { cwd: resolvedPagesDir })
+  const routes = createRoutes(sources)
 
-  const routes = createRoutes(sources, cwd)
-  const routesValues = Object.values(routes)
-  const routesByIds = routesValues.reduce(
-    (acc, curr) => {
-      acc[curr.id] = curr
+  const inputMap = Object.values(routes).reduce(
+    (acc, { source, stem, id, url }) => {
+      acc[id] = { source, stem, id, url }
       return acc
     },
-    {} as typeof routes
+    {} as RouteMap
   )
+  const input = Object.keys(inputMap)
 
-  const ctx = { routes: routesByIds, layouts: layoutsOptions } as Context
+  const ctx = { routes: {}, layouts: layoutsOptions } as Context
   const marked = createProcessor(ctx, {
     root,
+    partials: resolvedPartialsDir,
     layouts: layoutsOptions,
     ...processorOptions
   })
-
-  const input = Object.keys(routesByIds)
 
   return {
     name: 'vite:plugin-marked-mpa',
@@ -64,27 +70,42 @@ export default function pluginMarkedMpa(
     configResolved({ mode }) {
       ctx.NODE_ENV = mode
       ctx.isDev = mode === 'development'
+
+      for (const id in inputMap) {
+        ctx.routes[id] = inputMap[id]
+      }
     },
     resolveId(id) {
-      if (input.includes(id)) {
+      if (inputMap[id]) {
         return id
       }
     },
     async load(id) {
-      if (input.includes(id)) {
-        ctx.route = routesByIds[id]
+      if (inputMap[id]) {
+        const route = inputMap[id]
+        const source = resolve(resolvedPagesDir, route.source)
 
-        return await readFile(ctx.route.source, 'utf8')
+        if (enableDataStats) {
+          ctx.stats = await stat(source)
+        }
+
+        ctx.route = route
+
+        return await readFile(source, 'utf8')
       }
     },
     transformIndexHtml: {
       order: 'pre',
-      async handler(md: string) {
-        if (enableDataStats && ctx.route.source) {
-          addData('stats', await stat(String(ctx.route.source)))
+      async handler(md: string, { server }) {
+        const html = await marked.parse(md)
+
+        if ('datasources' in ctx && Array.isArray(ctx.datasources)) {
+          datasources.push(...ctx.datasources.map(d => resolve(d)))
+          // adds datasources to watcher
+          server?.watcher.add(datasources)
         }
 
-        return await marked.parse(md)
+        return html
       }
     },
     configureServer(server) {
@@ -93,12 +114,15 @@ export default function pluginMarkedMpa(
           try {
             if (req.headers['sec-fetch-dest'] === 'document') {
               const url = req.url?.replace(/(\.html|\/)$/, '') || '/'
-              ctx.route = routes[url]
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { isAlias: _, ...route } = routes[url] || {}
+              ctx.route = route
 
               const source = resolve(
-                cwd,
-                ctx.route ? ctx.route.source : '404.md'
+                resolvedPagesDir,
+                route.source ? route.source : '404.md'
               )
+
               const md = ctx.route ? await readFile(source, 'utf8') : '404'
               const html = await server.transformIndexHtml(url, md)
 
@@ -106,14 +130,25 @@ export default function pluginMarkedMpa(
               res.end(html)
             }
           } catch (err) {
-            res.statusCode = 500
-            res.end((err as Error).stack)
+            const error = err as Error
+
+            res.statusCode = /^ENOENT: no such file or directory/.test(
+              error.message
+            )
+              ? 404
+              : 500
+            res.end(error.stack)
           }
         })
       }
     },
     async handleHotUpdate({ file, server }) {
-      if (file.endsWith('.md')) {
+      if (
+        file.startsWith(resolvedPagesDir) ||
+        file.startsWith(resolvedLayoutsDir) ||
+        file.startsWith(resolvedPartialsDir) ||
+        datasources.includes(file)
+      ) {
         const source = file.replace(server.config.root, '')
 
         log.info(`\x1b[32mpage reload\x1b[0m ${source.slice(1)}`, {
@@ -122,15 +157,6 @@ export default function pluginMarkedMpa(
 
         server.ws.send({ type: 'full-reload', path: '*' })
       }
-    }
-  }
-
-  function addData(key: string, data: unknown) {
-    /* c8 ignore next 3 */
-    if (typeof ctx[key] === 'object') {
-      Object.assign(ctx[key] as object, data)
-    } else {
-      ctx[key] = data
     }
   }
 }

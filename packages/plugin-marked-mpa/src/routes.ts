@@ -1,12 +1,11 @@
-import { join } from 'node:path'
 import type { Routes, Route } from './types.js'
 
 /**
  * Creates routes based on the provided sources.
  */
-export function createRoutes(sources: string[], cwd: string) {
+export function createRoutes(sources: string[]) {
   return sources.reduce((routes, source) => {
-    const route = createRoute(source, cwd)
+    const route = createRoute(source)
 
     routes[route.url] = route
 
@@ -22,7 +21,7 @@ export function createRoutes(sources: string[], cwd: string) {
 /**
  * Creates a route based on a source path.
  */
-function createRoute(source: string, cwd: string): Route {
+function createRoute(source: string): Route {
   const stem = source.slice(0, -3)
   const id = `${stem}.html`
   const url = stem.split('/').reduce((acc, segment) => {
@@ -32,7 +31,7 @@ function createRoute(source: string, cwd: string): Route {
     return (acc += `/${segment.toLowerCase()}`)
   }, '')
 
-  return { source: join(cwd, source), stem, id, url, isAlias: false }
+  return { source, stem, id, url, isAlias: false }
 }
 
 /**

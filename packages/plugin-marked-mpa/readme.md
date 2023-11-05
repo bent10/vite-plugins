@@ -28,9 +28,11 @@ export default {
 
 Below are the available options:
 
-- `root`: Controls the top-level directory for layouts, pages, and data sources.
+- `root`: Controls the top-level directory for `layouts`, `pages`, `partials`, and `data` sources.
 
 - `pages`: Specifies the directory where your Markdown pages are located.
+
+- `partials`: Directory that contains partial templates.
 
 - `layouts`: Configuration options for layouts. Refer to the documentation of [`marked-hook-layout`](https://github.com/bent10/marked-extensions/tree/main/packages/hook-layout) for details.
 
@@ -52,10 +54,11 @@ export default {
     pluginMpa({
       root: 'src', // Your project root directory
       pages: 'pages', // The directory where your Markdown pages are located
+      partials: '_partials', // Directory that contains partial templates
       layouts: {
-        dir: 'layouts' // The directory where your layout files are located
+        dir: '_layouts' // The directory where your layout files are located
       },
-      data: ['data', 'more-data'], // Directories containing data sources
+      data: ['_data', '_more-data'], // Directories containing data sources
       frontmatter: {
         dataPrefix: 'page' // Parse frontmatter as member of 'page' object
       },

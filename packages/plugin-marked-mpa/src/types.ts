@@ -11,9 +11,15 @@ export type EtaConfig = NonNullable<ConstructorParameters<typeof Eta>[0]>
  */
 export interface PluginMarkedMpaOptions {
   /**
-   * Controls the top-level directory for layouts, pages, and data sources.
+   * Controls the top-level directory for `layouts`, `pages`, `includes`, and
+   * `data` sources.
    */
   root?: string
+
+  /**
+   * Options for specifying custom layouts.
+   */
+  layouts?: LayoutsOptions
 
   /**
    * The path to the directory containing the Markdown pages.
@@ -21,9 +27,9 @@ export interface PluginMarkedMpaOptions {
   pages?: string
 
   /**
-   * Options for specifying custom layouts.
+   * The path to the directory containing partials to be available in templates.
    */
-  layouts?: LayoutsOptions
+  partials?: string
 
   /**
    * Specifies the data source or an array of data sources.
@@ -93,9 +99,16 @@ export type Route = {
   url: string
 
   /**
-   * Indicates whether the route is an alias.
+   * Indicates whether the route is an index route.
    */
   isAlias: boolean
+}
+
+/**
+ * Represent a route by id.
+ */
+export interface RouteMap {
+  [id: string]: Omit<Route, 'isAlias'>
 }
 
 /**
@@ -116,8 +129,8 @@ export interface UnknownData {
 export interface ServerContext {
   NODE_ENV: string
   isDev: boolean
-  routes: Routes
-  route: Route
+  routes: RouteMap
+  route: Omit<Route, 'isAlias'>
 
   /**
    * An object provides information about a file, required `enableDataStats: true`.

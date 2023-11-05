@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="vitest/globals" />
 
-import { createServer } from 'vite'
+import { resolve } from 'node:path'
+import { ViteDevServer, createServer } from 'vite'
 import pluginMarkedMpa from '../src/index.js'
 
 type Plugin = Record<string, any>
+
+let server: ViteDevServer
 
 vi.mock('vite', async () => {
   const actual = (await vi.importActual('vite')) as any
@@ -12,7 +15,8 @@ vi.mock('vite', async () => {
   return { ...actual, createLogger: vi.fn().mockReturnValue({ info: vi.fn() }) }
 })
 
-beforeEach(() => {
+beforeEach(async () => {
+  server = server = await createServer()
   vi.clearAllMocks()
 })
 
@@ -62,7 +66,9 @@ it('should handle file resolution, load and transform content', async () => {
   const source = 'index.html'
   const id = plugin.resolveId(source)
   const content = await plugin.load(id)
-  const transformedContent = await plugin.transformIndexHtml.handler(content)
+  const transformedContent = await plugin.transformIndexHtml.handler(content, {
+    server
+  })
 
   expect(id).toEqual(source)
   expect(content).toMatchInlineSnapshot(`
@@ -136,7 +142,7 @@ it('should handle hot updates', async () => {
   })
   const { handleHotUpdate }: Plugin = plugin
 
-  const file = '/foo/bar.md'
+  const file = resolve('test/fixtures/pages/foo/bar.md')
   const server = { config: { root: 'test' }, ws: { send: vi.fn() } }
   const hotUpdateResult = await handleHotUpdate({ file, server })
 
@@ -150,9 +156,8 @@ it('should handle hot updates', async () => {
 
 it('should serve transformed HTML for documents', async () => {
   const { configureServer }: Plugin = pluginMarkedMpa({
-      root: 'test/fixtures'
-    }),
-    server = await createServer()
+    root: 'test/fixtures'
+  })
 
   vi.spyOn(server, 'transformIndexHtml').mockResolvedValueOnce('fired!')
 

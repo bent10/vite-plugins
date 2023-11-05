@@ -1,4 +1,3 @@
-import { resolve } from 'node:path'
 import { Eta } from 'eta'
 import { Marked } from 'marked'
 import markedHookData from 'marked-hook-data'
@@ -15,19 +14,19 @@ import { groupHeadingsByLevel, normalizeDataSource } from './utils.js'
 export function createProcessor(ctx: Context, options: ProcessorOptions) {
   const {
     root,
-    data: datasource = 'data',
+    data: datasource = '_data',
     frontmatter: fmOptions,
     eta: etaOptions = {},
     layouts: layoutsOptions,
+    partials,
     extensions = []
   } = options
 
-  const resolvedRoot = resolve(root)
-  const normalizedDatasource = normalizeDataSource(datasource, resolvedRoot)
+  const normalizedDatasource = normalizeDataSource(datasource, root)
 
   // template engine
   const eta = new Eta({
-    views: resolvedRoot,
+    views: partials,
     useWith: true,
     varName: 'data',
     tags: ['{{', '}}'],
@@ -78,7 +77,12 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
           },
           markedHookLayout(layoutsOptions),
           // render templates
-          async (html, data) => await eta.renderStringAsync(html, data)
+          async (html, data) => {
+            Object.assign(ctx, data)
+            // omit datasources
+            data.datasources = undefined
+            return await eta.renderStringAsync(html, data)
+          }
         ]
       })
     )
