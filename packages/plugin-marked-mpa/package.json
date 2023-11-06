@@ -44,8 +44,7 @@
     "marked-hook-data": "^1.2.1",
     "marked-hook-frontmatter": "^1.4.2",
     "marked-hook-layout": "^1.2.1",
-    "marked-sequential-hooks": "^1.2.1",
-    "xml-formatter": "^3.6.0"
+    "marked-sequential-hooks": "^1.2.1"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"
