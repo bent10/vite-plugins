@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.2.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.1...vite-plugin-marked-mpa@1.2.2) (2023-11-06)
+
+
+### Bug Fixes
+
+* **deps:** removes `xml-formatter` ([8377e19](https://github.com/bent10/vite-plugins/commit/8377e1987bc387b07537a92d4cd180f536fa6148))
+
 ## vite-plugin-marked-mpa [1.2.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.0...vite-plugin-marked-mpa@1.2.1) (2023-11-05)
 
 
