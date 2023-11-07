@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.2.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.2...vite-plugin-marked-mpa@1.2.3) (2023-11-07)
+
+
+### Bug Fixes
+
+* resolves un-traversed first `block` token ([ac8fef4](https://github.com/bent10/vite-plugins/commit/ac8fef4724585b4d4143438c9dfa255e106c0553))
+
 ## vite-plugin-marked-mpa [1.2.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.1...vite-plugin-marked-mpa@1.2.2) (2023-11-06)
 
 
