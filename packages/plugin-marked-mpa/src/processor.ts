@@ -66,7 +66,7 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
               if (!(data[key] instanceof Promise)) continue
               data[key] = await data[key]
             }
-            return await eta.renderStringAsync(md, data)
+            return '\n\n' + (await eta.renderStringAsync(md, data))
           }
         ],
         htmlHooks: [
