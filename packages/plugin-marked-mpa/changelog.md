@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.2.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.3...vite-plugin-marked-mpa@1.2.4) (2023-11-08)
+
+
+### Bug Fixes
+
+* **deps:** bump `marked-hook-data` ([3a46fe6](https://github.com/bent10/vite-plugins/commit/3a46fe68c537c0d79ae3ab39ac5290a38ebfe3d9))
+
 ## vite-plugin-marked-mpa [1.2.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.2...vite-plugin-marked-mpa@1.2.3) (2023-11-07)
 
 
