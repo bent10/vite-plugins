@@ -18,6 +18,7 @@ export default function pluginMarkedMpa(
   const {
     root = 'src',
     pages = 'pages',
+    ignore = ['**/_*.md'],
     partials = '_partials',
     layouts = {},
     enableDataStats,
@@ -38,7 +39,7 @@ export default function pluginMarkedMpa(
   // set datasources from ctx, later
   const datasources: string[] = []
 
-  const sources = fg.sync(`**/*.md`, { cwd: resolvedPagesDir })
+  const sources = fg.sync(`**/*.md`, { cwd: resolvedPagesDir, ignore })
   const routes = createRoutes(sources)
 
   const inputMap = Object.values(routes).reduce(

@@ -59,6 +59,14 @@ export interface PluginMarkedMpaOptions {
    * file metadata on every render.
    */
   enableDataStats?: boolean
+
+  /**
+   * An array of glob pattern to exclude page files from processing, relative to
+   * the `pages` directory.
+   *
+   * @default ['**\/_*.md']
+   */
+  ignore?: string[]
 }
 
 /**

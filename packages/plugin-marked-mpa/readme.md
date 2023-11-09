@@ -32,6 +32,8 @@ Below are the available options:
 
 - `pages`: Specifies the directory where your Markdown pages are located.
 
+- `ignore`: An array of glob pattern to exclude page files from processing, relative to the `pages` directory.
+
 - `partials`: Directory that contains partial templates.
 
 - `layouts`: Configuration options for layouts. Refer to the documentation of [`marked-hook-layout`](https://github.com/bent10/marked-extensions/tree/main/packages/hook-layout) for details.

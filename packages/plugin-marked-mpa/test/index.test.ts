@@ -60,8 +60,14 @@ it('should handle file resolution, load and transform content', async () => {
     enableDataStats: true
   })
 
-  plugin.config()
-  plugin.configResolved({ mode: 'production' })
+  const config = plugin.config()
+  plugin.configResolved({ mode: 'production', ...config })
+
+  expect(config).toEqual({
+    appType: 'custom',
+    build: { rollupOptions: { input: ['index.html', 'foo/bar.html'] } },
+    optimizeDeps: { include: [] }
+  })
 
   const source = 'index.html'
   const id = plugin.resolveId(source)
