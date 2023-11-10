@@ -47,7 +47,7 @@ it('should handle custom options', () => {
 
 it('should handle file resolution, load and transform content', async () => {
   const plugin: Plugin = pluginMarkedMpa({
-    root: 'test/fixtures',
+    root: 'example',
     layouts: {
       dir: '_layouts'
     },
@@ -77,59 +77,13 @@ it('should handle file resolution, load and transform content', async () => {
   })
 
   expect(id).toEqual(source)
-  expect(content).toMatchInlineSnapshot(`
-    "---
-    title: Hello, world!
-    author: John Doe
-    ---
-
-    # {{= page.title }}
-
-    This is the main content of your Markdown file autored by **{{= page.author }}**.
-
-    ## foo
-
-    foo
-
-    ### bar
-
-    > bar
-
-    ### baz
-
-    - baz
-    "
-  `)
-  expect(transformedContent).toMatchInlineSnapshot(`
-    "<!DOCTYPE html>
-    <html lang=\\"en\\">
-    <head>
-      <meta charset=\\"UTF-8\\">
-      <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\">
-      <title></title>
-    </head>
-    <body>
-      <h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
-    <p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
-    <h2 id=\\"foo\\" tabindex='-1'>foo</h2>
-    <p>foo</p>
-    <h3 id=\\"bar\\" tabindex='-1'>bar</h3>
-    <blockquote>
-    <p>bar</p>
-    </blockquote>
-    <h3 id=\\"baz\\" tabindex='-1'>baz</h3>
-    <ul>
-    <li>baz</li>
-    </ul>
-
-    </body>
-    </html>"
-  `)
+  expect(content).toMatchSnapshot()
+  expect(transformedContent).toMatchSnapshot()
 })
 
 it('should handle file resolution and load content for non-existent files', async () => {
   const plugin = pluginMarkedMpa({
-    root: 'test/fixtures',
+    root: 'example',
     data: false as any
   })
   const { resolveId, load }: Plugin = plugin
@@ -144,7 +98,7 @@ it('should handle file resolution and load content for non-existent files', asyn
 
 it('should handle hot updates', async () => {
   const plugin = pluginMarkedMpa({
-    root: 'test/fixtures'
+    root: 'example'
   })
   const { handleHotUpdate }: Plugin = plugin
 
@@ -157,7 +111,7 @@ it('should handle hot updates', async () => {
 
   const server = { config: { root: 'test' }, ws: { send: vi.fn() } }
   files.forEach(async f => {
-    const file = resolve('test/fixtures', f)
+    const file = resolve('example', f)
     const hotUpdateResult = await handleHotUpdate({ file, server })
 
     expect(hotUpdateResult).toBeUndefined()
@@ -171,7 +125,7 @@ it('should handle hot updates', async () => {
 
 it('should serve transformed HTML for documents', async () => {
   const { configureServer }: Plugin = pluginMarkedMpa({
-    root: 'test/fixtures'
+    root: 'example'
   })
 
   vi.spyOn(server, 'transformIndexHtml').mockResolvedValueOnce('fired!')

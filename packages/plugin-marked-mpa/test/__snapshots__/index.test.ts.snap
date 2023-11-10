@@ -1,0 +1,374 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`should handle file resolution, load and transform content 1`] = `
+"---
+title: Hello, world!
+author: John Doe
+---
+
+· [Home](/) · [Bar](/foo/bar.html) ·
+
+# {{= page.title }}
+
+This is the main content of your Markdown file autored by **{{= page.author }}**.
+
+This guide is a very brief overview, with examples, of the syntax that [Markdown] supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It's shown as _text_ and not _rendered HTML_.
+
+[Markdown]: http://daringfireball.net/projects/markdown/
+
+# Simple Text Formatting
+
+First thing is first. You can use _stars_ or _underscores_ for italics. **Double stars** and **double underscores** for bold. **_Three together_** for **_both_**.
+
+Paragraphs are pretty easy too. Just have a blank line between chunks of text.
+
+> This chunk of text is in a block quote. Its multiple lines will all be
+> indented a bit from the rest of the text.
+>
+> > Multiple levels of block quotes also work.
+
+Sometimes you want to include code, such as when you are explaining how \`<h1>\` HTML tags work, or maybe you are a programmer and you are discussing \`someMethod()\`.
+
+If you want to include code and have new
+lines preserved, indent the line with a tab
+or at least four spaces:
+
+    Extra spaces work here too.
+    This is also called preformatted text and it is useful for showing examples.
+    The text will stay as text, so any *markdown* or <u>HTML</u> you add will
+    not show up formatted. This way you can show markdown examples in a
+    markdown document.
+
+>     You can also use preformatted text with your blockquotes
+>     as long as you add at least five spaces.
+
+# Headings
+
+There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an \\"h1\\" style. Three or more hyphens under a line makes it \\"h2\\" (slightly smaller). You can also use multiple pound symbols (\`#\`) before and after a heading. Pounds after the title are ignored. Here are some examples:
+
+# This is H1
+
+## This is H2
+
+# This is H1
+
+## This is H2
+
+### This is H3 with some extra pounds
+
+#### You get the idea
+
+##### I don't need extra pounds at the end
+
+###### H6 is the max
+
+# Links
+
+Let's link to a few sites. First, let's use the bare URL, like <https://www.github.com>. Great for text, but ugly for HTML.
+Next is an inline link to [Google](https://www.google.com). A little nicer.
+This is a reference-style link to [Wikipedia] [1].
+Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links both automatically use the links defined below, but they could be defined _anywhere_ in the markdown and are removed from the HTML. The names are also case insensitive, so you can use [YaHoO] and have it link properly.
+
+[1]: https://www.wikipedia.org
+[Yahoo]: https://www.yahoo.com
+
+Title attributes may be added to links by adding text after a link.
+This is the [inline link](https://www.bing.com 'Bing') with a \\"Bing\\" title.
+You can also go to [W3C] [2] and maybe visit a [friend].
+
+[2]: https://w3c.org 'The W3C puts out specs for web-based things'
+[Friend]: https://facebook.com 'Facebook!'
+
+Email addresses in plain text are not linked: test@example.com.
+Email addresses wrapped in angle brackets are linked: <test@example.com>.
+They are also obfuscated so that email harvesting spam robots hopefully won't get them.
+
+# Lists
+
+- This is a bulleted list
+- Great for shopping lists
+
+* You can also use hyphens
+
+- Or plus symbols
+
+The above is an \\"unordered\\" list. Now, on for a bit of order.
+
+1. Numbered lists are also easy
+2. Just start with a number
+3. However, the actual number doesn't matter when converted to HTML.
+4. This will still show up as 4.
+
+You might want a few advanced lists:
+
+- This top-level list is wrapped in paragraph tags
+- This generates an extra space between each top-level item.
+
+- You do it by adding a blank line
+
+- This nested list also has blank lines between the list items.
+
+- How to create nested lists
+
+  1. Start your regular list
+  2. Indent nested lists with two spaces
+  3. Further nesting means you should indent with two more spaces
+
+  - This line is indented with four spaces.
+
+- List items can be quite lengthy. You can keep typing and either continue
+  them on the next line with no indentation.
+
+- Alternately, if that looks ugly, you can also
+  indent the next line a bit for a prettier look.
+
+- You can put large blocks of text in your list by just indenting with two spaces.
+
+  This is formatted the same as code, but you can inspect the HTML
+  and find that it's just wrapped in a \`<p>\` tag and _won't_ be shown
+  as preformatted text.
+
+  You can keep adding more and more paragraphs to a single
+  list item by adding the traditional blank line and then keep
+  on indenting the paragraphs with two spaces.
+
+  You really only need to indent the first line,
+  but that looks ugly.
+
+- Lists support blockquotes
+
+  > Just like this example here. By the way, you can
+  > nest lists inside blockquotes!
+  >
+  > - Fantastic!
+
+- Lists support preformatted text
+
+      You just need to indent an additional four spaces.
+
+## Horizontal Rule
+
+If you need a horizontal rule you just need to put at least three hyphens, asterisks, or underscores on a line by themselves. You can also even put spaces between the characters.
+
+---
+
+---
+
+---
+
+Those three all produced horizontal lines. Keep in mind that three hyphens under any text turns that text into a heading, so add a blank like if you use hyphens.
+
+## Images
+
+Images work exactly like links, but they have exclamation points in front. They work with references and titles too.
+
+![Google Logo](https://www.google.com/images/errors/logo_sm.gif) and ![Happy].
+
+[Happy]: https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png '\\"Smiley face\\"'
+
+## Inline HTML
+
+If markdown is too limiting, you can just insert your own <strike>crazy</strike> HTML. Span-level HTML <u>can _still_ use markdown</u>. Block level elements must be separated from text by a blank line and must not have any spaces before the opening and closing HTML.
+
+<div style='font-family: \\"Comic Sans MS\\", \\"Comic Sans\\", cursive;'>
+It is a pity, but markdown does **not** work in here for most markdown parsers.
+[We] handles it pretty well.
+</div>
+
+## Unlock gems with [\`extensions\`](https://github.com/bent10/marked-extensions)
+
+\`\`\`js
+import { defineConfig } from 'vite'
+import mpa from 'vite-plugin-marked-mpa'
+import markedAlert from 'marked-alert'
+
+export default defineConfig({
+  plugins: [
+    mpa({
+      extensions: [{ gfm: true }, markedAlert()]
+    })
+  ]
+})
+\`\`\`
+
+Use [more extensions](https://github.com/bent10/marked-extensions) to enable additional markdown features, e.g. footnotes, Github alerts, directive syntax, etc.
+"
+`;
+
+exports[`should handle file resolution, load and transform content 2`] = `
+"<!doctype html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
+    <title>Hello, world!</title>
+
+    <link
+      rel=\\"stylesheet\\"
+      href=\\"https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css\\"
+    />
+
+    <style>
+      #content {
+        margin: 0 auto;
+        padding: 1rem;
+        max-width: 928px;
+      }
+    </style>
+  </head>
+  <body class=\\"markdown-body\\">
+    <div id=\\"content\\">
+      <p>· <a href=\\"/\\">Home</a> · <a href=\\"/foo/bar.html\\">Bar</a> ·</p>
+<h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
+<p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
+<p>This guide is a very brief overview, with examples, of the syntax that <a href=\\"http://daringfireball.net/projects/markdown/\\">Markdown</a> supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It&#39;s shown as <em>text</em> and not <em>rendered HTML</em>.</p>
+<h1 id=\\"simple-text-formatting\\" tabindex='-1'>Simple Text Formatting</h1>
+<p>First thing is first. You can use <em>stars</em> or <em>underscores</em> for italics. <strong>Double stars</strong> and <strong>double underscores</strong> for bold. <strong><em>Three together</em></strong> for <strong><em>both</em></strong>.</p>
+<p>Paragraphs are pretty easy too. Just have a blank line between chunks of text.</p>
+<blockquote>
+<p>This chunk of text is in a block quote. Its multiple lines will all be
+indented a bit from the rest of the text.</p>
+<blockquote>
+<p>Multiple levels of block quotes also work.</p>
+</blockquote>
+</blockquote>
+<p>Sometimes you want to include code, such as when you are explaining how <code>&lt;h1&gt;</code> HTML tags work, or maybe you are a programmer and you are discussing <code>someMethod()</code>.</p>
+<p>If you want to include code and have new
+lines preserved, indent the line with a tab
+or at least four spaces:</p>
+<pre><code>Extra spaces work here too.
+This is also called preformatted text and it is useful for showing examples.
+The text will stay as text, so any *markdown* or &lt;u&gt;HTML&lt;/u&gt; you add will
+not show up formatted. This way you can show markdown examples in a
+markdown document.
+</code></pre>
+<blockquote>
+<pre><code>You can also use preformatted text with your blockquotes
+as long as you add at least five spaces.
+</code></pre>
+</blockquote>
+<h1 id=\\"headings\\" tabindex='-1'>Headings</h1>
+<p>There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an &quot;h1&quot; style. Three or more hyphens under a line makes it &quot;h2&quot; (slightly smaller). You can also use multiple pound symbols (<code>#</code>) before and after a heading. Pounds after the title are ignored. Here are some examples:</p>
+<h1 id=\\"this-is-h1\\" tabindex='-1'>This is H1</h1>
+<h2 id=\\"this-is-h2\\" tabindex='-1'>This is H2</h2>
+<h1 id=\\"this-is-h1-1\\" tabindex='-1'>This is H1</h1>
+<h2 id=\\"this-is-h2-1\\" tabindex='-1'>This is H2</h2>
+<h3 id=\\"this-is-h3-with-some-extra-pounds\\" tabindex='-1'>This is H3 with some extra pounds</h3>
+<h4 id=\\"you-get-the-idea\\" tabindex='-1'>You get the idea</h4>
+<h5 id=\\"i-don39t-need-extra-pounds-at-the-end\\" tabindex='-1'>I don&#39;t need extra pounds at the end</h5>
+<h6 id=\\"h6-is-the-max\\" tabindex='-1'>H6 is the max</h6>
+<h1 id=\\"links\\" tabindex='-1'>Links</h1>
+<p>Let&#39;s link to a few sites. First, let&#39;s use the bare URL, like <a href=\\"https://www.github.com\\">https://www.github.com</a>. Great for text, but ugly for HTML.
+Next is an inline link to <a href=\\"https://www.google.com\\">Google</a>. A little nicer.
+This is a reference-style link to [Wikipedia] <a href=\\"https://www.wikipedia.org\\">1</a>.
+Lastly, here&#39;s a pretty link to <a href=\\"https://www.yahoo.com\\">Yahoo</a>. The reference-style and pretty links both automatically use the links defined below, but they could be defined <em>anywhere</em> in the markdown and are removed from the HTML. The names are also case insensitive, so you can use <a href=\\"https://www.yahoo.com\\">YaHoO</a> and have it link properly.</p>
+<p>Title attributes may be added to links by adding text after a link.
+This is the <a href=\\"https://www.bing.com\\" title=\\"Bing\\">inline link</a> with a &quot;Bing&quot; title.
+You can also go to [W3C] <a href=\\"https://w3c.org\\" title=\\"The W3C puts out specs for web-based things\\">2</a> and maybe visit a <a href=\\"https://facebook.com\\" title=\\"Facebook!\\">friend</a>.</p>
+<p>Email addresses in plain text are not linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
+Email addresses wrapped in angle brackets are linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
+They are also obfuscated so that email harvesting spam robots hopefully won&#39;t get them.</p>
+<h1 id=\\"lists\\" tabindex='-1'>Lists</h1>
+<ul>
+<li>This is a bulleted list</li>
+<li>Great for shopping lists</li>
+</ul>
+<ul>
+<li>You can also use hyphens</li>
+</ul>
+<ul>
+<li>Or plus symbols</li>
+</ul>
+<p>The above is an &quot;unordered&quot; list. Now, on for a bit of order.</p>
+<ol>
+<li>Numbered lists are also easy</li>
+<li>Just start with a number</li>
+<li>However, the actual number doesn&#39;t matter when converted to HTML.</li>
+<li>This will still show up as 4.</li>
+</ol>
+<p>You might want a few advanced lists:</p>
+<ul>
+<li><p>This top-level list is wrapped in paragraph tags</p>
+</li>
+<li><p>This generates an extra space between each top-level item.</p>
+</li>
+<li><p>You do it by adding a blank line</p>
+</li>
+<li><p>This nested list also has blank lines between the list items.</p>
+</li>
+<li><p>How to create nested lists</p>
+<ol>
+<li>Start your regular list</li>
+<li>Indent nested lists with two spaces</li>
+<li>Further nesting means you should indent with two more spaces</li>
+</ol>
+<ul>
+<li>This line is indented with four spaces.</li>
+</ul>
+</li>
+<li><p>List items can be quite lengthy. You can keep typing and either continue
+them on the next line with no indentation.</p>
+</li>
+<li><p>Alternately, if that looks ugly, you can also
+indent the next line a bit for a prettier look.</p>
+</li>
+<li><p>You can put large blocks of text in your list by just indenting with two spaces.</p>
+<p>This is formatted the same as code, but you can inspect the HTML
+and find that it&#39;s just wrapped in a <code>&lt;p&gt;</code> tag and <em>won&#39;t</em> be shown
+as preformatted text.</p>
+<p>You can keep adding more and more paragraphs to a single
+list item by adding the traditional blank line and then keep
+on indenting the paragraphs with two spaces.</p>
+<p>You really only need to indent the first line,
+but that looks ugly.</p>
+</li>
+<li><p>Lists support blockquotes</p>
+<blockquote>
+<p>Just like this example here. By the way, you can
+nest lists inside blockquotes!</p>
+<ul>
+<li>Fantastic!</li>
+</ul>
+</blockquote>
+</li>
+<li><p>Lists support preformatted text</p>
+<pre><code>You just need to indent an additional four spaces.
+</code></pre>
+</li>
+</ul>
+<h2 id=\\"horizontal-rule\\" tabindex='-1'>Horizontal Rule</h2>
+<p>If you need a horizontal rule you just need to put at least three hyphens, asterisks, or underscores on a line by themselves. You can also even put spaces between the characters.</p>
+<hr>
+<hr>
+<hr>
+<p>Those three all produced horizontal lines. Keep in mind that three hyphens under any text turns that text into a heading, so add a blank like if you use hyphens.</p>
+<h2 id=\\"images\\" tabindex='-1'>Images</h2>
+<p>Images work exactly like links, but they have exclamation points in front. They work with references and titles too.</p>
+<p><img src=\\"https://www.google.com/images/errors/logo_sm.gif\\" alt=\\"Google Logo\\"> and <img src=\\"https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png\\" alt=\\"Happy\\" title=\\"&quot;Smiley face&quot;\\">.</p>
+<h2 id=\\"inline-html\\" tabindex='-1'>Inline HTML</h2>
+<p>If markdown is too limiting, you can just insert your own <strike>crazy</strike> HTML. Span-level HTML <u>can <em>still</em> use markdown</u>. Block level elements must be separated from text by a blank line and must not have any spaces before the opening and closing HTML.</p>
+<div style='font-family: \\"Comic Sans MS\\", \\"Comic Sans\\", cursive;'>
+It is a pity, but markdown does **not** work in here for most markdown parsers.
+[We] handles it pretty well.
+</div>
+
+<h2 id=\\"unlock-gems-with-extensions\\" tabindex='-1'>Unlock gems with <a href=\\"https://github.com/bent10/marked-extensions\\"><code>extensions</code></a></h2>
+<pre><code class=\\"language-js\\">import {defineConfig} from &#39;vite&#39;
+import mpa from &#39;vite-plugin-marked-mpa&#39;
+import markedAlert from &#39;marked-alert&#39;
+
+export default defineConfig({
+  plugins: [
+    mpa({
+      extensions: [{ gfm: true }, markedAlert()]
+    })
+  ]
+})
+</code></pre>
+<p>Use <a href=\\"https://github.com/bent10/marked-extensions\\">more extensions</a> to enable additional markdown features, e.g. footnotes, Github alerts, directive syntax, etc.</p>
+
+    </div>
+  </body>
+</html>
+"
+`;
