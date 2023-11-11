@@ -40,13 +40,19 @@
     "example:build": "vite build -c example/vite.config.ts"
   },
   "dependencies": {
+    "common-ancestor-path": "^1.0.1",
     "eta": "^3.1.1",
     "github-slugger": "^2.0.0",
+    "loadee": "^2.3.1",
     "marked": "^9.1.5",
-    "marked-hook-data": "^1.3.0",
-    "marked-hook-frontmatter": "^1.4.2",
-    "marked-hook-layout": "^1.2.1",
-    "marked-sequential-hooks": "^1.2.1"
+    "moo": "^0.5.2",
+    "set-value": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/common-ancestor-path": "^1.0.2",
+    "@types/js-yaml": "^4.0.9",
+    "@types/moo": "^0.5.9",
+    "@types/set-value": "^4.0.3"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"
