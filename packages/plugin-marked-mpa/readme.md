@@ -13,64 +13,131 @@ yarn add vite-plugin-marked-mpa --dev
 ## Usage
 
 ```js
-import pluginMpa from 'vite-plugin-marked-mpa'
+import markedAlert from 'marked-alert'
+import { createDirectives } from 'marked-directive'
+import mpa from 'vite-plugin-marked-mpa'
 
 export default {
   plugins: [
-    pluginMpa({
+    mpa({
       // Your configuration options here
+      extensions: [markedAlert(), createDirectives()]
     })
   ]
 }
 ```
 
+For more details, please explore the [`example`](https://github.com/bent10/vite-plugins/tree/main/packages/plugin-marked-mpa/example) folder.
+
 ## Options
 
-Below are the available options:
+Below is the available options:
 
-- `root`: Controls the top-level directory for `layouts`, `pages`, `partials`, and `data` sources.
+```ts
+interface PluginMarkedMpaOptions {
+  /**
+   * Controls the top-level directory for `layouts`, `pages`, `partials`, and
+   * `data` sources.
+   *
+   * @default 'src'
+   */
+  root?: string
 
-- `pages`: Specifies the directory where your Markdown pages are located.
+  /**
+   * The path to the directory containing Markdown pages, relative to the `root`
+   * directory.
+   *
+   * @default 'pages'
+   */
+  pages?: string
 
-- `ignore`: An array of glob pattern to exclude page files from processing, relative to the `pages` directory.
+  /**
+   * An array of glob pattern to exclude page files from processing, relative to
+   * the `pages` directory.
+   *
+   * @default ['**\/_*.md']
+   */
+  ignore?: string[]
 
-- `partials`: Directory that contains partial templates.
+  /**
+   * The path to the directory containing Layout files, relative to the `root`
+   * directory.
+   *
+   * @default '_layouts'
+   */
+  layouts?: string
 
-- `layouts`: Configuration options for layouts. Refer to the documentation of [`marked-hook-layout`](https://github.com/bent10/marked-extensions/tree/main/packages/hook-layout) for details.
+  /**
+   * The path to the directory containing partial files, relative to the `root`
+   * directory.
+   *
+   * @default '_partials'
+   */
+  partials?: string
 
-- `data`: Specifies the directory or directories containing data sources for your pages. Refer to the documentation of [`marked-hook-data`](https://github.com/bent10/marked-extensions/tree/main/packages/hook-data) for details.
+  /**
+   * Options for handling frontmatter in Markdown files.
+   */
+  frontmatter?: {
+    /**
+     * The prefix to use for hooks data when adding frontmatter data. If `true`,
+     * the data will be added to the `matter` property of the hooks data. If a
+     * string is provided, the data will be added with that string as the key.
+     *
+     * @default false
+     */
+    dataPrefix?: boolean | string
 
-- `frontmatter`: Configuration options for frontmatter processing. Refer to the documentation of [`marked-hook-frontmatter`](https://github.com/bent10/marked-extensions/tree/main/packages/hook-frontmatter) for details.
+    /**
+     * Specifies a schema to use.
+     *
+     * @default DEFAULT_SCHEMA
+     */
+    schema?: Schema
 
-- `eta`: Configuration options for the Eta template engine.
+    /**
+     * Compatibility with JSON.parse behaviour.
+     *
+     * @default false
+     */
+    json?: boolean
+  }
 
-- `extensions`: An array of `marked` extensions to enhance the Markdown processing.
+  /**
+   * Specifies the data source or an array of data sources, relative to the `root`
+   * directory.
+   *
+   * @default '_data'
+   */
+  data?: string | string[] | UnknownData
 
-- `enableDataStats`: Enables information about the file in the `data.stats` object, such as `size`, `ctime`, `mtime`, etc. Note that enabling this option can impact performance, as it requires stat calls to get file metadata on every render.
+  /**
+   * Set to `true` to disable merging data from multiple data sources.
+   */
+  disableDataMerge?: boolean
 
-```js
-import pluginMpa from 'vite-plugin-marked-mpa'
+  /**
+   * Options for the template engine.
+   *
+   * @see [Eta Docs](https://eta.js.org/docs/api/configuration)
+   */
+  eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName'>
 
-export default {
-  plugins: [
-    pluginMpa({
-      root: 'src', // Your project root directory
-      pages: 'pages', // The directory where your Markdown pages are located
-      partials: '_partials', // Directory that contains partial templates
-      layouts: {
-        dir: '_layouts' // The directory where your layout files are located
-      },
-      data: ['_data', '_more-data'], // Directories containing data sources
-      frontmatter: {
-        dataPrefix: 'page' // Parse frontmatter as member of 'page' object
-      },
-      eta: {
-        // Eta template engine configuration options
-      },
-      extensions: [], // Additional marked extensions
-      enableDataStats: false // Disable data file statistics
-    })
-  ]
+  /**
+   * An array of custom Marked extensions.
+   *
+   * @see [Marked extensions](https://github.com/bent10/marked-extensions)
+   */
+  extensions?: MarkedExtension[]
+
+  /**
+   * Enables information about the file in the `data.stats` object, such as
+   * `size`, `ctime`, `mtime`, etc.
+   *
+   * **Note:** This option will decrease performance as it requires stat calls to get
+   * file metadata on every render.
+   */
+  enableDataStats?: boolean
 }
 ```
 

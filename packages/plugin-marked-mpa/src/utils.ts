@@ -39,6 +39,19 @@ export function normalizeSource(source: string, cwd = '') {
 }
 
 /**
+ * Checks if all items in an array are strings.
+ */
+export function isDatasources(items: unknown[]) {
+  for (const item of items) {
+    if (typeof item !== 'string') {
+      return false
+    }
+  }
+
+  return true
+}
+
+/**
  * Groups heading data by level.
  */
 export function groupHeadingsByLevel(headingList: Omit<Heading, 'children'>[]) {

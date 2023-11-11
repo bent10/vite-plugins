@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import mpa from 'vite-plugin-marked-mpa'
+import mpa from '../src/index'
 
 export default defineConfig({
   plugins: [

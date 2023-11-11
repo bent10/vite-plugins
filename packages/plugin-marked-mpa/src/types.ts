@@ -1,8 +1,19 @@
 import type { Stats } from 'node:fs'
-import type { MarkedExtension } from 'marked'
 import type { Eta } from 'eta'
-import type { Options as FrontmatterOptions } from 'marked-hook-frontmatter'
-import type { Options as LayoutsOptions } from 'marked-hook-layout'
+import type { LoadOptions } from 'js-yaml'
+import type { MarkedExtension } from 'marked'
+
+export interface FrontmatterOptions
+  extends Pick<LoadOptions, 'schema' | 'json'> {
+  /**
+   * The prefix to use for hooks data when adding frontmatter data. If `true`,
+   * the data will be added to the `matter` property of the hooks data. If a
+   * string is provided, the data will be added with that string as the key.
+   *
+   * @default false
+   */
+  dataPrefix?: boolean | string
+}
 
 export type EtaConfig = NonNullable<ConstructorParameters<typeof Eta>[0]>
 
@@ -11,30 +22,44 @@ export type EtaConfig = NonNullable<ConstructorParameters<typeof Eta>[0]>
  */
 export interface PluginMarkedMpaOptions {
   /**
-   * Controls the top-level directory for `layouts`, `pages`, `includes`, and
+   * Controls the top-level directory for `layouts`, `pages`, `partials`, and
    * `data` sources.
+   *
+   * @default 'src'
    */
   root?: string
 
   /**
-   * Options for specifying custom layouts.
-   */
-  layouts?: LayoutsOptions
-
-  /**
-   * The path to the directory containing the Markdown pages.
+   * The path to the directory containing Markdown pages, relative to the `root`
+   * directory.
+   *
+   * @default 'pages'
    */
   pages?: string
 
   /**
-   * The path to the directory containing partials to be available in templates.
+   * An array of glob pattern to exclude page files from processing, relative to
+   * the `pages` directory.
+   *
+   * @default ['**\/_*.md']
    */
-  partials?: string
+  ignore?: string[]
 
   /**
-   * Specifies the data source or an array of data sources.
+   * The path to the directory containing Layout files, relative to the `root`
+   * directory.
+   *
+   * @default '_layouts'
    */
-  data?: string | string[] | UnknownData
+  layouts?: string
+
+  /**
+   * The path to the directory containing partial files, relative to the `root`
+   * directory.
+   *
+   * @default '_partials'
+   */
+  partials?: string
 
   /**
    * Options for handling frontmatter in Markdown files.
@@ -42,12 +67,29 @@ export interface PluginMarkedMpaOptions {
   frontmatter?: FrontmatterOptions
 
   /**
-   * Configuration options for the Eta template engine.
+   * Specifies the data source or an array of data sources, relative to the `root`
+   * directory.
+   *
+   * @default '_data'
+   */
+  data?: string | string[] | UnknownData
+
+  /**
+   * Set to `true` to disable merging data from multiple data sources.
+   */
+  disableDataMerge?: boolean
+
+  /**
+   * Options for the template engine.
+   *
+   * @see [Eta Docs](https://eta.js.org/docs/api/configuration)
    */
   eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName'>
 
   /**
    * An array of custom Marked extensions.
+   *
+   * @see [Marked extensions](https://github.com/bent10/marked-extensions)
    */
   extensions?: MarkedExtension[]
 
@@ -59,14 +101,6 @@ export interface PluginMarkedMpaOptions {
    * file metadata on every render.
    */
   enableDataStats?: boolean
-
-  /**
-   * An array of glob pattern to exclude page files from processing, relative to
-   * the `pages` directory.
-   *
-   * @default ['**\/_*.md']
-   */
-  ignore?: string[]
 }
 
 /**
@@ -74,8 +108,10 @@ export interface PluginMarkedMpaOptions {
  * specifying the 'root' property.
  */
 export interface ProcessorOptions
-  extends Omit<PluginMarkedMpaOptions, 'root' | 'pages'> {
+  extends Pick<PluginMarkedMpaOptions, 'eta' | 'extensions'> {
   root: string
+  layouts: string
+  partials: string
 }
 
 /**
@@ -150,15 +186,17 @@ export interface ServerContext {
  * Additional data added during the Marked process.
  */
 export interface MarkedContext {
+  matterDataPrefix: string | false
+  datasources: string[]
+  datasourcesAncestor: string
+
   /**
    * The layout specified by the user.
    */
-  layouts: LayoutsOptions
-
-  /**
-   * An array of headings included in the content.
-   */
-  headings: Heading[]
+  layout: {
+    id: string
+    raw: string
+  }
 
   /**
    * The title specified by the user.
@@ -174,6 +212,13 @@ export interface MarkedContext {
    * An array of JavaScript assets specified by the user.
    */
   js?: Array<string | Attrs>
+
+  /**
+   * An array of headings included in the content.
+   *
+   * **Note** that this object is only available after the Markdown has been parsed to HTML.
+   */
+  headings: Heading[]
 }
 
 /**

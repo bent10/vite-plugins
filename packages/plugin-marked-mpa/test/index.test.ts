@@ -48,9 +48,7 @@ it('should handle custom options', () => {
 it('should handle file resolution, load and transform content', async () => {
   const plugin: Plugin = pluginMarkedMpa({
     root: 'example',
-    layouts: {
-      dir: '_layouts'
-    },
+    layouts: '_layouts',
     data: {
       foo: Promise.resolve('bar')
     },

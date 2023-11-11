@@ -3,8 +3,6 @@ title: Hello, world!
 author: John Doe
 ---
 
-· [Home](/) · [Bar](/foo/bar.html) ·
-
 # {{= page.title }}
 
 This is the main content of your Markdown file autored by **{{= page.author }}**.
@@ -13,7 +11,7 @@ This guide is a very brief overview, with examples, of the syntax that [Markdown
 
 [Markdown]: http://daringfireball.net/projects/markdown/
 
-# Simple Text Formatting
+## Simple Text Formatting
 
 First thing is first. You can use _stars_ or _underscores_ for italics. **Double stars** and **double underscores** for bold. **_Three together_** for **_both_**.
 
@@ -39,10 +37,11 @@ or at least four spaces:
 >     You can also use preformatted text with your blockquotes
 >     as long as you add at least five spaces.
 
-# Headings
+## Headings
 
 There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an "h1" style. Three or more hyphens under a line makes it "h2" (slightly smaller). You can also use multiple pound symbols (`#`) before and after a heading. Pounds after the title are ignored. Here are some examples:
 
+```md
 # This is H1
 
 ## This is H2
@@ -58,12 +57,13 @@ There are a couple of ways to make headings. Using three or more equals signs on
 ##### I don't need extra pounds at the end
 
 ###### H6 is the max
+```
 
-# Links
+## Links
 
-Let's link to a few sites. First, let's use the bare URL, like <https://www.github.com>. Great for text, but ugly for HTML.
+Let's link to a few sites. First, let's use the bare URL, like <https://github.com>. Great for text, but ugly for HTML.
 Next is an inline link to [Google](https://www.google.com). A little nicer.
-This is a reference-style link to [Wikipedia] [1].
+This is a reference-style link to [Wikipedia][1].
 Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links both automatically use the links defined below, but they could be defined _anywhere_ in the markdown and are removed from the HTML. The names are also case insensitive, so you can use [YaHoO] and have it link properly.
 
 [1]: https://www.wikipedia.org
@@ -71,16 +71,16 @@ Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links bo
 
 Title attributes may be added to links by adding text after a link.
 This is the [inline link](https://www.bing.com 'Bing') with a "Bing" title.
-You can also go to [W3C] [2] and maybe visit a [friend].
+You can also go to [W3C][2] and maybe visit a [friend].
 
 [2]: https://w3c.org 'The W3C puts out specs for web-based things'
 [Friend]: https://facebook.com 'Facebook!'
 
-Email addresses in plain text are not linked: test@example.com.
-Email addresses wrapped in angle brackets are linked: <test@example.com>.
+Email addresses in plain text are linked: test@example.com.
+Email addresses wrapped in angle brackets are linked as well: <test@example.com>.
 They are also obfuscated so that email harvesting spam robots hopefully won't get them.
 
-# Lists
+## Lists
 
 - This is a bulleted list
 - Great for shopping lists
@@ -172,7 +172,27 @@ It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
 
-## Unlock gems with [`extensions`](https://github.com/bent10/marked-extensions)
+## Template Engine
+
+- **To output data**, use the `\{{=` opening tag, `# \{{= page.title }}`.
+
+- **To allow raw HTML**, use the `\{{~` opening tag, `\{{~ contentContainingHTML }}`.
+
+- **To evaluate JavaScript**, use the `\{{` opening tag, `\{{ let myVar = 3 }}`.
+
+- **To render a partial**, use the `\{{~` opening tag + the `include()` function, `\{{~ include("./path-to-layout") }}`.
+
+- **To render an async partial**, use the `\{{~` opening tag + the `includeAsync()` function, `\{{~ includeAsync("./path-to-layout") }}`.
+
+The partial template will automatically try to resolve partial files from inside the filesystem. Ex. `\{{~ include("/header.html") }}` will look for a file called `header.html` in the `src/partials` directory of your project.
+
+> **Tips:** Use the following syntax in page file to see `data` object:
+>
+> ```html
+> \{{~ JSON.stringify(data, null, 2) + '\n' }}
+> ```
+
+## Unlock more gems with [`extensions`](https://github.com/bent10/marked-extensions)
 
 ```js
 import { defineConfig } from 'vite'

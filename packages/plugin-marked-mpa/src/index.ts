@@ -1,9 +1,12 @@
 import { readFile, stat } from 'node:fs/promises'
-import { join, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import fg from 'fast-glob'
-import { createLogger, normalizePath, type Plugin } from 'vite'
+import { createLogger, type Plugin } from 'vite'
+import { retrieveData } from './data.js'
+import { frontmatter } from './frontmatter.js'
 import { createProcessor } from './processor.js'
 import { createRoutes } from './routes.js'
+import { normalizeDataSource } from './utils.js'
 import type { Context, PluginMarkedMpaOptions, RouteMap } from './types.js'
 
 const log = createLogger()
@@ -20,22 +23,19 @@ export default function pluginMarkedMpa(
     pages = 'pages',
     ignore = ['**/_*.md'],
     partials = '_partials',
-    layouts = {},
+    layouts = '_layouts',
+    frontmatter: fmOptions,
+    data: datasource = '_data',
+    disableDataMerge,
     enableDataStats,
     ...processorOptions
   } = options
-  const { dir: layoutsDir = '_layouts', ...restLayouts } = layouts
 
   const resolvedPagesDir = resolve(root, pages)
   const resolvedPartialsDir = resolve(root, partials)
-  const resolvedLayoutsDir = resolve(root, layoutsDir)
+  const resolvedLayoutsDir = resolve(root, layouts)
 
-  const layoutsOptions: typeof layouts = {
-    dir: normalizePath(join(root, layoutsDir)),
-    name: 'default',
-    placeholder: /<Outlet[ \t]*?\/>/,
-    ...restLayouts
-  }
+  const normalizedDatasource = normalizeDataSource(datasource, root)
   // set datasources from ctx, later
   const datasources: string[] = []
 
@@ -51,11 +51,11 @@ export default function pluginMarkedMpa(
   )
   const input = Object.keys(inputMap)
 
-  const ctx = { routes: {}, layouts: layoutsOptions } as Context
+  const ctx = { routes: {} } as Context
   const marked = createProcessor(ctx, {
     root,
-    partials: resolvedPartialsDir,
-    layouts: layoutsOptions,
+    layouts,
+    partials,
     ...processorOptions
   })
 
@@ -98,7 +98,11 @@ export default function pluginMarkedMpa(
     transformIndexHtml: {
       order: 'pre',
       async handler(md: string, { server }) {
-        const html = await marked.parse(md)
+        const content = frontmatter(ctx, md, fmOptions)
+        // now we should have matter data in the ctx
+        await retrieveData(ctx, normalizedDatasource, !disableDataMerge)
+
+        const html = await marked.parse(content)
 
         if ('datasources' in ctx && Array.isArray(ctx.datasources)) {
           datasources.push(...ctx.datasources.map(d => resolve(d)))
