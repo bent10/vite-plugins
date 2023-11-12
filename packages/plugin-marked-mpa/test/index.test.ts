@@ -67,16 +67,20 @@ it('should handle file resolution, load and transform content', async () => {
     optimizeDeps: { include: [] }
   })
 
-  const source = 'index.html'
-  const id = plugin.resolveId(source)
-  const content = await plugin.load(id)
-  const transformedContent = await plugin.transformIndexHtml.handler(content, {
-    server
-  })
+  const sources = ['index.html', 'foo/bar.html']
 
-  expect(id).toEqual(source)
-  expect(content).toMatchSnapshot()
-  expect(transformedContent).toMatchSnapshot()
+  for (const source of sources) {
+    const id = plugin.resolveId(source)
+    const content = await plugin.load(id)
+    const transformedContent = await plugin.transformIndexHtml.handler(
+      content,
+      { server }
+    )
+
+    expect(id).toEqual(source)
+    expect(content).toMatchSnapshot()
+    expect(transformedContent).toMatchSnapshot()
+  }
 })
 
 it('should handle file resolution and load content for non-existent files', async () => {

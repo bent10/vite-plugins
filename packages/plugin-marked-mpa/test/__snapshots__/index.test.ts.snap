@@ -458,3 +458,69 @@ export default defineConfig({
 </html>
 "
 `;
+
+exports[`should handle file resolution, load and transform content 3`] = `
+"---
+layout: default
+title: Bazinga!
+author: Jane Smith
+useWith:
+  foo: _foo.md
+  qux: _bar/qux.md
+---
+
+# {{= page.title }}
+
+This is the main content of your Markdown file autored by **{{= page.author }}**.
+
+\`\`\`json
+{{~ JSON.stringify(useWith, null, 2) }}
+\`\`\`
+"
+`;
+
+exports[`should handle file resolution, load and transform content 4`] = `
+"<!doctype html>
+<html lang=\\"en\\">
+  <head>
+    <meta charset=\\"UTF-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
+    <title>Bazinga!</title>
+
+    <link
+      rel=\\"stylesheet\\"
+      href=\\"https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css\\"
+    />
+
+    <style>
+      #content {
+        margin: 0 auto;
+        padding: 1rem;
+        max-width: 928px;
+      }
+    </style>
+  </head>
+  <body class=\\"markdown-body\\">
+    <div id=\\"content\\">
+      <nav>
+  
+  <a href=\\"/index.html\\">index</a>
+   · 
+  <a href=\\"/foo/bar.html\\" class=\\"active\\">bar</a>
+  
+</nav>
+
+
+      <h1 id=\\"bazinga\\" tabindex='-1'>Bazinga!</h1>
+<p>This is the main content of your Markdown file autored by <strong>Jane Smith</strong>.</p>
+<pre><code class=\\"language-json\\">{
+  &quot;foo&quot;: &quot;&lt;p&gt;Hi private foo&lt;/p&gt;\\\\n&quot;,
+  &quot;qux&quot;: &quot;&lt;p&gt;Hi qux&lt;/p&gt;\\\\n&quot;
+}
+</code></pre>
+
+    </div>
+  </body>
+</html>
+"
+`;
