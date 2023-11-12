@@ -1,3 +1,11 @@
+## vite-plugin-marked-mpa [1.3.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.1...vite-plugin-marked-mpa@1.3.2) (2023-11-12)
+
+
+### Bug Fixes
+
+* ignores folder begins with `_` by default ([8c4dfec](https://github.com/bent10/vite-plugins/commit/8c4dfec99d7380deb6ad4993f18d593386f13732))
+* missing filename for handling frontmatter error ([aef969d](https://github.com/bent10/vite-plugins/commit/aef969d0310607ab0325a22361c8e460e36c13f5))
+
 ## vite-plugin-marked-mpa [1.3.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.0...vite-plugin-marked-mpa@1.3.1) (2023-11-12)
 
 
