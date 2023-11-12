@@ -30,10 +30,12 @@ export async function retrieveData(
     ctx.datasources = fg
       .sync(source, { onlyFiles: true })
       .map(p => p.replace(/^\.*?\//g, ''))
-    ctx.datasourcesAncestor =
+
+    const datasourcesAncestor =
       ctx.datasources.length > 1
         ? String(ancestorPath(...ctx.datasources))
         : dirname(ctx.datasources[0])
+    ctx.datasourcesAncestor = datasourcesAncestor.replace(/\\+/g, '/')
 
     for (const source of ctx.datasources) {
       const notation = source.replace(
