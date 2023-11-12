@@ -22,7 +22,7 @@ export default function pluginMarkedMpa(
   const {
     root = 'src',
     pages = 'pages',
-    ignore = ['**/_*.md'],
+    ignore = ['**/_**/*.*', '**/_*.md'],
     partials = '_partials',
     layouts = '_layouts',
     frontmatter: fmOptions,
@@ -143,6 +143,7 @@ export default function pluginMarkedMpa(
 
         const html = await marked.parse(content)
 
+        /* c8 ignore next 5 */
         if ('datasources' in ctx && Array.isArray(ctx.datasources)) {
           datasources.push(...ctx.datasources.map(d => resolve(d)))
           // adds datasources to watcher
