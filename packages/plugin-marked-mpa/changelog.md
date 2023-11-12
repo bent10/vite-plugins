@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.3.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.0...vite-plugin-marked-mpa@1.3.1) (2023-11-12)
+
+
+### Bug Fixes
+
+* **windows:** use posix path for datasource ancestor ([424e517](https://github.com/bent10/vite-plugins/commit/424e517b015f6c7f990afea10bd26d4c76552231))
+
 # vite-plugin-marked-mpa [1.3.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.4...vite-plugin-marked-mpa@1.3.0) (2023-11-12)
 
 
