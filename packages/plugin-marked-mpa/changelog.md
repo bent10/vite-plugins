@@ -1,3 +1,13 @@
+# vite-plugin-marked-mpa [1.3.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.4...vite-plugin-marked-mpa@1.3.0) (2023-11-12)
+
+
+### Features
+
+* add `ignore` option ([df4dddc](https://github.com/bent10/vite-plugins/commit/df4dddcbb13c01a92ce1905078024bdb66b878f9))
+* improve performance ([b2469b4](https://github.com/bent10/vite-plugins/commit/b2469b43f5ac23c6cd455d8d688125e35c4285dd))
+* matter `useWith` to attach another `.md` files in the current context ([76aee1a](https://github.com/bent10/vite-plugins/commit/76aee1a173b3565b1e042d4d9a7c45faf857e2ad))
+* rm marked sequential hooks ([d06a6af](https://github.com/bent10/vite-plugins/commit/d06a6af3fdf4a187ed94b47d01838129524f11b6))
+
 ## vite-plugin-marked-mpa [1.2.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.2.3...vite-plugin-marked-mpa@1.2.4) (2023-11-08)
 
 
