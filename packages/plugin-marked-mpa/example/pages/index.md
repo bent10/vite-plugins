@@ -111,7 +111,7 @@ You might want a few advanced lists:
   2. Indent nested lists with two spaces
   3. Further nesting means you should indent with two more spaces
 
-  - This line is indented with four spaces.
+     - This line is indented with four spaces.
 
 - List items can be quite lengthy. You can keep typing and either continue
   them on the next line with no indentation.
@@ -172,6 +172,22 @@ It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
 
+## Frontmatter
+
+Frontmatter is metadata typically found at the beginning of a Markdown file, written in YAML format.
+
+```md
+---
+title: Hello, world!
+author: John Doe
+datasource: 'path/to/data.{json,yml,js}'
+---
+
+# {{= page.title }}
+
+This is the main content of your Markdown file autored by {{= page.author }}.
+```
+
 ## Template Engine
 
 - **To output data**, use the `\{{=` opening tag, `# \{{= page.title }}`.
@@ -189,7 +205,7 @@ The partial template will automatically try to resolve partial files from inside
 > **Tips:** Use the following syntax in page file to see `data` object:
 >
 > ```html
-> \{{~ JSON.stringify(data, null, 2) + '\n' }}
+> \{{~ JSON.stringify(data, null, 2) }}
 > ```
 
 ## Unlock more gems with [`extensions`](https://github.com/bent10/marked-extensions)

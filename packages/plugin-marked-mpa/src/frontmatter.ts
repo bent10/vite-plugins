@@ -1,11 +1,13 @@
 import jsyaml from 'js-yaml'
 import moo from 'moo'
+import setValue from 'set-value'
 import { Context, FrontmatterOptions, UnknownData } from './types.js'
 
 // Define a lexer for frontmatter and content.
 const lexer = moo.states({
   main: {
-    open: { match: /^---\n/, lineBreaks: true, push: 'matter' }
+    open: { match: /^---\n/, lineBreaks: true, push: 'matter' },
+    content: moo.fallback
   },
   matter: {
     close: { match: /^---\n/, lineBreaks: true, push: 'end' },
@@ -32,12 +34,11 @@ export function frontmatter(
   const { dataPrefix = false, ...yamlOptions } = options
 
   lexer.reset(markdown)
-  let fm = ''
+  let fm = '---\n'
   let content = ''
 
   for (const token of lexer) {
     switch (token.type) {
-      case 'open':
       case 'chunk':
       case 'lineBreak':
         fm += token.value
@@ -48,21 +49,25 @@ export function frontmatter(
     }
   }
 
-  const { matterDataPrefix = dataPrefix, ...matter } = jsyaml.load(
-    fm,
-    yamlOptions
-  ) as UnknownData
+  const {
+    matterDataPrefix = dataPrefix,
+    useWith = {},
+    ...matter
+  } = { ...(<UnknownData>jsyaml.load(fm, yamlOptions)) }
+
+  // move useWith prop to ctx
+  Object.assign(ctx, { useWith })
 
   if (typeof matterDataPrefix === 'boolean') {
-    Object.assign(
-      ctx,
-      matterDataPrefix
-        ? { matter, matterDataPrefix: 'matter' }
-        : { ...matter, matterDataPrefix }
-    )
+    if (matterDataPrefix) {
+      ctx.matterDataPrefix = 'matter'
+      setValue(ctx, 'matter', matter, { merge: true })
+    } else {
+      Object.assign(ctx, { ...matter, matterDataPrefix })
+    }
   } else if (typeof matterDataPrefix === 'string') {
     ctx.matterDataPrefix = matterDataPrefix
-    ctx[matterDataPrefix] = matter
+    setValue(ctx, matterDataPrefix, matter, { merge: true })
   }
 
   return content

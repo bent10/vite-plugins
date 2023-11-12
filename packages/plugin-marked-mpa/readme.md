@@ -121,7 +121,7 @@ interface PluginMarkedMpaOptions {
    *
    * @see [Eta Docs](https://eta.js.org/docs/api/configuration)
    */
-  eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName'>
+  eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName' | 'autoTrim'>
 
   /**
    * An array of custom Marked extensions.

@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises'
 import { extname, join, resolve } from 'node:path'
-import { Eta } from 'eta'
 import GithubSlugger from 'github-slugger'
 import { Marked } from 'marked'
 import { normalizePath } from 'vite'
@@ -16,33 +15,28 @@ import type {
  * Creates a Marked processor with the specified options.
  */
 export function createProcessor(ctx: Context, options: ProcessorOptions) {
-  const { root, layouts, partials, eta: etaOptions, extensions = [] } = options
-  let slugger: GithubSlugger
-  let headingList: Omit<Heading, 'children'>[] = []
-
-  // template engine
-  const eta = new Eta({
-    views: resolve(root, partials),
-    useWith: true,
-    varName: 'data',
-    tags: ['{{', '}}'],
-    ...etaOptions
-  })
+  const { root, layouts, eta, extensions = [] } = options
+  const slugger = new GithubSlugger()
+  const headingList: Omit<Heading, 'children'>[] = []
 
   return new Marked({ async: true }).use(...extensions, {
     hooks: {
-      async preprocess(md) {
-        slugger = new GithubSlugger()
-        headingList = []
+      async preprocess(md: string) {
+        slugger.reset()
+        headingList.length = 0
         ctx.headings = []
 
         const matter = (
           ctx.matterDataPrefix ? ctx[ctx.matterDataPrefix] : ctx
         ) as MarkedContext
+
+        // special matter prop (layout)
         const baseLayout =
           typeof matter.layout === 'string' ? matter.layout : 'default.html'
-        const layout = extname(baseLayout) ? baseLayout : baseLayout + '.html'
-        const layoutId = normalizePath(join(layouts, layout))
+        const layoutSource = extname(baseLayout)
+          ? baseLayout
+          : baseLayout + '.html'
+        const layoutId = normalizePath(join(layouts, layoutSource))
 
         // sets layout path
         ctx.layout = {
@@ -52,8 +46,9 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
 
         return await eta.renderStringAsync(md.replace(/\\{/g, '&#123;'), ctx)
       },
-      async postprocess(content) {
+      async postprocess(content: string) {
         ctx.headings = groupHeadingsByLevel(headingList)
+        ctx.useWith.content = content
 
         const layout = await eta.renderStringAsync(ctx.layout.raw, ctx)
         const html = layout.replace(/<Outlet[ \t]*?\/>/, content)

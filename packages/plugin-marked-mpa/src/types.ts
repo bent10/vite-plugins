@@ -84,7 +84,7 @@ export interface PluginMarkedMpaOptions {
    *
    * @see [Eta Docs](https://eta.js.org/docs/api/configuration)
    */
-  eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName'>
+  eta?: Omit<EtaConfig, 'views' | 'useWith' | 'varName' | 'autoTrim'>
 
   /**
    * An array of custom Marked extensions.
@@ -107,11 +107,11 @@ export interface PluginMarkedMpaOptions {
  * Options for the processor, extending the `PluginMarkedMpaOptions` and
  * specifying the 'root' property.
  */
-export interface ProcessorOptions
-  extends Pick<PluginMarkedMpaOptions, 'eta' | 'extensions'> {
+export interface ProcessorOptions {
   root: string
   layouts: string
-  partials: string
+  eta: Eta
+  extensions?: PluginMarkedMpaOptions['extensions']
 }
 
 /**
@@ -175,6 +175,7 @@ export interface ServerContext {
   isDev: boolean
   routes: RouteMap
   route: Omit<Route, 'isAlias'>
+  useWith: { [id: string]: string }
 
   /**
    * An object provides information about a file, required `enableDataStats: true`.

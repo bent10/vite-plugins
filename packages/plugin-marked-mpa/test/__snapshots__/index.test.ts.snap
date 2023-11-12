@@ -6,8 +6,6 @@ title: Hello, world!
 author: John Doe
 ---
 
-· [Home](/) · [Bar](/foo/bar.html) ·
-
 # {{= page.title }}
 
 This is the main content of your Markdown file autored by **{{= page.author }}**.
@@ -16,7 +14,7 @@ This guide is a very brief overview, with examples, of the syntax that [Markdown
 
 [Markdown]: http://daringfireball.net/projects/markdown/
 
-# Simple Text Formatting
+## Simple Text Formatting
 
 First thing is first. You can use _stars_ or _underscores_ for italics. **Double stars** and **double underscores** for bold. **_Three together_** for **_both_**.
 
@@ -42,10 +40,11 @@ or at least four spaces:
 >     You can also use preformatted text with your blockquotes
 >     as long as you add at least five spaces.
 
-# Headings
+## Headings
 
 There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an \\"h1\\" style. Three or more hyphens under a line makes it \\"h2\\" (slightly smaller). You can also use multiple pound symbols (\`#\`) before and after a heading. Pounds after the title are ignored. Here are some examples:
 
+\`\`\`md
 # This is H1
 
 ## This is H2
@@ -61,12 +60,13 @@ There are a couple of ways to make headings. Using three or more equals signs on
 ##### I don't need extra pounds at the end
 
 ###### H6 is the max
+\`\`\`
 
-# Links
+## Links
 
-Let's link to a few sites. First, let's use the bare URL, like <https://www.github.com>. Great for text, but ugly for HTML.
+Let's link to a few sites. First, let's use the bare URL, like <https://github.com>. Great for text, but ugly for HTML.
 Next is an inline link to [Google](https://www.google.com). A little nicer.
-This is a reference-style link to [Wikipedia] [1].
+This is a reference-style link to [Wikipedia][1].
 Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links both automatically use the links defined below, but they could be defined _anywhere_ in the markdown and are removed from the HTML. The names are also case insensitive, so you can use [YaHoO] and have it link properly.
 
 [1]: https://www.wikipedia.org
@@ -74,16 +74,16 @@ Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links bo
 
 Title attributes may be added to links by adding text after a link.
 This is the [inline link](https://www.bing.com 'Bing') with a \\"Bing\\" title.
-You can also go to [W3C] [2] and maybe visit a [friend].
+You can also go to [W3C][2] and maybe visit a [friend].
 
 [2]: https://w3c.org 'The W3C puts out specs for web-based things'
 [Friend]: https://facebook.com 'Facebook!'
 
-Email addresses in plain text are not linked: test@example.com.
-Email addresses wrapped in angle brackets are linked: <test@example.com>.
+Email addresses in plain text are linked: test@example.com.
+Email addresses wrapped in angle brackets are linked as well: <test@example.com>.
 They are also obfuscated so that email harvesting spam robots hopefully won't get them.
 
-# Lists
+## Lists
 
 - This is a bulleted list
 - Great for shopping lists
@@ -114,7 +114,7 @@ You might want a few advanced lists:
   2. Indent nested lists with two spaces
   3. Further nesting means you should indent with two more spaces
 
-  - This line is indented with four spaces.
+     - This line is indented with four spaces.
 
 - List items can be quite lengthy. You can keep typing and either continue
   them on the next line with no indentation.
@@ -175,7 +175,43 @@ It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
 
-## Unlock gems with [\`extensions\`](https://github.com/bent10/marked-extensions)
+## Frontmatter
+
+Frontmatter is metadata typically found at the beginning of a Markdown file, written in YAML format.
+
+\`\`\`md
+---
+title: Hello, world!
+author: John Doe
+datasource: 'path/to/data.{json,yml,js}'
+---
+
+# {{= page.title }}
+
+This is the main content of your Markdown file autored by {{= page.author }}.
+\`\`\`
+
+## Template Engine
+
+- **To output data**, use the \`\\\\{{=\` opening tag, \`# \\\\{{= page.title }}\`.
+
+- **To allow raw HTML**, use the \`\\\\{{~\` opening tag, \`\\\\{{~ contentContainingHTML }}\`.
+
+- **To evaluate JavaScript**, use the \`\\\\{{\` opening tag, \`\\\\{{ let myVar = 3 }}\`.
+
+- **To render a partial**, use the \`\\\\{{~\` opening tag + the \`include()\` function, \`\\\\{{~ include(\\"./path-to-layout\\") }}\`.
+
+- **To render an async partial**, use the \`\\\\{{~\` opening tag + the \`includeAsync()\` function, \`\\\\{{~ includeAsync(\\"./path-to-layout\\") }}\`.
+
+The partial template will automatically try to resolve partial files from inside the filesystem. Ex. \`\\\\{{~ include(\\"/header.html\\") }}\` will look for a file called \`header.html\` in the \`src/partials\` directory of your project.
+
+> **Tips:** Use the following syntax in page file to see \`data\` object:
+>
+> \`\`\`html
+> \\\\{{~ JSON.stringify(data, null, 2) }}
+> \`\`\`
+
+## Unlock more gems with [\`extensions\`](https://github.com/bent10/marked-extensions)
 
 \`\`\`js
 import { defineConfig } from 'vite'
@@ -218,11 +254,19 @@ exports[`should handle file resolution, load and transform content 2`] = `
   </head>
   <body class=\\"markdown-body\\">
     <div id=\\"content\\">
-      <p>· <a href=\\"/\\">Home</a> · <a href=\\"/foo/bar.html\\">Bar</a> ·</p>
-<h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
+      <nav>
+  
+  <a href=\\"/index.html\\" class=\\"active\\">index</a>
+   · 
+  <a href=\\"/foo/bar.html\\">bar</a>
+  
+</nav>
+
+
+      <h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
 <p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
 <p>This guide is a very brief overview, with examples, of the syntax that <a href=\\"http://daringfireball.net/projects/markdown/\\">Markdown</a> supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It&#39;s shown as <em>text</em> and not <em>rendered HTML</em>.</p>
-<h1 id=\\"simple-text-formatting\\" tabindex='-1'>Simple Text Formatting</h1>
+<h2 id=\\"simple-text-formatting\\" tabindex='-1'>Simple Text Formatting</h2>
 <p>First thing is first. You can use <em>stars</em> or <em>underscores</em> for italics. <strong>Double stars</strong> and <strong>double underscores</strong> for bold. <strong><em>Three together</em></strong> for <strong><em>both</em></strong>.</p>
 <p>Paragraphs are pretty easy too. Just have a blank line between chunks of text.</p>
 <blockquote>
@@ -247,28 +291,36 @@ markdown document.
 as long as you add at least five spaces.
 </code></pre>
 </blockquote>
-<h1 id=\\"headings\\" tabindex='-1'>Headings</h1>
+<h2 id=\\"headings\\" tabindex='-1'>Headings</h2>
 <p>There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an &quot;h1&quot; style. Three or more hyphens under a line makes it &quot;h2&quot; (slightly smaller). You can also use multiple pound symbols (<code>#</code>) before and after a heading. Pounds after the title are ignored. Here are some examples:</p>
-<h1 id=\\"this-is-h1\\" tabindex='-1'>This is H1</h1>
-<h2 id=\\"this-is-h2\\" tabindex='-1'>This is H2</h2>
-<h1 id=\\"this-is-h1-1\\" tabindex='-1'>This is H1</h1>
-<h2 id=\\"this-is-h2-1\\" tabindex='-1'>This is H2</h2>
-<h3 id=\\"this-is-h3-with-some-extra-pounds\\" tabindex='-1'>This is H3 with some extra pounds</h3>
-<h4 id=\\"you-get-the-idea\\" tabindex='-1'>You get the idea</h4>
-<h5 id=\\"i-don39t-need-extra-pounds-at-the-end\\" tabindex='-1'>I don&#39;t need extra pounds at the end</h5>
-<h6 id=\\"h6-is-the-max\\" tabindex='-1'>H6 is the max</h6>
-<h1 id=\\"links\\" tabindex='-1'>Links</h1>
-<p>Let&#39;s link to a few sites. First, let&#39;s use the bare URL, like <a href=\\"https://www.github.com\\">https://www.github.com</a>. Great for text, but ugly for HTML.
+<pre><code class=\\"language-md\\"># This is H1
+
+## This is H2
+
+# This is H1
+
+## This is H2
+
+### This is H3 with some extra pounds
+
+#### You get the idea
+
+##### I don&#39;t need extra pounds at the end
+
+###### H6 is the max
+</code></pre>
+<h2 id=\\"links\\" tabindex='-1'>Links</h2>
+<p>Let&#39;s link to a few sites. First, let&#39;s use the bare URL, like <a href=\\"https://github.com\\">https://github.com</a>. Great for text, but ugly for HTML.
 Next is an inline link to <a href=\\"https://www.google.com\\">Google</a>. A little nicer.
-This is a reference-style link to [Wikipedia] <a href=\\"https://www.wikipedia.org\\">1</a>.
+This is a reference-style link to <a href=\\"https://www.wikipedia.org\\">Wikipedia</a>.
 Lastly, here&#39;s a pretty link to <a href=\\"https://www.yahoo.com\\">Yahoo</a>. The reference-style and pretty links both automatically use the links defined below, but they could be defined <em>anywhere</em> in the markdown and are removed from the HTML. The names are also case insensitive, so you can use <a href=\\"https://www.yahoo.com\\">YaHoO</a> and have it link properly.</p>
 <p>Title attributes may be added to links by adding text after a link.
 This is the <a href=\\"https://www.bing.com\\" title=\\"Bing\\">inline link</a> with a &quot;Bing&quot; title.
-You can also go to [W3C] <a href=\\"https://w3c.org\\" title=\\"The W3C puts out specs for web-based things\\">2</a> and maybe visit a <a href=\\"https://facebook.com\\" title=\\"Facebook!\\">friend</a>.</p>
-<p>Email addresses in plain text are not linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
-Email addresses wrapped in angle brackets are linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
+You can also go to <a href=\\"https://w3c.org\\" title=\\"The W3C puts out specs for web-based things\\">W3C</a> and maybe visit a <a href=\\"https://facebook.com\\" title=\\"Facebook!\\">friend</a>.</p>
+<p>Email addresses in plain text are linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
+Email addresses wrapped in angle brackets are linked as well: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
 They are also obfuscated so that email harvesting spam robots hopefully won&#39;t get them.</p>
-<h1 id=\\"lists\\" tabindex='-1'>Lists</h1>
+<h2 id=\\"lists\\" tabindex='-1'>Lists</h2>
 <ul>
 <li>This is a bulleted list</li>
 <li>Great for shopping lists</li>
@@ -298,13 +350,16 @@ They are also obfuscated so that email harvesting spam robots hopefully won&#39;
 </li>
 <li><p>How to create nested lists</p>
 <ol>
-<li>Start your regular list</li>
-<li>Indent nested lists with two spaces</li>
-<li>Further nesting means you should indent with two more spaces</li>
-</ol>
+<li><p>Start your regular list</p>
+</li>
+<li><p>Indent nested lists with two spaces</p>
+</li>
+<li><p>Further nesting means you should indent with two more spaces</p>
 <ul>
 <li>This line is indented with four spaces.</li>
 </ul>
+</li>
+</ol>
 </li>
 <li><p>List items can be quite lengthy. You can keep typing and either continue
 them on the next line with no indentation.</p>
@@ -352,8 +407,39 @@ It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
 
-<h2 id=\\"unlock-gems-with-extensions\\" tabindex='-1'>Unlock gems with <a href=\\"https://github.com/bent10/marked-extensions\\"><code>extensions</code></a></h2>
-<pre><code class=\\"language-js\\">import {defineConfig} from &#39;vite&#39;
+<h2 id=\\"frontmatter\\" tabindex='-1'>Frontmatter</h2>
+<p>Frontmatter is metadata typically found at the beginning of a Markdown file, written in YAML format.</p>
+<pre><code class=\\"language-md\\">---
+title: Hello, world!
+author: John Doe
+datasource: &#39;path/to/data.{json,yml,js}&#39;
+---
+
+# Hello, world!
+
+This is the main content of your Markdown file autored by John Doe.
+</code></pre>
+<h2 id=\\"template-engine\\" tabindex='-1'>Template Engine</h2>
+<ul>
+<li><p><strong>To output data</strong>, use the <code>{{=</code> opening tag, <code># {{= page.title }}</code>.</p>
+</li>
+<li><p><strong>To allow raw HTML</strong>, use the <code>{{~</code> opening tag, <code>{{~ contentContainingHTML }}</code>.</p>
+</li>
+<li><p><strong>To evaluate JavaScript</strong>, use the <code>{{</code> opening tag, <code>{{ let myVar = 3 }}</code>.</p>
+</li>
+<li><p><strong>To render a partial</strong>, use the <code>{{~</code> opening tag + the <code>include()</code> function, <code>{{~ include(&quot;./path-to-layout&quot;) }}</code>.</p>
+</li>
+<li><p><strong>To render an async partial</strong>, use the <code>{{~</code> opening tag + the <code>includeAsync()</code> function, <code>{{~ includeAsync(&quot;./path-to-layout&quot;) }}</code>.</p>
+</li>
+</ul>
+<p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>{{~ include(&quot;/header.html&quot;) }}</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
+<blockquote>
+<p><strong>Tips:</strong> Use the following syntax in page file to see <code>data</code> object:</p>
+<pre><code class=\\"language-html\\">{{~ JSON.stringify(data, null, 2) }}
+</code></pre>
+</blockquote>
+<h2 id=\\"unlock-more-gems-with-extensions\\" tabindex='-1'>Unlock more gems with <a href=\\"https://github.com/bent10/marked-extensions\\"><code>extensions</code></a></h2>
+<pre><code class=\\"language-js\\">import { defineConfig } from &#39;vite&#39;
 import mpa from &#39;vite-plugin-marked-mpa&#39;
 import markedAlert from &#39;marked-alert&#39;
 

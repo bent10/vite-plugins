@@ -1,5 +1,6 @@
 import { readFile, stat } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { dirname, resolve } from 'node:path'
+import { Eta } from 'eta'
 import fg from 'fast-glob'
 import { createLogger, type Plugin } from 'vite'
 import { retrieveData } from './data.js'
@@ -28,6 +29,7 @@ export default function pluginMarkedMpa(
     data: datasource = '_data',
     disableDataMerge,
     enableDataStats,
+    eta: etaOptions,
     ...processorOptions
   } = options
 
@@ -52,10 +54,20 @@ export default function pluginMarkedMpa(
   const input = Object.keys(inputMap)
 
   const ctx = { routes: {} } as Context
+
+  // template engine
+  const eta = new Eta({
+    views: resolve(root, partials),
+    useWith: true,
+    varName: 'data',
+    tags: ['{{', '}}'],
+    autoTrim: false,
+    ...etaOptions
+  })
   const marked = createProcessor(ctx, {
     root,
     layouts,
-    partials,
+    eta,
     ...processorOptions
   })
 
@@ -101,6 +113,33 @@ export default function pluginMarkedMpa(
         const content = frontmatter(ctx, md, fmOptions)
         // now we should have matter data in the ctx
         await retrieveData(ctx, normalizedDatasource, !disableDataMerge)
+
+        // special prop (useWith)
+        if (typeof ctx.useWith === 'object' && !Array.isArray(ctx.useWith)) {
+          for (const key in ctx.useWith) {
+            const path = ctx.useWith[key]
+            const _md = await readFile(
+              resolve(root, pages, dirname(ctx.route.source), path),
+              'utf8'
+            )
+            const tabCtx = { ...ctx }
+            const _content = frontmatter(tabCtx, _md, fmOptions)
+
+            const _html = await marked.parse(_content, {
+              ...marked.defaults,
+              hooks: {
+                preprocess: async content =>
+                  await eta.renderStringAsync(
+                    content.replace(/\\{/g, '&#123;'),
+                    tabCtx
+                  ),
+                postprocess: html => html
+              }
+            })
+
+            ctx.useWith[key] = _html
+          }
+        }
 
         const html = await marked.parse(content)
 
