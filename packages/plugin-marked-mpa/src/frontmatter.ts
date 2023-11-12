@@ -49,6 +49,10 @@ export function frontmatter(
     }
   }
 
+  if (ctx.route && ctx.route.source) {
+    Object.assign(yamlOptions, { filename: ctx.route.source })
+  }
+
   const {
     matterDataPrefix = dataPrefix,
     useWith = {},
