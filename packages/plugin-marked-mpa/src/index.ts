@@ -125,19 +125,10 @@ export default function pluginMarkedMpa(
             const tabCtx = { ...ctx }
             const _content = frontmatter(tabCtx, _md, fmOptions)
 
-            const _html = await marked.parse(_content, {
-              ...marked.defaults,
-              hooks: {
-                preprocess: async content =>
-                  await eta.renderStringAsync(
-                    content.replace(/\\{/g, '&#123;'),
-                    tabCtx
-                  ),
-                postprocess: html => html
-              }
-            })
-
-            ctx.useWith[key] = _html
+            ctx.useWith[key] = await eta.renderStringAsync(
+              _content.replace(/\\{/g, '&#123;'),
+              tabCtx
+            )
           }
         }
 
