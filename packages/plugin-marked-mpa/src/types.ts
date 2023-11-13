@@ -1,10 +1,8 @@
 import type { Stats } from 'node:fs'
 import type { Eta } from 'eta'
-import type { LoadOptions } from 'js-yaml'
 import type { MarkedExtension } from 'marked'
 
-export interface FrontmatterOptions
-  extends Pick<LoadOptions, 'schema' | 'json'> {
+export interface FrontmatterOptions {
   /**
    * The prefix to use for hooks data when adding frontmatter data. If `true`,
    * the data will be added to the `matter` property of the hooks data. If a
@@ -13,6 +11,16 @@ export interface FrontmatterOptions
    * @default false
    */
   dataPrefix?: boolean | string
+
+  /**
+   * Specifies a schema to use.
+   */
+  schema?: unknown
+
+  /**
+   * Compatibility with JSON.parse behaviour.
+   */
+  json?: boolean
 }
 
 export type EtaConfig = NonNullable<ConstructorParameters<typeof Eta>[0]>
