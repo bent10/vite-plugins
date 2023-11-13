@@ -117,18 +117,28 @@ export default function pluginMarkedMpa(
         // special prop (useWith)
         if (typeof ctx.useWith === 'object' && !Array.isArray(ctx.useWith)) {
           for (const key in ctx.useWith) {
-            const path = ctx.useWith[key]
+            const path = String(ctx.useWith[key])
             const _md = await readFile(
               resolve(root, pages, dirname(ctx.route.source), path),
               'utf8'
             )
             const tabCtx = { ...ctx }
-            const _content = frontmatter(tabCtx, _md, fmOptions)
-
-            ctx.useWith[key] = await eta.renderStringAsync(
-              _content.replace(/\\{/g, '&#123;'),
-              tabCtx
+            const _content = frontmatter(tabCtx, _md, fmOptions).replace(
+              /\\{/g,
+              '&#123;'
             )
+
+            ctx.useWith[key] = {
+              md: await eta.renderStringAsync(_content, tabCtx),
+              html: await marked.parse(_content, {
+                ...marked.defaults,
+                hooks: {
+                  preprocess: async md =>
+                    await eta.renderStringAsync(md, tabCtx),
+                  postprocess: html => html
+                }
+              })
+            }
           }
         }
 

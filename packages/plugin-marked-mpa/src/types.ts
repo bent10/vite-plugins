@@ -184,7 +184,12 @@ export interface ServerContext {
   isDev: boolean
   routes: RouteMap
   route: Omit<Route, 'isAlias'>
-  useWith: { [id: string]: string }
+  useWith: {
+    [id: string]: {
+      md: string
+      html: string
+    }
+  }
 
   /**
    * An object provides information about a file, required `enableDataStats: true`.
