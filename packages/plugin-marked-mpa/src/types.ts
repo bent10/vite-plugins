@@ -15,7 +15,8 @@ export interface FrontmatterOptions {
   /**
    * Specifies a schema to use.
    */
-  schema?: unknown
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema?: any
 
   /**
    * Compatibility with JSON.parse behaviour.
