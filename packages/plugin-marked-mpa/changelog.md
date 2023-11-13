@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.3.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.3...vite-plugin-marked-mpa@1.3.4) (2023-11-13)
+
+
+### Bug Fixes
+
+* hold parsing of `useWith` values ([0f8c476](https://github.com/bent10/vite-plugins/commit/0f8c47632f81708295b0e36c25cd2fc4187f22c5))
+
 ## vite-plugin-marked-mpa [1.3.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.2...vite-plugin-marked-mpa@1.3.3) (2023-11-13)
 
 
