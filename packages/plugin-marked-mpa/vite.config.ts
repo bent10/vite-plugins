@@ -1,15 +1,15 @@
 /// <reference types="vitest" />
 
 import { defineConfig } from 'vite'
-import cacheDir from 'vite-plugin-cachedir'
 
 export default defineConfig({
-  plugins: [cacheDir()],
+  cacheDir: '.cache/vite',
   build: {
     ssr: 'src/index.ts'
   },
   test: {
     globals: true,
+    cache: { dir: '.cache/vitest' },
     include: ['test/*.test.ts']
   }
 })
