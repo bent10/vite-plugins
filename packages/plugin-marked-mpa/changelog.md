@@ -1,3 +1,12 @@
+## vite-plugin-marked-mpa [1.3.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.2...vite-plugin-marked-mpa@1.3.3) (2023-11-13)
+
+
+### Bug Fixes
+
+* `FrontmatterOptions` types ([d935d5f](https://github.com/bent10/vite-plugins/commit/d935d5fd7c0c7da95b173a28cc1f76c34b15f547))
+* `FrontmatterOptions` types ([f073c25](https://github.com/bent10/vite-plugins/commit/f073c25766ddb736764198fb3d7babd6484b8688))
+* **deps:** bump marked to v10.0.0 ([be3e63e](https://github.com/bent10/vite-plugins/commit/be3e63ee4e5d979d145bd9b32f34900b7d443d0d))
+
 ## vite-plugin-marked-mpa [1.3.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.1...vite-plugin-marked-mpa@1.3.2) (2023-11-12)
 
 
