@@ -22,6 +22,8 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
   return new Marked({ async: true }).use(...extensions, {
     hooks: {
       async preprocess(md: string) {
+        Object.assign(this, { data: ctx })
+
         slugger.reset()
         headingList.length = 0
         ctx.headings = []
@@ -48,7 +50,6 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
       },
       async postprocess(content: string) {
         ctx.headings = groupHeadingsByLevel(headingList)
-        ctx.useWith.content = content
 
         const layout = await eta.renderStringAsync(ctx.layout.raw, ctx)
         const html = layout.replace(/<Outlet[ \t]*?\/>/, content)
