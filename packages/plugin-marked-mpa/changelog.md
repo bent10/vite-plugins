@@ -1,3 +1,16 @@
+# vite-plugin-marked-mpa [1.4.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.4...vite-plugin-marked-mpa@1.4.0) (2023-11-14)
+
+
+### Bug Fixes
+
+* use default eta tags to avoid conflict with another syntax ([994a582](https://github.com/bent10/vite-plugins/commit/994a582b04ce35f4a7f5376337a444a1941f92e2))
+
+
+### Features
+
+* provides markdown and html in the `useWith` prop ([3288c3a](https://github.com/bent10/vite-plugins/commit/3288c3a425e8d3a681f84e11061d1eea049618d0))
+* shares context via marked hooks ([7d324df](https://github.com/bent10/vite-plugins/commit/7d324df558beea3024ac151937521c78f067fbb1))
+
 ## vite-plugin-marked-mpa [1.3.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.3...vite-plugin-marked-mpa@1.3.4) (2023-11-13)
 
 
