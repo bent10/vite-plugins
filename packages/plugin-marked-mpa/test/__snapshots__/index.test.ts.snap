@@ -6,9 +6,9 @@ title: Hello, world!
 author: John Doe
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by **{{= page.author }}**.
+This is the main content of your Markdown file autored by **<%= page.author %>**.
 
 This guide is a very brief overview, with examples, of the syntax that [Markdown] supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It's shown as _text_ and not _rendered HTML_.
 
@@ -186,29 +186,29 @@ author: John Doe
 datasource: 'path/to/data.{json,yml,js}'
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by {{= page.author }}.
+This is the main content of your Markdown file autored by <%= page.author %>.
 \`\`\`
 
 ## Template Engine
 
-- **To output data**, use the \`\\\\{{=\` opening tag, \`# \\\\{{= page.title }}\`.
+- **To output data**, use the \`\\\\<%=\` opening tag, \`# \\\\<%= page.title %>\`.
 
-- **To allow raw HTML**, use the \`\\\\{{~\` opening tag, \`\\\\{{~ contentContainingHTML }}\`.
+- **To allow raw HTML**, use the \`\\\\<%~\` opening tag, \`\\\\<%~ contentContainingHTML %>\`.
 
-- **To evaluate JavaScript**, use the \`\\\\{{\` opening tag, \`\\\\{{ let myVar = 3 }}\`.
+- **To evaluate JavaScript**, use the \`\\\\<%\` opening tag, \`\\\\<% let myVar = 3 %>\`.
 
-- **To render a partial**, use the \`\\\\{{~\` opening tag + the \`include()\` function, \`\\\\{{~ include(\\"./path-to-layout\\") }}\`.
+- **To render a partial**, use the \`\\\\<%~\` opening tag + the \`include()\` function, \`\\\\<%~ include(\\"./path-to-layout\\") %>\`.
 
-- **To render an async partial**, use the \`\\\\{{~\` opening tag + the \`includeAsync()\` function, \`\\\\{{~ includeAsync(\\"./path-to-layout\\") }}\`.
+- **To render an async partial**, use the \`\\\\<%~\` opening tag + the \`includeAsync()\` function, \`\\\\<%~ includeAsync(\\"./path-to-layout\\") %>\`.
 
-The partial template will automatically try to resolve partial files from inside the filesystem. Ex. \`\\\\{{~ include(\\"/header.html\\") }}\` will look for a file called \`header.html\` in the \`src/partials\` directory of your project.
+The partial template will automatically try to resolve partial files from inside the filesystem. Ex. \`\\\\<%~ include(\\"/header.html\\") %>\` will look for a file called \`header.html\` in the \`src/partials\` directory of your project.
 
 > **Tips:** Use the following syntax in page file to see \`data\` object:
 >
 > \`\`\`html
-> \\\\{{~ JSON.stringify(data, null, 2) }}
+> \\\\<%~ JSON.stringify(data, null, 2) %>
 > \`\`\`
 
 ## Unlock more gems with [\`extensions\`](https://github.com/bent10/marked-extensions)
@@ -421,21 +421,21 @@ This is the main content of your Markdown file autored by John Doe.
 </code></pre>
 <h2 id=\\"template-engine\\" tabindex='-1'>Template Engine</h2>
 <ul>
-<li><p><strong>To output data</strong>, use the <code>{{=</code> opening tag, <code># {{= page.title }}</code>.</p>
+<li><p><strong>To output data</strong>, use the <code>&lt;%=</code> opening tag, <code># &lt;%= page.title %&gt;</code>.</p>
 </li>
-<li><p><strong>To allow raw HTML</strong>, use the <code>{{~</code> opening tag, <code>{{~ contentContainingHTML }}</code>.</p>
+<li><p><strong>To allow raw HTML</strong>, use the <code>&lt;%~</code> opening tag, <code>&lt;%~ contentContainingHTML %&gt;</code>.</p>
 </li>
-<li><p><strong>To evaluate JavaScript</strong>, use the <code>{{</code> opening tag, <code>{{ let myVar = 3 }}</code>.</p>
+<li><p><strong>To evaluate JavaScript</strong>, use the <code>&lt;%</code> opening tag, <code>&lt;% let myVar = 3 %&gt;</code>.</p>
 </li>
-<li><p><strong>To render a partial</strong>, use the <code>{{~</code> opening tag + the <code>include()</code> function, <code>{{~ include(&quot;./path-to-layout&quot;) }}</code>.</p>
+<li><p><strong>To render a partial</strong>, use the <code>&lt;%~</code> opening tag + the <code>include()</code> function, <code>&lt;%~ include(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
 </li>
-<li><p><strong>To render an async partial</strong>, use the <code>{{~</code> opening tag + the <code>includeAsync()</code> function, <code>{{~ includeAsync(&quot;./path-to-layout&quot;) }}</code>.</p>
+<li><p><strong>To render an async partial</strong>, use the <code>&lt;%~</code> opening tag + the <code>includeAsync()</code> function, <code>&lt;%~ includeAsync(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
 </li>
 </ul>
-<p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>{{~ include(&quot;/header.html&quot;) }}</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
+<p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>&lt;%~ include(&quot;/header.html&quot;) %&gt;</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
 <blockquote>
 <p><strong>Tips:</strong> Use the following syntax in page file to see <code>data</code> object:</p>
-<pre><code class=\\"language-html\\">{{~ JSON.stringify(data, null, 2) }}
+<pre><code class=\\"language-html\\">&lt;%~ JSON.stringify(data, null, 2) %&gt;
 </code></pre>
 </blockquote>
 <h2 id=\\"unlock-more-gems-with-extensions\\" tabindex='-1'>Unlock more gems with <a href=\\"https://github.com/bent10/marked-extensions\\"><code>extensions</code></a></h2>
@@ -469,12 +469,12 @@ useWith:
   qux: _bar/qux.md
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by **{{= page.author }}**.
+This is the main content of your Markdown file autored by **<%= page.author %>**.
 
 \`\`\`json
-{{~ JSON.stringify(useWith, null, 2) }}
+<%~ JSON.stringify(useWith, null, 2) %>
 \`\`\`
 "
 `;

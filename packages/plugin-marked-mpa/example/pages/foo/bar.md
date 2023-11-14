@@ -7,10 +7,10 @@ useWith:
   qux: _bar/qux.md
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by **{{= page.author }}**.
+This is the main content of your Markdown file autored by **<%= page.author %>**.
 
 ```json
-{{~ JSON.stringify(useWith, null, 2) }}
+<%~ JSON.stringify(useWith, null, 2) %>
 ```

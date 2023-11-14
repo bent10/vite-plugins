@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{= page.title }}</title>
+    <title><%= page.title %></title>
 
     <link
       rel="stylesheet"
@@ -20,7 +20,7 @@
   </head>
   <body class="markdown-body">
     <div id="content">
-      {{~ include("menu.html", data) }}
+      <%~ include("menu.html", data) %>
 
       <Outlet />
     </div>

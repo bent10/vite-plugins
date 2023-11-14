@@ -3,9 +3,9 @@ title: Hello, world!
 author: John Doe
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by **{{= page.author }}**.
+This is the main content of your Markdown file autored by **<%= page.author %>**.
 
 This guide is a very brief overview, with examples, of the syntax that [Markdown] supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It's shown as _text_ and not _rendered HTML_.
 
@@ -183,29 +183,29 @@ author: John Doe
 datasource: 'path/to/data.{json,yml,js}'
 ---
 
-# {{= page.title }}
+# <%= page.title %>
 
-This is the main content of your Markdown file autored by {{= page.author }}.
+This is the main content of your Markdown file autored by <%= page.author %>.
 ```
 
 ## Template Engine
 
-- **To output data**, use the `\{{=` opening tag, `# \{{= page.title }}`.
+- **To output data**, use the `\<%=` opening tag, `# \<%= page.title %>`.
 
-- **To allow raw HTML**, use the `\{{~` opening tag, `\{{~ contentContainingHTML }}`.
+- **To allow raw HTML**, use the `\<%~` opening tag, `\<%~ contentContainingHTML %>`.
 
-- **To evaluate JavaScript**, use the `\{{` opening tag, `\{{ let myVar = 3 }}`.
+- **To evaluate JavaScript**, use the `\<%` opening tag, `\<% let myVar = 3 %>`.
 
-- **To render a partial**, use the `\{{~` opening tag + the `include()` function, `\{{~ include("./path-to-layout") }}`.
+- **To render a partial**, use the `\<%~` opening tag + the `include()` function, `\<%~ include("./path-to-layout") %>`.
 
-- **To render an async partial**, use the `\{{~` opening tag + the `includeAsync()` function, `\{{~ includeAsync("./path-to-layout") }}`.
+- **To render an async partial**, use the `\<%~` opening tag + the `includeAsync()` function, `\<%~ includeAsync("./path-to-layout") %>`.
 
-The partial template will automatically try to resolve partial files from inside the filesystem. Ex. `\{{~ include("/header.html") }}` will look for a file called `header.html` in the `src/partials` directory of your project.
+The partial template will automatically try to resolve partial files from inside the filesystem. Ex. `\<%~ include("/header.html") %>` will look for a file called `header.html` in the `src/partials` directory of your project.
 
 > **Tips:** Use the following syntax in page file to see `data` object:
 >
 > ```html
-> \{{~ JSON.stringify(data, null, 2) }}
+> \<%~ JSON.stringify(data, null, 2) %>
 > ```
 
 ## Unlock more gems with [`extensions`](https://github.com/bent10/marked-extensions)

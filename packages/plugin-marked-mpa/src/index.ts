@@ -60,7 +60,6 @@ export default function pluginMarkedMpa(
     views: resolve(root, partials),
     useWith: true,
     varName: 'data',
-    tags: ['{{', '}}'],
     autoTrim: false,
     ...etaOptions
   })
@@ -124,8 +123,8 @@ export default function pluginMarkedMpa(
             )
             const tabCtx = { ...ctx }
             const _content = frontmatter(tabCtx, _md, fmOptions).replace(
-              /\\{/g,
-              '&#123;'
+              /\\</g,
+              '&lt;'
             )
 
             ctx.useWith[key] = {

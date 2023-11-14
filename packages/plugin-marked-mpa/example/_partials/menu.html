@@ -1,5 +1,5 @@
 <nav>
-  {{~ Object.values(routes).map(({ id, stem }) => `
+  <%~ Object.values(routes).map(({ id, stem }) => `
   <a href="/${id}"${route.id === id ? ' class="active"' : ''}>${stem.split('/').pop()}</a>
-  `).join(' · ') }}
+  `).join(' · ') %>
 </nav>

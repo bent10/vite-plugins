@@ -130,7 +130,7 @@ it('should serve transformed HTML for documents', async () => {
     root: 'example'
   })
 
-  vi.spyOn(server, 'transformIndexHtml').mockResolvedValueOnce('fired!')
+  vi.spyOn(server, 'transformIndexHtml').mockResolvedValue('fired!')
 
   const serverMiddleware = await configureServer(server)
   await serverMiddleware()

@@ -46,7 +46,7 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
           raw: await readFile(resolve(root, layoutId), 'utf8')
         }
 
-        return await eta.renderStringAsync(md.replace(/\\{/g, '&#123;'), ctx)
+        return await eta.renderStringAsync(md.replace(/\\</g, '&lt;'), ctx)
       },
       async postprocess(content: string) {
         ctx.headings = groupHeadingsByLevel(headingList)
@@ -59,12 +59,10 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
     },
     // escape template syntax
     async walkTokens(token) {
-      if (
-        token.type === 'escape' ||
-        token.type === 'codespan' ||
-        token.type === 'code'
-      ) {
-        token.text = token.text.replace(/&(?:amp;)?#123;/g, '{')
+      if (token.type === 'codespan') {
+        token.text = token.text.replace(/&amp;lt;/g, '&lt;')
+      } else if (token.type === 'code') {
+        token.text = token.text.replace(/&lt;/g, '<')
       }
     },
     renderer: {
