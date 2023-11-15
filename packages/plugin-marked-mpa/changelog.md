@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.4.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.0...vite-plugin-marked-mpa@1.4.1) (2023-11-15)
+
+
+### Bug Fixes
+
+* avoid `server.watcher` on build ([8bfaa9f](https://github.com/bent10/vite-plugins/commit/8bfaa9f73fb8a69ad37da31758eaddeb33d2d88f))
+
 # vite-plugin-marked-mpa [1.4.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.3.4...vite-plugin-marked-mpa@1.4.0) (2023-11-14)
 
 
