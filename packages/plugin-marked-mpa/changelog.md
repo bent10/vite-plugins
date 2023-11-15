@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.4.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.1...vite-plugin-marked-mpa@1.4.2) (2023-11-15)
+
+
+### Bug Fixes
+
+* build context ([9418f3b](https://github.com/bent10/vite-plugins/commit/9418f3bfd3599de78f90d840ad8b9a122c306fc2))
+
 ## vite-plugin-marked-mpa [1.4.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.0...vite-plugin-marked-mpa@1.4.1) (2023-11-15)
 
 
