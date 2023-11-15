@@ -74,7 +74,7 @@ it('should handle file resolution, load and transform content', async () => {
     const content = await plugin.load(id)
     const transformedContent = await plugin.transformIndexHtml.handler(
       content,
-      { server }
+      { path: '/' + id }
     )
 
     expect(id).toEqual(source)

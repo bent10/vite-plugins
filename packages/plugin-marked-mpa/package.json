@@ -37,7 +37,8 @@
     "lint": "tsc --noEmit && eslint . --cache --cache-location ../../node_modules/.eslint",
     "format": "prettier . --write --cache-location ../../node_modules/.prettier --ignore-path ../../.prettierignore",
     "example:dev": "vite -c example/vite.config.ts",
-    "example:build": "vite build -c example/vite.config.ts"
+    "example:build": "vite build -c example/vite.config.ts",
+    "example:preview": "vite preview -c example/vite.config.ts"
   },
   "dependencies": {
     "common-ancestor-path": "^1.0.1",

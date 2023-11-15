@@ -1,8 +1,8 @@
 import { readFile, stat } from 'node:fs/promises'
-import { dirname, resolve } from 'node:path'
+import { dirname, join, resolve } from 'node:path'
 import { Eta } from 'eta'
 import fg from 'fast-glob'
-import { createLogger, type Plugin } from 'vite'
+import { type Plugin, type ResolvedConfig, createLogger } from 'vite'
 import { retrieveData } from './data.js'
 import { frontmatter } from './frontmatter.js'
 import { createProcessor } from './processor.js'
@@ -53,8 +53,6 @@ export default function pluginMarkedMpa(
   )
   const input = Object.keys(inputMap)
 
-  const ctx = { routes: {} } as Context
-
   // template engine
   const eta = new Eta({
     views: resolve(root, partials),
@@ -63,12 +61,8 @@ export default function pluginMarkedMpa(
     autoTrim: false,
     ...etaOptions
   })
-  const marked = createProcessor(ctx, {
-    root,
-    layouts,
-    eta,
-    ...processorOptions
-  })
+
+  let viteConfig: ResolvedConfig
 
   return {
     name: 'vite:plugin-marked-mpa',
@@ -79,13 +73,8 @@ export default function pluginMarkedMpa(
         optimizeDeps: { include: [] }
       }
     },
-    configResolved({ mode }) {
-      ctx.NODE_ENV = mode
-      ctx.isDev = mode === 'development'
-
-      for (const id in inputMap) {
-        ctx.routes[id] = inputMap[id]
-      }
+    configResolved(config) {
+      viteConfig = config
     },
     resolveId(id) {
       if (inputMap[id]) {
@@ -97,18 +86,31 @@ export default function pluginMarkedMpa(
         const route = inputMap[id]
         const source = resolve(resolvedPagesDir, route.source)
 
-        if (enableDataStats) {
-          ctx.stats = await stat(source)
-        }
-
-        ctx.route = route
-
         return await readFile(source, 'utf8')
       }
     },
     transformIndexHtml: {
       order: 'pre',
-      async handler(md: string, { server }) {
+      async handler(md: string, { server, path }) {
+        const route = server ? routes[path] : inputMap[path.slice(1)]
+        const ctx = {
+          NODE_ENV: viteConfig.mode,
+          isDev: viteConfig.mode === 'development',
+          routes: inputMap,
+          route
+        } as Context
+
+        if (enableDataStats) {
+          ctx.stats = await stat(join(resolvedPagesDir, route.source))
+        }
+
+        const marked = createProcessor(ctx, {
+          root,
+          layouts,
+          eta,
+          ...processorOptions
+        })
+
         const content = frontmatter(ctx, md, fmOptions)
         // now we should have matter data in the ctx
         await retrieveData(ctx, normalizedDatasource, !disableDataMerge)
@@ -118,7 +120,7 @@ export default function pluginMarkedMpa(
           for (const key in ctx.useWith) {
             const path = String(ctx.useWith[key])
             const _md = await readFile(
-              resolve(root, pages, dirname(ctx.route.source), path),
+              join(resolvedPagesDir, dirname(ctx.route.source), path),
               'utf8'
             )
             const tabCtx = { ...ctx }
@@ -159,16 +161,10 @@ export default function pluginMarkedMpa(
           try {
             if (req.headers['sec-fetch-dest'] === 'document') {
               const url = req.url?.replace(/(\.html|\/)$/, '') || '/'
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
-              const { isAlias: _, ...route } = routes[url] || {}
-              ctx.route = route
+              const { source } = routes[url] || {}
+              const id = join(resolvedPagesDir, source ? source : '404.md')
 
-              const source = resolve(
-                resolvedPagesDir,
-                route.source ? route.source : '404.md'
-              )
-
-              const md = await readFile(source, 'utf8')
+              const md = await readFile(id, 'utf8')
               const html = await server.transformIndexHtml(url, md)
 
               res.statusCode = 200
