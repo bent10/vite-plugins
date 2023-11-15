@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import mpa from '../src/index'
 
 export default defineConfig({
-  cacheDir: '../.cache/vite',
+  cacheDir: '.cache/vite',
   plugins: [
     mpa({
       root: 'example',
