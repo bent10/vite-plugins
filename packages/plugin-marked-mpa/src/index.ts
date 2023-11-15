@@ -147,7 +147,7 @@ export default function pluginMarkedMpa(
         if ('datasources' in ctx && Array.isArray(ctx.datasources)) {
           datasources.push(...ctx.datasources.map(d => resolve(d)))
           // adds datasources to watcher
-          server?.watcher.add(datasources)
+          server && server.watcher.add(datasources)
         }
 
         return html
