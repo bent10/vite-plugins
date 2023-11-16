@@ -2,18 +2,6 @@
 
 Vite plugins workspace.
 
-## Install
-
-Follows the steps below to get up and running:
-
-```bash
-# clone this repo
-> git clone https://github.com/bent10/vite-plugins.git
-
-# go to the project directory and install dependencies
-> cd vite-plugins && npm i
-```
-
 ## Packages
 
 | Package                                              | Description                                                             | Version (click for changelog)                                                                          |
