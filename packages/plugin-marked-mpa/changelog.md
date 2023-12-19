@@ -1,3 +1,11 @@
+## vite-plugin-marked-mpa [1.4.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.3...vite-plugin-marked-mpa@1.4.4) (2023-12-19)
+
+
+### Bug Fixes
+
+* error `TS2322` ([287132a](https://github.com/bent10/vite-plugins/commit/287132af682b5d20df472bc8b56adbdb83ef6e2c))
+* error `TS2322` ([433128b](https://github.com/bent10/vite-plugins/commit/433128be3b52b3fd343d3243d16396029d3e50d8))
+
 ## vite-plugin-marked-mpa [1.4.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.2...vite-plugin-marked-mpa@1.4.3) (2023-12-04)
 
 
