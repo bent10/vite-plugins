@@ -42,7 +42,7 @@ or at least four spaces:
 
 ## Headings
 
-There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an \\"h1\\" style. Three or more hyphens under a line makes it \\"h2\\" (slightly smaller). You can also use multiple pound symbols (\`#\`) before and after a heading. Pounds after the title are ignored. Here are some examples:
+There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an "h1" style. Three or more hyphens under a line makes it "h2" (slightly smaller). You can also use multiple pound symbols (\`#\`) before and after a heading. Pounds after the title are ignored. Here are some examples:
 
 \`\`\`md
 # This is H1
@@ -73,7 +73,7 @@ Lastly, here's a pretty link to [Yahoo]. The reference-style and pretty links bo
 [Yahoo]: https://www.yahoo.com
 
 Title attributes may be added to links by adding text after a link.
-This is the [inline link](https://www.bing.com 'Bing') with a \\"Bing\\" title.
+This is the [inline link](https://www.bing.com 'Bing') with a "Bing" title.
 You can also go to [W3C][2] and maybe visit a [friend].
 
 [2]: https://w3c.org 'The W3C puts out specs for web-based things'
@@ -92,7 +92,7 @@ They are also obfuscated so that email harvesting spam robots hopefully won't ge
 
 - Or plus symbols
 
-The above is an \\"unordered\\" list. Now, on for a bit of order.
+The above is an "unordered" list. Now, on for a bit of order.
 
 1. Numbered lists are also easy
 2. Just start with a number
@@ -164,13 +164,13 @@ Images work exactly like links, but they have exclamation points in front. They 
 
 ![Google Logo](https://www.google.com/images/errors/logo_sm.gif) and ![Happy].
 
-[Happy]: https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png '\\"Smiley face\\"'
+[Happy]: https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png '"Smiley face"'
 
 ## Inline HTML
 
 If markdown is too limiting, you can just insert your own <strike>crazy</strike> HTML. Span-level HTML <u>can _still_ use markdown</u>. Block level elements must be separated from text by a blank line and must not have any spaces before the opening and closing HTML.
 
-<div style='font-family: \\"Comic Sans MS\\", \\"Comic Sans\\", cursive;'>
+<div style='font-family: "Comic Sans MS", "Comic Sans", cursive;'>
 It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
@@ -193,22 +193,22 @@ This is the main content of your Markdown file autored by <%= page.author %>.
 
 ## Template Engine
 
-- **To output data**, use the \`\\\\<%=\` opening tag, \`# \\\\<%= page.title %>\`.
+- **To output data**, use the \`\\<%=\` opening tag, \`# \\<%= page.title %>\`.
 
-- **To allow raw HTML**, use the \`\\\\<%~\` opening tag, \`\\\\<%~ contentContainingHTML %>\`.
+- **To allow raw HTML**, use the \`\\<%~\` opening tag, \`\\<%~ contentContainingHTML %>\`.
 
-- **To evaluate JavaScript**, use the \`\\\\<%\` opening tag, \`\\\\<% let myVar = 3 %>\`.
+- **To evaluate JavaScript**, use the \`\\<%\` opening tag, \`\\<% let myVar = 3 %>\`.
 
-- **To render a partial**, use the \`\\\\<%~\` opening tag + the \`include()\` function, \`\\\\<%~ include(\\"./path-to-layout\\") %>\`.
+- **To render a partial**, use the \`\\<%~\` opening tag + the \`include()\` function, \`\\<%~ include("./path-to-layout") %>\`.
 
-- **To render an async partial**, use the \`\\\\<%~\` opening tag + the \`includeAsync()\` function, \`\\\\<%~ includeAsync(\\"./path-to-layout\\") %>\`.
+- **To render an async partial**, use the \`\\<%~\` opening tag + the \`includeAsync()\` function, \`\\<%~ includeAsync("./path-to-layout") %>\`.
 
-The partial template will automatically try to resolve partial files from inside the filesystem. Ex. \`\\\\<%~ include(\\"/header.html\\") %>\` will look for a file called \`header.html\` in the \`src/partials\` directory of your project.
+The partial template will automatically try to resolve partial files from inside the filesystem. Ex. \`\\<%~ include("/header.html") %>\` will look for a file called \`header.html\` in the \`src/partials\` directory of your project.
 
 > **Tips:** Use the following syntax in page file to see \`data\` object:
 >
 > \`\`\`html
-> \\\\<%~ JSON.stringify(data, null, 2) %>
+> \\<%~ JSON.stringify(data, null, 2) %>
 > \`\`\`
 
 ## Unlock more gems with [\`extensions\`](https://github.com/bent10/marked-extensions)
@@ -233,15 +233,15 @@ Use [more extensions](https://github.com/bent10/marked-extensions) to enable add
 
 exports[`should handle file resolution, load and transform content 2`] = `
 "<!doctype html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hello, world!</title>
 
     <link
-      rel=\\"stylesheet\\"
-      href=\\"https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css\\"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css"
     />
 
     <style>
@@ -252,21 +252,21 @@ exports[`should handle file resolution, load and transform content 2`] = `
       }
     </style>
   </head>
-  <body class=\\"markdown-body\\">
-    <div id=\\"content\\">
+  <body class="markdown-body">
+    <div id="content">
       <nav>
   
-  <a href=\\"/index.html\\" class=\\"active\\">index</a>
+  <a href="/index.html" class="active">index</a>
    · 
-  <a href=\\"/foo/bar.html\\">bar</a>
+  <a href="/foo/bar.html">bar</a>
   
 </nav>
 
 
-      <h1 id=\\"hello-world\\" tabindex='-1'>Hello, world!</h1>
+      <h1 id="hello-world" tabindex='-1'>Hello, world!</h1>
 <p>This is the main content of your Markdown file autored by <strong>John Doe</strong>.</p>
-<p>This guide is a very brief overview, with examples, of the syntax that <a href=\\"http://daringfireball.net/projects/markdown/\\">Markdown</a> supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It&#39;s shown as <em>text</em> and not <em>rendered HTML</em>.</p>
-<h2 id=\\"simple-text-formatting\\" tabindex='-1'>Simple Text Formatting</h2>
+<p>This guide is a very brief overview, with examples, of the syntax that <a href="http://daringfireball.net/projects/markdown/">Markdown</a> supports. It is itself written in Markdown and you can copy the samples over to the left-hand pane for experimentation. It&#39;s shown as <em>text</em> and not <em>rendered HTML</em>.</p>
+<h2 id="simple-text-formatting" tabindex='-1'>Simple Text Formatting</h2>
 <p>First thing is first. You can use <em>stars</em> or <em>underscores</em> for italics. <strong>Double stars</strong> and <strong>double underscores</strong> for bold. <strong><em>Three together</em></strong> for <strong><em>both</em></strong>.</p>
 <p>Paragraphs are pretty easy too. Just have a blank line between chunks of text.</p>
 <blockquote>
@@ -291,9 +291,9 @@ markdown document.
 as long as you add at least five spaces.
 </code></pre>
 </blockquote>
-<h2 id=\\"headings\\" tabindex='-1'>Headings</h2>
+<h2 id="headings" tabindex='-1'>Headings</h2>
 <p>There are a couple of ways to make headings. Using three or more equals signs on a line under a heading makes it into an &quot;h1&quot; style. Three or more hyphens under a line makes it &quot;h2&quot; (slightly smaller). You can also use multiple pound symbols (<code>#</code>) before and after a heading. Pounds after the title are ignored. Here are some examples:</p>
-<pre><code class=\\"language-md\\"># This is H1
+<pre><code class="language-md"># This is H1
 
 ## This is H2
 
@@ -309,18 +309,18 @@ as long as you add at least five spaces.
 
 ###### H6 is the max
 </code></pre>
-<h2 id=\\"links\\" tabindex='-1'>Links</h2>
-<p>Let&#39;s link to a few sites. First, let&#39;s use the bare URL, like <a href=\\"https://github.com\\">https://github.com</a>. Great for text, but ugly for HTML.
-Next is an inline link to <a href=\\"https://www.google.com\\">Google</a>. A little nicer.
-This is a reference-style link to <a href=\\"https://www.wikipedia.org\\">Wikipedia</a>.
-Lastly, here&#39;s a pretty link to <a href=\\"https://www.yahoo.com\\">Yahoo</a>. The reference-style and pretty links both automatically use the links defined below, but they could be defined <em>anywhere</em> in the markdown and are removed from the HTML. The names are also case insensitive, so you can use <a href=\\"https://www.yahoo.com\\">YaHoO</a> and have it link properly.</p>
+<h2 id="links" tabindex='-1'>Links</h2>
+<p>Let&#39;s link to a few sites. First, let&#39;s use the bare URL, like <a href="https://github.com">https://github.com</a>. Great for text, but ugly for HTML.
+Next is an inline link to <a href="https://www.google.com">Google</a>. A little nicer.
+This is a reference-style link to <a href="https://www.wikipedia.org">Wikipedia</a>.
+Lastly, here&#39;s a pretty link to <a href="https://www.yahoo.com">Yahoo</a>. The reference-style and pretty links both automatically use the links defined below, but they could be defined <em>anywhere</em> in the markdown and are removed from the HTML. The names are also case insensitive, so you can use <a href="https://www.yahoo.com">YaHoO</a> and have it link properly.</p>
 <p>Title attributes may be added to links by adding text after a link.
-This is the <a href=\\"https://www.bing.com\\" title=\\"Bing\\">inline link</a> with a &quot;Bing&quot; title.
-You can also go to <a href=\\"https://w3c.org\\" title=\\"The W3C puts out specs for web-based things\\">W3C</a> and maybe visit a <a href=\\"https://facebook.com\\" title=\\"Facebook!\\">friend</a>.</p>
-<p>Email addresses in plain text are linked: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
-Email addresses wrapped in angle brackets are linked as well: <a href=\\"mailto:test@example.com\\">test@example.com</a>.
+This is the <a href="https://www.bing.com" title="Bing">inline link</a> with a &quot;Bing&quot; title.
+You can also go to <a href="https://w3c.org" title="The W3C puts out specs for web-based things">W3C</a> and maybe visit a <a href="https://facebook.com" title="Facebook!">friend</a>.</p>
+<p>Email addresses in plain text are linked: <a href="mailto:test@example.com">test@example.com</a>.
+Email addresses wrapped in angle brackets are linked as well: <a href="mailto:test@example.com">test@example.com</a>.
 They are also obfuscated so that email harvesting spam robots hopefully won&#39;t get them.</p>
-<h2 id=\\"lists\\" tabindex='-1'>Lists</h2>
+<h2 id="lists" tabindex='-1'>Lists</h2>
 <ul>
 <li>This is a bulleted list</li>
 <li>Great for shopping lists</li>
@@ -391,25 +391,25 @@ nest lists inside blockquotes!</p>
 </code></pre>
 </li>
 </ul>
-<h2 id=\\"horizontal-rule\\" tabindex='-1'>Horizontal Rule</h2>
+<h2 id="horizontal-rule" tabindex='-1'>Horizontal Rule</h2>
 <p>If you need a horizontal rule you just need to put at least three hyphens, asterisks, or underscores on a line by themselves. You can also even put spaces between the characters.</p>
 <hr>
 <hr>
 <hr>
 <p>Those three all produced horizontal lines. Keep in mind that three hyphens under any text turns that text into a heading, so add a blank like if you use hyphens.</p>
-<h2 id=\\"images\\" tabindex='-1'>Images</h2>
+<h2 id="images" tabindex='-1'>Images</h2>
 <p>Images work exactly like links, but they have exclamation points in front. They work with references and titles too.</p>
-<p><img src=\\"https://www.google.com/images/errors/logo_sm.gif\\" alt=\\"Google Logo\\"> and <img src=\\"https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png\\" alt=\\"Happy\\" title=\\"&quot;Smiley face&quot;\\">.</p>
-<h2 id=\\"inline-html\\" tabindex='-1'>Inline HTML</h2>
+<p><img src="https://www.google.com/images/errors/logo_sm.gif" alt="Google Logo"> and <img src="https://api-ninjas-data.s3.us-west-2.amazonaws.com/emojis/U%2B1F642.png" alt="Happy" title="&quot;Smiley face&quot;">.</p>
+<h2 id="inline-html" tabindex='-1'>Inline HTML</h2>
 <p>If markdown is too limiting, you can just insert your own <strike>crazy</strike> HTML. Span-level HTML <u>can <em>still</em> use markdown</u>. Block level elements must be separated from text by a blank line and must not have any spaces before the opening and closing HTML.</p>
-<div style='font-family: \\"Comic Sans MS\\", \\"Comic Sans\\", cursive;'>
+<div style='font-family: "Comic Sans MS", "Comic Sans", cursive;'>
 It is a pity, but markdown does **not** work in here for most markdown parsers.
 [We] handles it pretty well.
 </div>
 
-<h2 id=\\"frontmatter\\" tabindex='-1'>Frontmatter</h2>
+<h2 id="frontmatter" tabindex='-1'>Frontmatter</h2>
 <p>Frontmatter is metadata typically found at the beginning of a Markdown file, written in YAML format.</p>
-<pre><code class=\\"language-md\\">---
+<pre><code class="language-md">---
 title: Hello, world!
 author: John Doe
 datasource: &#39;path/to/data.{json,yml,js}&#39;
@@ -419,7 +419,7 @@ datasource: &#39;path/to/data.{json,yml,js}&#39;
 
 This is the main content of your Markdown file autored by John Doe.
 </code></pre>
-<h2 id=\\"template-engine\\" tabindex='-1'>Template Engine</h2>
+<h2 id="template-engine" tabindex='-1'>Template Engine</h2>
 <ul>
 <li><p><strong>To output data</strong>, use the <code>&lt;%=</code> opening tag, <code># &lt;%= page.title %&gt;</code>.</p>
 </li>
@@ -435,11 +435,11 @@ This is the main content of your Markdown file autored by John Doe.
 <p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>&lt;%~ include(&quot;/header.html&quot;) %&gt;</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
 <blockquote>
 <p><strong>Tips:</strong> Use the following syntax in page file to see <code>data</code> object:</p>
-<pre><code class=\\"language-html\\">&lt;%~ JSON.stringify(data, null, 2) %&gt;
+<pre><code class="language-html">&lt;%~ JSON.stringify(data, null, 2) %&gt;
 </code></pre>
 </blockquote>
-<h2 id=\\"unlock-more-gems-with-extensions\\" tabindex='-1'>Unlock more gems with <a href=\\"https://github.com/bent10/marked-extensions\\"><code>extensions</code></a></h2>
-<pre><code class=\\"language-js\\">import { defineConfig } from &#39;vite&#39;
+<h2 id="unlock-more-gems-with-extensions" tabindex='-1'>Unlock more gems with <a href="https://github.com/bent10/marked-extensions"><code>extensions</code></a></h2>
+<pre><code class="language-js">import { defineConfig } from &#39;vite&#39;
 import mpa from &#39;vite-plugin-marked-mpa&#39;
 import markedAlert from &#39;marked-alert&#39;
 
@@ -451,7 +451,7 @@ export default defineConfig({
   ]
 })
 </code></pre>
-<p>Use <a href=\\"https://github.com/bent10/marked-extensions\\">more extensions</a> to enable additional markdown features, e.g. footnotes, Github alerts, directive syntax, etc.</p>
+<p>Use <a href="https://github.com/bent10/marked-extensions">more extensions</a> to enable additional markdown features, e.g. footnotes, Github alerts, directive syntax, etc.</p>
 
     </div>
   </body>
@@ -481,15 +481,15 @@ This is the main content of your Markdown file autored by **<%= page.author %>**
 
 exports[`should handle file resolution, load and transform content 4`] = `
 "<!doctype html>
-<html lang=\\"en\\">
+<html lang="en">
   <head>
-    <meta charset=\\"UTF-8\\" />
-    <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bazinga!</title>
 
     <link
-      rel=\\"stylesheet\\"
-      href=\\"https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css\\"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.3.0/github-markdown-light.css"
     />
 
     <style>
@@ -500,27 +500,27 @@ exports[`should handle file resolution, load and transform content 4`] = `
       }
     </style>
   </head>
-  <body class=\\"markdown-body\\">
-    <div id=\\"content\\">
+  <body class="markdown-body">
+    <div id="content">
       <nav>
   
-  <a href=\\"/index.html\\">index</a>
+  <a href="/index.html">index</a>
    · 
-  <a href=\\"/foo/bar.html\\" class=\\"active\\">bar</a>
+  <a href="/foo/bar.html" class="active">bar</a>
   
 </nav>
 
 
-      <h1 id=\\"bazinga\\" tabindex='-1'>Bazinga!</h1>
+      <h1 id="bazinga" tabindex='-1'>Bazinga!</h1>
 <p>This is the main content of your Markdown file autored by <strong>Jane Smith</strong>.</p>
-<pre><code class=\\"language-json\\">{
+<pre><code class="language-json">{
   &quot;foo&quot;: {
-    &quot;md&quot;: &quot;Hi private foo\\\\n&quot;,
-    &quot;html&quot;: &quot;&lt;p&gt;Hi private foo&lt;/p&gt;\\\\n&quot;
+    &quot;md&quot;: &quot;Hi private foo\\n&quot;,
+    &quot;html&quot;: &quot;&lt;p&gt;Hi private foo&lt;/p&gt;\\n&quot;
   },
   &quot;qux&quot;: {
-    &quot;md&quot;: &quot;Hi qux\\\\n&quot;,
-    &quot;html&quot;: &quot;&lt;p&gt;Hi qux&lt;/p&gt;\\\\n&quot;
+    &quot;md&quot;: &quot;Hi qux\\n&quot;,
+    &quot;html&quot;: &quot;&lt;p&gt;Hi qux&lt;/p&gt;\\n&quot;
   }
 }
 </code></pre>

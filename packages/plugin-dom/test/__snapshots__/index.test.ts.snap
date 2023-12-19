@@ -9,22 +9,22 @@ exports[`pluginDom > transformIndexHtml > injects comments based on provided sel
 
         
 
-<!--BEGIN div.foo--><div class=\\"foo\\"></div><!--/END div.foo-->
+<!--BEGIN div.foo--><div class="foo"></div><!--/END div.foo-->
 
 
         
 
-<!--BEGIN .bar--><p class=\\"bar\\"></p><!--/END .bar-->
+<!--BEGIN .bar--><p class="bar"></p><!--/END .bar-->
 
 
         
 
-<!--BEGIN div#baz--><div id=\\"baz\\"></div><!--/END div#baz-->
+<!--BEGIN div#baz--><div id="baz"></div><!--/END div#baz-->
 
 
         
 
-<!--BEGIN div.qux--><div class=\\"qux\\"></div><!--/END div.qux-->
+<!--BEGIN div.qux--><div class="qux"></div><!--/END div.qux-->
 
 
       "
