@@ -2,6 +2,7 @@ import { readFile, stat } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { Eta } from 'eta'
 import fg from 'fast-glob'
+import type { Hooks } from 'marked'
 import { type Plugin, type ResolvedConfig, createLogger } from 'vite'
 import { retrieveData } from './data.js'
 import { frontmatter } from './frontmatter.js'
@@ -134,10 +135,9 @@ export default function pluginMarkedMpa(
               html: await marked.parse(_content, {
                 ...marked.defaults,
                 hooks: {
-                  preprocess: async md =>
-                    await eta.renderStringAsync(md, tabCtx),
+                  preprocess: md => eta.renderString(md, tabCtx),
                   postprocess: html => html
-                }
+                } as Hooks
               })
             }
           }
