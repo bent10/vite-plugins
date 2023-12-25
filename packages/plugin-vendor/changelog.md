@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.3.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.3.0...vite-plugin-vendor@1.3.1) (2023-12-25)
+
+
+### Bug Fixes
+
+* eliminate opinionated configurations ([9a9778f](https://github.com/bent10/vite-plugins/commit/9a9778f1e50bdb5493abaf1683a82e22f130f194))
+
 # vite-plugin-vendor [1.3.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.2.1...vite-plugin-vendor@1.3.0) (2023-11-04)
 
 
