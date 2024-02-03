@@ -1,5 +1,4 @@
 import * as prettier from 'prettier'
-import type { Options } from 'prettier'
 import { DEFAULT_CONFIG } from './constans.js'
 
 /**
@@ -13,5 +12,5 @@ export async function getConfig(id: string) {
 
   return config === null
     ? DEFAULT_CONFIG
-    : (prettier.resolveConfig(id, { config }) as Options)
+    : prettier.resolveConfig(id, { config })!
 }
