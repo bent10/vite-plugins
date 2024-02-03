@@ -1,3 +1,10 @@
+## vite-plugin-dom [1.0.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-dom@1.0.2...vite-plugin-dom@1.0.3) (2024-02-03)
+
+
+### Bug Fixes
+
+* **deps:** ncu ([6cd2baf](https://github.com/bent10/vite-plugins/commit/6cd2bafff760278948452b8013d7e674282700a0))
+
 ## vite-plugin-dom [1.0.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-dom@1.0.1...vite-plugin-dom@1.0.2) (2023-08-15)
 
 
