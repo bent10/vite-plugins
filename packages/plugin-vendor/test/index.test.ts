@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { join } from 'node:path/posix'
 import pluginVendor from '../src/index.js'
 

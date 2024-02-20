@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { basename, dirname, join, relative, resolve } from 'node:path'
+import { basename, dirname, join, resolve } from 'node:path'
 import fg from 'fast-glob'
 import { normalizePath as np } from 'vite'
 import type { QueueConfig, VendorEntries } from './types.js'
@@ -36,7 +36,7 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
   // @see https://docs.npmjs.com/cli/v7/using-npm/changelog#v7220-2021-09-02
   const localPrefix = process.env['npm_config_local_prefix']
   const nodeModulesDir = normalizePath(
-    resolve(relative(root, localPrefix || process.cwd()), 'node_modules')
+    resolve(root, localPrefix || process.cwd(), 'node_modules')
   )
 
   const queue: Array<{ from: string; to: string }> = []
@@ -60,8 +60,8 @@ export function createQueue(entries: VendorEntries, config: QueueConfig) {
         typeof entry.rename === 'string'
           ? entry.rename
           : typeof entry.rename === 'function'
-          ? entry.rename(filepath)
-          : join(entry.flat ? name : dirname(filepath), basename(filepath))
+            ? entry.rename(filepath)
+            : join(entry.flat ? name : dirname(filepath), basename(filepath))
 
       queue.push({
         from: file,

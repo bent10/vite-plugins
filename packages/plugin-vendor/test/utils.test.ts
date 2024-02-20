@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { normalize } from 'node:path'
 import { createQueue } from '../src/utils.js'
 
