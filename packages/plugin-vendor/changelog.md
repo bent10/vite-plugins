@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.3.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.3.1...vite-plugin-vendor@1.3.2) (2024-02-20)
+
+
+### Bug Fixes
+
+* resolves `node_modules` dir ([987a553](https://github.com/bent10/vite-plugins/commit/987a553e724330870ee739349abf9aada2d5f832))
+
 ## vite-plugin-vendor [1.3.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.3.0...vite-plugin-vendor@1.3.1) (2023-12-25)
 
 
