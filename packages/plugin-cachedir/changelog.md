@@ -1,3 +1,10 @@
+# vite-plugin-cachedir [1.2.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.1.1...vite-plugin-cachedir@1.2.0) (2024-04-06)
+
+
+### Features
+
+* remove vitest config due to `cache.dir` deprecation ([97ed688](https://github.com/bent10/vite-plugins/commit/97ed688b36e070e9428437cbf3ea350c9a4c8f7b))
+
 ## vite-plugin-cachedir [1.1.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-cachedir@1.1.0...vite-plugin-cachedir@1.1.1) (2023-08-04)
 
 
