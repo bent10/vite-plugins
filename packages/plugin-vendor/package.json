@@ -29,8 +29,8 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "types": "tsc --esModuleInterop -d --emitDeclarationOnly --outDir ./dist",
-    "lint": "tsc --noEmit && eslint . --cache --cache-location .cache/eslint",
-    "format": "prettier . --write --cache-location .cache/prettier --ignore-path ../../.prettierignore"
+    "lint": "tsc --noEmit && eslint . --cache --cache-location ../../node_modules/.eslint",
+    "format": "prettier . --write --cache-location ../../node_modules/.prettier --ignore-path ../../.prettierignore"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"

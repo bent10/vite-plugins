@@ -4,7 +4,6 @@ import { defineConfig } from 'vite'
 import cacheDir from './src/index'
 
 export default defineConfig({
-  // cacheDir: '.cache/vite',
   plugins: [cacheDir()],
   build: {
     lib: {
@@ -18,7 +17,6 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    // cache: { dir: '.cache/vitest' },
-    include: ['test/**/*.test.ts']
+    include: ['test/*.test.ts']
   }
 })
