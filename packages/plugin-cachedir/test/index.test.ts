@@ -1,3 +1,5 @@
+/// <reference types="vitest/globals" />
+
 import { resolve } from 'node:path'
 import pluginCacheDir from '../src/index.js'
 
@@ -13,31 +15,15 @@ describe('pluginCacheDir', () => {
   })
 
   it('resolves the default cache directory in Vite config', () => {
-    const [plugin]: Plugin[] = pluginCacheDir()
+    const plugin: Plugin = pluginCacheDir()
     const config = plugin.config()
 
     expect(config.cacheDir).toBe(resolve('/path/to/project/node_modules/.vite'))
   })
 
   it("does not resolve cache directory if it's already provided in Vite config", () => {
-    const [plugin]: Plugin[] = pluginCacheDir()
+    const plugin: Plugin = pluginCacheDir()
     const config = plugin.config({ cacheDir: 'foo' })
-
-    expect(config).toBeUndefined()
-  })
-
-  it('resolves the default test cache directory in Vite config', () => {
-    const [, plugin]: Plugin[] = pluginCacheDir()
-    const config = plugin.config()
-
-    expect(config.test?.cache?.dir).toBe(
-      resolve('/path/to/project/node_modules/.vitest')
-    )
-  })
-
-  it("does not resolve test cache directory if it's already provided in Vite config", () => {
-    const [, plugin]: Plugin[] = pluginCacheDir()
-    const config = plugin.config({ test: { cache: { dir: 'foo' } } })
 
     expect(config).toBeUndefined()
   })
