@@ -34,7 +34,7 @@
     "format": "prettier . --write --cache-location .cache/prettier --ignore-path ../../.prettierignore"
   },
   "dependencies": {
-    "@fullhuman/postcss-purgecss": "^5.0.0"
+    "@fullhuman/postcss-purgecss": "^6.0.0"
   },
   "peerDependencies": {
     "vite": ">=4.0.0"
