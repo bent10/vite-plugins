@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.4.7](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.6...vite-plugin-marked-mpa@1.4.7) (2024-04-21)
+
+
+### Bug Fixes
+
+* **deps:** ncu ([88788ae](https://github.com/bent10/vite-plugins/commit/88788aee0e1a63b265f66f9157be66f108ad6806))
+
 ## vite-plugin-marked-mpa [1.4.6](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.5...vite-plugin-marked-mpa@1.4.6) (2024-03-04)
 
 
