@@ -42,10 +42,10 @@
   },
   "dependencies": {
     "common-ancestor-path": "^1.0.1",
-    "eta": "^3.2.0",
+    "eta": "^3.4.0",
     "github-slugger": "^2.0.0",
-    "loadee": "^3.0.1",
-    "marked": "^12.0.0",
+    "loadee": "^3.1.1",
+    "marked": "^12.0.2",
     "moo": "^0.5.2",
     "set-value": "^4.1.0"
   },
