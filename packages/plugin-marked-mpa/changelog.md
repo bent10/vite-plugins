@@ -1,3 +1,16 @@
+# vite-plugin-marked-mpa [1.5.0](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.7...vite-plugin-marked-mpa@1.5.0) (2024-08-29)
+
+
+### Bug Fixes
+
+* **deps:** ncu ([fe5ae17](https://github.com/bent10/vite-plugins/commit/fe5ae17a6c1ad908d6e84047a7959f6ef8158f0d))
+* **deps:** update dependency marked to v13 ([32d121d](https://github.com/bent10/vite-plugins/commit/32d121d902e5a77c679deb15a4b886a89d1e92e8))
+
+
+### Features
+
+* update for Marked's new API ([7a4d2e8](https://github.com/bent10/vite-plugins/commit/7a4d2e846def3f02850cc88f2e1efd9b2b39d193))
+
 ## vite-plugin-marked-mpa [1.4.7](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.4.6...vite-plugin-marked-mpa@1.4.7) (2024-04-21)
 
 
