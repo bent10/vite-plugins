@@ -515,8 +515,8 @@ exports[`should handle file resolution, load and transform content 4`] = `
 <p>This is the main content of your Markdown file autored by <strong>Jane Smith</strong>.</p>
 <pre><code class="language-json">{
   &quot;foo&quot;: {
-    &quot;md&quot;: &quot;Hi private foo\\n&quot;,
-    &quot;html&quot;: &quot;&lt;p&gt;Hi private foo&lt;/p&gt;\\n&quot;
+    &quot;md&quot;: &quot;# Hi Jane Smith!\\n\\nThis is your private foo\\n&quot;,
+    &quot;html&quot;: &quot;&lt;h1&gt;Hi Jane Smith!&lt;/h1&gt;\\n&lt;p&gt;This is your private foo&lt;/p&gt;\\n&quot;
   },
   &quot;qux&quot;: {
     &quot;md&quot;: &quot;Hi qux\\n&quot;,

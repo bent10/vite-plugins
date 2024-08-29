@@ -2,6 +2,7 @@ import { readFile, stat } from 'node:fs/promises'
 import { dirname, join, resolve } from 'node:path'
 import { Eta } from 'eta'
 import fg from 'fast-glob'
+import { Marked } from 'marked'
 import { type Plugin, type ResolvedConfig, createLogger } from 'vite'
 import { retrieveData } from './data.js'
 import { frontmatter } from './frontmatter.js'
@@ -131,17 +132,13 @@ export default function pluginMarkedMpa(
 
             ctx.useWith[key] = {
               md: await eta.renderStringAsync(_content, tabCtx),
-              html: await marked.parse(_content, {
-                ...marked.defaults,
+              html: await new Marked({
                 hooks: {
-                  options: {},
-                  preprocess: md => eta.renderString(md, tabCtx),
-                  postprocess: html => html,
-                  processAllTokens(tokens) {
-                    return tokens
+                  preprocess(md: string) {
+                    return eta.renderString(md, tabCtx)
                   }
                 }
-              })
+              }).parse(_content)
             }
           }
         }
@@ -152,7 +149,9 @@ export default function pluginMarkedMpa(
         if ('datasources' in ctx && Array.isArray(ctx.datasources)) {
           datasources.push(...ctx.datasources.map(d => resolve(d)))
           // adds datasources to watcher
-          server && server.watcher.add(datasources)
+          if (server) {
+            server.watcher.add(datasources)
+          }
         }
 
         return html

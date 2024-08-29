@@ -67,13 +67,15 @@ export function createProcessor(ctx: Context, options: ProcessorOptions) {
     },
     renderer: {
       // apply heading id
-      heading(text, level) {
-        const normalizedText = text.trim().replace(/<[!\/a-zA-Z].*?>/g, '')
+      heading({ depth, tokens }) {
+        const text = this.parser.parseInline(tokens)
+        const normalizedText = text.trim().replace(/<[^>]*\/?>|<\/[^>]*>/g, '')
+
         const id = slugger.slug(normalizedText)
 
-        headingList.push({ text: normalizedText, level, id })
+        headingList.push({ text: normalizedText, level: depth, id })
 
-        return `<h${level} id="${id}" tabindex='-1'>${text}</h${level}>\n`
+        return `<h${depth} id="${id}" tabindex='-1'>${text}</h${depth}>\n`
       }
     }
   })
