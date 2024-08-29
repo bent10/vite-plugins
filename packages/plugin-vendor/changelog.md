@@ -1,3 +1,10 @@
+## vite-plugin-vendor [1.3.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.3.2...vite-plugin-vendor@1.3.3) (2024-08-29)
+
+
+### Bug Fixes
+
+* resolve eslint errors ([006f6fd](https://github.com/bent10/vite-plugins/commit/006f6fd28fcedcf04c8434dedbb2d7baf222dc43))
+
 ## vite-plugin-vendor [1.3.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-vendor@1.3.1...vite-plugin-vendor@1.3.2) (2024-02-20)
 
 
