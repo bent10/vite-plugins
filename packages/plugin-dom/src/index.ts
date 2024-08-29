@@ -39,7 +39,9 @@ export default function pluginDom({
         },
         domHandlerOptions,
         element => {
-          typeof comments === 'object' && commentsHandler(element, comments)
+          if (typeof comments === 'object') {
+            commentsHandler(element, comments)
+          }
 
           if (!hasHandler) return
 

@@ -43,27 +43,23 @@ export default function pluginVendor(
       await fsp.rm(vendorDir, { recursive: true, force: true })
     },
     async buildStart() {
-      try {
-        const entries = getEntries(ignore)
-        const queue = createQueue(entries, {
-          root: resolvedRoot,
-          vendorDir,
-          manualEntry
-        })
+      const entries = getEntries(ignore)
+      const queue = createQueue(entries, {
+        root: resolvedRoot,
+        vendorDir,
+        manualEntry
+      })
 
-        // copying...
-        await Promise.all(
-          queue.map(
-            async ({ from, to }) =>
-              await fsp.cp(from, to, {
-                preserveTimestamps: true,
-                recursive: true
-              })
-          )
+      // copying...
+      await Promise.all(
+        queue.map(
+          async ({ from, to }) =>
+            await fsp.cp(from, to, {
+              preserveTimestamps: true,
+              recursive: true
+            })
         )
-      } catch (e) {
-        throw e
-      }
+      )
     }
   }
 }
