@@ -8,8 +8,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: 'src/index.ts',
-      formats: ['es'],
-      fileName: 'index'
+      formats: ['cjs', 'es'],
+      fileName: format => `index.${format === 'es' ? 'mjs' : 'js'}`
     },
     rollupOptions: {
       external: ['node:path', 'prettier']
