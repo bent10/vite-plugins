@@ -421,18 +421,18 @@ This is the main content of your Markdown file autored by John Doe.
 </code></pre>
 <h2 id="template-engine" tabindex='-1'>Template Engine</h2>
 <ul>
-<li><p><strong>To output data</strong>, use the <code>&lt;%=</code> opening tag, <code># &lt;%= page.title %&gt;</code>.</p>
+<li><p><strong>To output data</strong>, use the <code>&amp;lt;%=</code> opening tag, <code># &amp;lt;%= page.title %&gt;</code>.</p>
 </li>
-<li><p><strong>To allow raw HTML</strong>, use the <code>&lt;%~</code> opening tag, <code>&lt;%~ contentContainingHTML %&gt;</code>.</p>
+<li><p><strong>To allow raw HTML</strong>, use the <code>&amp;lt;%~</code> opening tag, <code>&amp;lt;%~ contentContainingHTML %&gt;</code>.</p>
 </li>
-<li><p><strong>To evaluate JavaScript</strong>, use the <code>&lt;%</code> opening tag, <code>&lt;% let myVar = 3 %&gt;</code>.</p>
+<li><p><strong>To evaluate JavaScript</strong>, use the <code>&amp;lt;%</code> opening tag, <code>&amp;lt;% let myVar = 3 %&gt;</code>.</p>
 </li>
-<li><p><strong>To render a partial</strong>, use the <code>&lt;%~</code> opening tag + the <code>include()</code> function, <code>&lt;%~ include(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
+<li><p><strong>To render a partial</strong>, use the <code>&amp;lt;%~</code> opening tag + the <code>include()</code> function, <code>&amp;lt;%~ include(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
 </li>
-<li><p><strong>To render an async partial</strong>, use the <code>&lt;%~</code> opening tag + the <code>includeAsync()</code> function, <code>&lt;%~ includeAsync(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
+<li><p><strong>To render an async partial</strong>, use the <code>&amp;lt;%~</code> opening tag + the <code>includeAsync()</code> function, <code>&amp;lt;%~ includeAsync(&quot;./path-to-layout&quot;) %&gt;</code>.</p>
 </li>
 </ul>
-<p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>&lt;%~ include(&quot;/header.html&quot;) %&gt;</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
+<p>The partial template will automatically try to resolve partial files from inside the filesystem. Ex. <code>&amp;lt;%~ include(&quot;/header.html&quot;) %&gt;</code> will look for a file called <code>header.html</code> in the <code>src/partials</code> directory of your project.</p>
 <blockquote>
 <p><strong>Tips:</strong> Use the following syntax in page file to see <code>data</code> object:</p>
 <pre><code class="language-html">&lt;%~ JSON.stringify(data, null, 2) %&gt;
