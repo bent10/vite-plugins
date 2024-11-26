@@ -1,3 +1,10 @@
+## vite-plugin-purge [1.0.4](https://github.com/bent10/vite-plugins/compare/vite-plugin-purge@1.0.3...vite-plugin-purge@1.0.4) (2024-11-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @fullhuman/postcss-purgecss to v7 ([1d20480](https://github.com/bent10/vite-plugins/commit/1d20480d0ad1553d5b517980565dcffc435e3947))
+
 ## vite-plugin-purge [1.0.3](https://github.com/bent10/vite-plugins/compare/vite-plugin-purge@1.0.2...vite-plugin-purge@1.0.3) (2024-04-06)
 
 
