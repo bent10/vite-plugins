@@ -1,3 +1,10 @@
+## vite-plugin-marked-mpa [1.5.2](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.5.1...vite-plugin-marked-mpa@1.5.2) (2025-08-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency marked to v16 ([be1d03d](https://github.com/bent10/vite-plugins/commit/be1d03d7489094f66e7dc1c88e465a99b39a684f))
+
 ## vite-plugin-marked-mpa [1.5.1](https://github.com/bent10/vite-plugins/compare/vite-plugin-marked-mpa@1.5.0...vite-plugin-marked-mpa@1.5.1) (2024-11-17)
 
 
