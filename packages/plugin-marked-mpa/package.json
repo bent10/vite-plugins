@@ -41,7 +41,7 @@
     "example:preview": "vite preview -c example/vite.config.ts"
   },
   "dependencies": {
-    "common-ancestor-path": "^1.0.1",
+    "common-ancestor-path": "^2.0.0",
     "eta": "^3.5.0",
     "github-slugger": "^2.0.0",
     "loadee": "^3.1.2",
